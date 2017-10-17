@@ -1,11 +1,10 @@
 package sct.hexxitgear.model;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
-public class ModelSageHood extends ModelBiped {
+public class ModelSageHood extends ModelWtfMojang {
 	//fields
 	ModelRenderer head;
 	ModelRenderer Shape1;
@@ -58,22 +57,21 @@ public class ModelSageHood extends ModelBiped {
 		GlStateManager.popMatrix();
 	}
 
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		float newX = this.bipedHeadwear.rotateAngleX;
+		float newY = this.bipedHeadwear.rotateAngleY;
+		setRotation(head, newX, newY, 0);
+		setRotation(Shape1, newX, newY, 0);
+		setRotation(Shape2, newX, newY, 0);
+		setRotation(Shape3, newX, newY, 0);
+	}
+
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-		setup(head, p_78087_4_, p_78087_5_);
-		setup(Shape1, p_78087_4_, p_78087_5_);
-		setup(Shape2, p_78087_4_, p_78087_5_);
-		setup(Shape3, p_78087_4_, p_78087_5_);
-	}
-
-	private void setup(ModelRenderer box, float x, float y) {
-		box.rotateAngleY = x / (180F / (float) Math.PI);
-		box.rotateAngleX = y / (180F / (float) Math.PI);
-		box.rotationPointY = (this.isSneak) ? 1.0f : 0.0f;
+		model.rotationPointY = (this.isSneak) ? 1.0f : 0;
 	}
 }
