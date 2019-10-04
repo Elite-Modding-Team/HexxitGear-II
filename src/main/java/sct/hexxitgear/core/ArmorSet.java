@@ -26,11 +26,11 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import sct.hexxitgear.core.ability.Ability;
 import sct.hexxitgear.core.ability.AbilityLift;
 import sct.hexxitgear.core.ability.AbilityRampage;
@@ -79,16 +79,16 @@ public class ArmorSet {
 		return ability;
 	}
 
-	public void applyBuffs(EntityPlayer player) {
+	public void applyBuffs(PlayerEntity player) {
 		buffHandler.applyPlayerBuffs(player);
 	}
 
-	public void removeBuffs(EntityPlayer player) {
+	public void removeBuffs(PlayerEntity player) {
 		buffHandler.removePlayerBuffs(player);
 	}
 
 	@Nullable
-	public static ArmorSet getCurrentArmorSet(EntityPlayer player) {
+	public static ArmorSet getCurrentArmorSet(PlayerEntity player) {
 		Iterable<ItemStack> curArmor = player.getArmorInventoryList();
 		for (ArmorSet set : SETS) {
 			int i = 0;

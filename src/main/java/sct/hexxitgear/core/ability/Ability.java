@@ -21,9 +21,7 @@ package sct.hexxitgear.core.ability;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.PlayerEntity;
 import sct.hexxitgear.init.HexConfig;
 
 public abstract class Ability {
@@ -106,7 +104,7 @@ public abstract class Ability {
 		return hungerCost;
 	}
 
-	public boolean canCast(EntityPlayer player) {
+	public boolean canCast(PlayerEntity player) {
 		return player.experience >= getXpCost() && player.getFoodStats().getFoodLevel() >= hungerCost;
 	}
 
@@ -114,33 +112,33 @@ public abstract class Ability {
 	 * Called on the first tick of this ability's activation.
 	 * @param player The ability caster.
 	 */
-	public abstract void start(EntityPlayer player);
+	public abstract void start(PlayerEntity player);
 
 	/**
 	 * Called every subsequent tick after the first tick.
 	 * @param player The ability caster.
 	 */
-	public abstract void tick(EntityPlayer player, int duration);
+	public abstract void tick(PlayerEntity player, int duration);
 
 	/**
 	 * Called after the duration of this ability has ended.
 	 * @param player The ability caster.
 	 */
-	public abstract void end(EntityPlayer player);
+	public abstract void end(PlayerEntity player);
 
 	/**
 	 * Render effects for this ability, called when start is called.
 	 * Can also be used to play cast sounds.
 	 * @param player The ability caster.
 	 */
-	@SideOnly(Side.CLIENT)
-	public abstract void renderFirst(EntityPlayer player);
+	public void renderFirst(PlayerEntity player) {
+	}
 
 	/**
 	 * Render effects for this ability, called when tick is called.
 	 * @param player The ability caster.
 	 * @param duration The remaining duration of the ability.
 	 */
-	@SideOnly(Side.CLIENT)
-	public abstract void renderAt(EntityPlayer player, int duration);
+	public void renderAt(PlayerEntity player, int duration) {
+	}
 }

@@ -18,24 +18,21 @@
 
 package sct.hexxitgear.control;
 
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
+import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.net.ActivateMessage;
 import sct.hexxitgear.net.HexNetwork;
 
 public class HexKeybinds {
 
-	public static KeyBinding activateHexxitArmor = new KeyBinding("Activate Hexxit Gear Armor", Keyboard.KEY_X, "Hexxit Gear");
-	public static KeyBinding[] keybindArray = new KeyBinding[] { activateHexxitArmor };
-	public static boolean[] repeats = new boolean[keybindArray.length];
+	public static KeyBinding activateHexxitArmor = new KeyBinding("Activate Hexxit Gear Armor", GLFW.GLFW_KEY_X, "Hexxit Gear");
 
 	public HexKeybinds() {
 		ClientRegistry.registerKeyBinding(activateHexxitArmor);
@@ -43,7 +40,7 @@ public class HexKeybinds {
 
 	@SubscribeEvent
 	public void keyEvent(InputEvent.KeyInputEvent event) {
-		if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class) && activateHexxitArmor.isPressed() && ArmorSet.getCurrentArmorSet(Minecraft.getMinecraft().player) != null) HexNetwork.INSTANCE.sendToServer(new ActivateMessage());
+		if (!ChatScreen.class.equals(Minecraft.getInstance().currentScreen.getClass()) && activateHexxitArmor.isPressed() && ArmorSet.getCurrentArmorSet(Minecraft.getInstance().player) != null) HexNetwork.INSTANCE.sendToServer(new ActivateMessage());
 	}
 
 }

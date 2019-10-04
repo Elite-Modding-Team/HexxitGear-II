@@ -21,13 +21,11 @@ package sct.hexxitgear.core.ability;
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEndRod;
-import net.minecraft.client.particle.ParticleSimpleAnimated;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.client.particle.SimpleAnimatedParticle;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.SoundEvents;
 
 public class AbilityShield extends Ability {
 
@@ -38,34 +36,31 @@ public class AbilityShield extends Ability {
 	}
 
 	@Override
-	public void start(EntityPlayer player) {
-		player.setEntityInvulnerable(true);
+	public void start(PlayerEntity player) {
+		player.setInvulnerable(true);
 	}
 
 	@Override
-	public void tick(EntityPlayer player, int duration) {
+	public void tick(PlayerEntity player, int duration) {
 	}
 
 	@Override
-	public void end(EntityPlayer player) {
-		player.setEntityInvulnerable(false);
+	public void end(PlayerEntity player) {
+		player.setInvulnerable(false);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void renderFirst(EntityPlayer player) {
+	public void renderFirst(PlayerEntity player) {
 		renderAt(player, 0);
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLAGER_PREPARE_MIRROR, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLUSIONER_PREPARE_MIRROR, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void renderAt(EntityPlayer player, int duration) {
+	public void renderAt(PlayerEntity player, int duration) {
 		if (duration % 10 == 0) for (int i = 0; i < 360; i += 10) {
-			ParticleSimpleAnimated p = new ParticleEndRod(Minecraft.getMinecraft().world, player.posX + Math.sin(i), player.posY, player.posZ + Math.cos(i), 0, 0.2F, 0);
+			SimpleAnimatedParticle p = (SimpleAnimatedParticle) Minecraft.getInstance().particles.addParticle(ParticleTypes.END_ROD, player.posX + Math.sin(i), player.posY, player.posZ + Math.cos(i), 0, 0.2F, 0);
 			p.setColor(BLUE);
 			p.setColorFade(BLUE);
-			Minecraft.getMinecraft().effectRenderer.addEffect(p);
 		}
 	}
 }

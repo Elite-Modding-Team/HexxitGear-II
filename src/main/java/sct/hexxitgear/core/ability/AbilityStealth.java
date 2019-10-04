@@ -18,14 +18,12 @@
 
 package sct.hexxitgear.core.ability;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.SoundEvents;
 import sct.hexxitgear.core.AbilityHandler;
 
 public class AbilityStealth extends Ability {
@@ -35,35 +33,33 @@ public class AbilityStealth extends Ability {
 	}
 
 	@Override
-	public void start(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, getDuration(), 81, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, getDuration(), 1, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, getDuration(), 3, false, false));
+	public void start(PlayerEntity player) {
+		player.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, getDuration(), 81, false, false));
+		player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, getDuration(), 1, false, false));
+		player.addPotionEffect(new EffectInstance(Effects.STRENGTH, getDuration(), 3, false, false));
 	}
 
 	@Override
-	public void tick(EntityPlayer player, int duration) {
-		if(player.ticksExisted - player.getLastAttackedEntityTime() <= 2) 
-			AbilityHandler.ACTIVE_HANDLERS.get(player.getUniqueID()).setEnded(player);
+	public void tick(PlayerEntity player, int duration) {
+		if (player.ticksExisted - player.getLastAttackedEntityTime() <= 2) AbilityHandler.ACTIVE_HANDLERS.get(player.getUniqueID()).setEnded(player);
 	}
 
 	@Override
-	public void end(EntityPlayer player) {
-		player.removePotionEffect(MobEffects.INVISIBILITY);
-		player.removePotionEffect(MobEffects.SLOWNESS);
-		player.removePotionEffect(MobEffects.STRENGTH);
+	public void end(PlayerEntity player) {
+		player.removePotionEffect(Effects.INVISIBILITY);
+		player.removePotionEffect(Effects.SLOWNESS);
+		player.removePotionEffect(Effects.STRENGTH);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void renderFirst(EntityPlayer player) {
+	public void renderFirst(PlayerEntity player) {
 		for (int i = 0; i < 360; i += 10) {
-			player.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, player.posX, player.posY + 4, player.posZ, Math.sin(i) * 0.1F, -0.8F, Math.cos(i) * 0.1F);
+			player.world.addParticle(ParticleTypes.SMOKE, player.posX, player.posY + 4, player.posZ, Math.sin(i) * 0.1F, -0.8F, Math.cos(i) * 0.1F);
 		}
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLAGER_MIRROR_MOVE, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override
-	public void renderAt(EntityPlayer player, int duration) {
+	public void renderAt(PlayerEntity player, int duration) {
 	}
 }

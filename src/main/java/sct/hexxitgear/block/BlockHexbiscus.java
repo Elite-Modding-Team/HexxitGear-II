@@ -18,52 +18,16 @@
 
 package sct.hexxitgear.block;
 
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.block.BlockBush;
+import net.minecraft.block.Block;
+import net.minecraft.block.BushBlock;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import sct.hexxitgear.HexxitGear;
-import sct.hexxitgear.gui.HexTab;
-import sct.hexxitgear.init.HexRegistry;
-import shadows.placebo.client.IHasModel;
+import net.minecraft.block.material.Material;
 
-public class BlockHexbiscus extends BlockBush implements IHasModel {
+public class BlockHexbiscus extends BushBlock {
 
 	public BlockHexbiscus() {
-		setCreativeTab(HexTab.INSTANCE);
+		super(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT));
 		setRegistryName("hexbiscus");
-		setTranslationKey(HexxitGear.MODID + ".hexbiscus");
-		setSoundType(SoundType.PLANT);
-		HexxitGear.INFO.getItemList().add(new ItemBlock(this).setRegistryName(getRegistryName()));
 	}
 
-	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		return Arrays.asList(new ItemStack(HexRegistry.HEXICAL_ESSENCE));
-	}
-
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		return true;
-	}
-
-	@Override
-	protected ItemStack getSilkTouchDrop(IBlockState state) {
-		return new ItemStack(this);
-	}
-
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-		items.add(new ItemStack(this));
-	}
 }

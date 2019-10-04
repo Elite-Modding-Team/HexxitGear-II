@@ -18,11 +18,11 @@
 
 package sct.hexxitgear.gui;
 
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import sct.hexxitgear.init.HexRegistry;
 
-public class HexTab extends CreativeTabs {
+public class HexTab extends ItemGroup {
 
 	public static final HexTab INSTANCE = new HexTab("Hexxit Gear");
 

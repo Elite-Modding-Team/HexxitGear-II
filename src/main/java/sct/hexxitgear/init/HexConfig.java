@@ -22,9 +22,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.loading.FMLPaths;
+import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.ArmorSet;
+import shadows.placebo.config.Configuration;
 
 public class HexConfig {
 
@@ -35,8 +36,8 @@ public class HexConfig {
 	private static final List<Integer> DIM_BLACKLIST = new ArrayList<Integer>();
 	private static int hexbiscusChance = 0;
 
-	public static void loadCommonConfig(FMLPreInitializationEvent evt) {
-		config = new Configuration(evt.getSuggestedConfigurationFile());
+	public static void loadCommonConfig() {
+		config = new Configuration(new File(FMLPaths.CONFIGDIR.get().toFile(), HexxitGear.MODID + ".cfg"));
 		config.load();
 
 		registerDimBlacklist(config.getStringList("Dimensional Blacklist", "worldgen", new String[0], "Dimensions where hexbiscuses will not generate. New line per id."));

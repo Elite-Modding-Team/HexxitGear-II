@@ -16,39 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.proxy;
+package sct.hexxitgear;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import sct.hexxitgear.HexxitGear;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import sct.hexxitgear.control.HexKeybinds;
-import sct.hexxitgear.init.HexRegistry;
-import shadows.placebo.client.IHasModel;
 
-@EventBusSubscriber(Side.CLIENT)
-public class ClientProxy implements IProxy {
+@EventBusSubscriber(value = Dist.CLIENT, modid = HexxitGear.MODID, bus = Bus.MOD)
+public class HexClient {
 
-	@Override
-	public void registerKeybinds() {
+	@SubscribeEvent
+	public static void setup(FMLClientSetupEvent e) {
 		MinecraftForge.EVENT_BUS.register(new HexKeybinds());
 	}
 
-	@SubscribeEvent
-	public static void modelRegistry(ModelRegistryEvent e) {
-		for (Item i : HexxitGear.INFO.getItemList())
-			if (i instanceof IHasModel) ((IHasModel) i).initModels(e);
-		HexRegistry.HEXBISCUS.initModels(e);
-	}
-
-	@Override
-	public void setActionText(ITextComponent message) {
-		Minecraft.getMinecraft().ingameGUI.setOverlayMessage(message, false);
+	public static void setActionText(ITextComponent message) {
+		Minecraft.getInstance().ingameGUI.setOverlayMessage(message, false);
 	}
 
 }
