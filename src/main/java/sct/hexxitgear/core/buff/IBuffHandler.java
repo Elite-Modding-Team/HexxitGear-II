@@ -18,11 +18,11 @@
 
 package sct.hexxitgear.core.buff;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 
 public interface IBuffHandler {
 
-	public abstract void applyPlayerBuffs(EntityPlayer player);
+	public abstract void applyPlayerBuffs(PlayerEntity player);
 
-	public abstract void removePlayerBuffs(EntityPlayer player);
+	public abstract void removePlayerBuffs(PlayerEntity player);
 }

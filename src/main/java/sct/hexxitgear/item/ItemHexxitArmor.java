@@ -18,55 +18,28 @@
 
 package sct.hexxitgear.item;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.item.Rarity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ISpecialArmor;
-import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.core.AbilityHandler;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
-import shadows.placebo.client.IHasModel;
 
-public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
+public class ItemHexxitArmor extends ArmorItem {
 
-	public ItemHexxitArmor(String regname, ArmorMaterial material, int renderindex, EntityEquipmentSlot slot) {
-		super(material, renderindex, slot);
-		setCreativeTab(HexTab.INSTANCE);
-		setRegistryName(HexxitGear.MODID, regname);
-		setTranslationKey(HexxitGear.MODID + "." + regname);
-		HexxitGear.INFO.getItemList().add(this);
+	public ItemHexxitArmor(IArmorMaterial material, EquipmentSlotType slot, Item.Properties props) {
+		super(material, slot, props);
 	}
 
 	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-		return new ArmorProperties(1, damageReduceAmount / 22D, armor.getMaxDamage() + 1);
-	}
-
-	@Override
-	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		return 0;
-	}
-
-	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-		if (entity instanceof EntityPlayer && !(((EntityPlayer) entity).capabilities.isCreativeMode)) {
-			if (stack.getItemDamage() < stack.getMaxDamage()) {
-				stack.setItemDamage(stack.getItemDamage() + 1);
-			}
-		}
-	}
-
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		if (world.isRemote) return;
-		if (this.armorType != EntityEquipmentSlot.HEAD) return;
+		if (this.slot != EquipmentSlotType.HEAD) return;
 
 		ArmorSet set = ArmorSet.getCurrentArmorSet(player);
 		if (set != null) set.applyBuffs(player);
@@ -81,12 +54,12 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack) {
-		return EnumRarity.UNCOMMON;
+	public Rarity getRarity(ItemStack stack) {
+		return Rarity.UNCOMMON;
 	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return toRepair.isItemDamaged() && repair.getItem() == HexRegistry.HEXICAL_ESSENCE;
+		return toRepair.isDamaged() && repair.getItem() == HexRegistry.HEXICAL_ESSENCE;
 	}
 }

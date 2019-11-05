@@ -18,21 +18,21 @@
 
 package sct.hexxitgear.core.buff;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 
 public class BuffThiefSet implements IBuffHandler {
 
 	@Override
-	public void applyPlayerBuffs(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 45, 1, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 45, 2, false, false));
+	public void applyPlayerBuffs(PlayerEntity player) {
+		player.addPotionEffect(new EffectInstance(Effects.LUCK, 45, 1, false, false));
+		player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 420, 0, false, false));
+		player.addPotionEffect(new EffectInstance(Effects.SPEED, 45, 2, false, false));
 	}
 
 	@Override
-	public void removePlayerBuffs(EntityPlayer player) {
-		player.removePotionEffect(MobEffects.NIGHT_VISION);
+	public void removePlayerBuffs(PlayerEntity player) {
+		player.removePotionEffect(Effects.NIGHT_VISION);
 	}
 }

@@ -11,20 +11,18 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.block.BlockHexbiscus;
+import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.item.ItemMagicianArmor;
 import sct.hexxitgear.item.ItemScaleArmor;
 import sct.hexxitgear.item.ItemThiefArmor;
 import sct.hexxitgear.item.ItemTribalArmor;
-import shadows.placebo.item.ItemBase;
 
 public class HexRegistry {
 
 	public static final BlockHexbiscus HEXBISCUS = new BlockHexbiscus();
 
-	public static final Item HEXICAL_ESSENCE = new ItemBase("hexical_essence", HexxitGear.INFO) {
-	};
-	public static final Item HEXICAL_DIAMOND = new ItemBase("hexical_diamond", HexxitGear.INFO) {
-	};
+	public static final Item HEXICAL_ESSENCE = new Item(new Item.Properties().group(HexTab.INSTANCE)).setRegistryName("hexical_essence");
+	public static final Item HEXICAL_DIAMOND = new Item(new Item.Properties().group(HexTab.INSTANCE)).setRegistryName("hexical_diamond");
 
 	public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD);
 	public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST);

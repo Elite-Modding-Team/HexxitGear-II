@@ -18,26 +18,26 @@
 
 package sct.hexxitgear.core.buff;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 
 public class BuffScaleSet implements IBuffHandler {
 
 	@Override
-	public void applyPlayerBuffs(EntityPlayer player) {
-		player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 45, 0, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 45, 1, false, false));
-		if (!player.isPotionActive(MobEffects.HEALTH_BOOST)) player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, Integer.MAX_VALUE, 4, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 420, 0, false, false));
+	public void applyPlayerBuffs(PlayerEntity player) {
+		player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 45, 0, false, false));
+		player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 45, 1, false, false));
+		if (!player.isPotionActive(Effects.HEALTH_BOOST)) player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, Integer.MAX_VALUE, 4, false, false));
+		player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 420, 0, false, false));
 	}
 
 	@Override
-	public void removePlayerBuffs(EntityPlayer player) {
-		player.removePotionEffect(MobEffects.HEALTH_BOOST);
-		player.removePotionEffect(MobEffects.NIGHT_VISION);
-		player.removePotionEffect(MobEffects.SLOWNESS);
-		player.removePotionEffect(MobEffects.RESISTANCE);
+	public void removePlayerBuffs(PlayerEntity player) {
+		player.removePotionEffect(Effects.HEALTH_BOOST);
+		player.removePotionEffect(Effects.NIGHT_VISION);
+		player.removePotionEffect(Effects.SLOWNESS);
+		player.removePotionEffect(Effects.RESISTANCE);
 	}
 
 }
