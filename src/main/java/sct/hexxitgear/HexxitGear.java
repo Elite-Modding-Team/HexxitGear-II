@@ -30,7 +30,6 @@ import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.init.HexConfig;
 import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.net.HexNetwork;
-import sct.hexxitgear.world.HexGenerator;
 import shadows.placebo.recipe.RecipeHelper;
 
 @Mod(HexxitGear.MODID)
@@ -53,7 +52,6 @@ public class HexxitGear {
 	@SubscribeEvent
 	public void setup(FMLCommonSetupEvent e) {
 		HexNetwork.init();
-		MinecraftForge.TERRAIN_GEN_BUS.register(new HexGenerator());
 		MinecraftForge.EVENT_BUS.register(ArmorSet.class);
 	}
 

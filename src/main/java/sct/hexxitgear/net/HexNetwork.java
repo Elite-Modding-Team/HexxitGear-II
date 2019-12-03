@@ -1,21 +1,26 @@
 package sct.hexxitgear.net;
 
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import sct.hexxitgear.HexxitGear;
-import sct.hexxitgear.net.AbilityRenderMessage.AbilityRenderHandler;
-import sct.hexxitgear.net.ActionTextMessage.ActionTextHandler;
-import sct.hexxitgear.net.ActivateMessage.ActivateMessageHandler;
+import shadows.placebo.util.NetworkUtils;
 
 public class HexNetwork {
 
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(HexxitGear.MODID);
-	static int discrim = 0;
+	//Formatter::off
+    public static final SimpleChannel INSTANCE	 = NetworkRegistry.ChannelBuilder
+            .named(new ResourceLocation(HexxitGear.MODID, "channel"))
+            .clientAcceptedVersions(s->true)
+            .serverAcceptedVersions(s->true)
+            .networkProtocolVersion(() -> "1.0.0")
+            .simpleChannel();
+    //Formatter::on
 
 	public static void init() {
-		INSTANCE.registerMessage(ActivateMessageHandler.class, ActivateMessage.class, discrim++, Side.SERVER);
-		INSTANCE.registerMessage(ActionTextHandler.class, ActionTextMessage.class, discrim++, Side.CLIENT);
-		INSTANCE.registerMessage(AbilityRenderHandler.class, AbilityRenderMessage.class, discrim++, Side.CLIENT);
+		NetworkUtils.registerMessage(INSTANCE, 0, new AbilityRenderMessage());
+		NetworkUtils.registerMessage(INSTANCE, 1, new ActivateMessage());
+		NetworkUtils.registerMessage(INSTANCE, 2, new ActionTextMessage());
+
 	}
 }

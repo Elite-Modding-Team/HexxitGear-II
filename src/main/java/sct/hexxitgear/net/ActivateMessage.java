@@ -1,36 +1,33 @@
 package sct.hexxitgear.net;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import sct.hexxitgear.core.AbilityHandler;
+import java.util.function.Supplier;
 
-public class ActivateMessage implements IMessage {
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent.Context;
+import sct.hexxitgear.core.AbilityHandler;
+import shadows.placebo.util.NetworkUtils;
+import shadows.placebo.util.NetworkUtils.MessageProvider;
+
+public class ActivateMessage extends MessageProvider<ActivateMessage> {
 
 	public ActivateMessage() {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void write(ActivateMessage msg, PacketBuffer buf) {
 
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public ActivateMessage read(PacketBuffer buf) {
+		return new ActivateMessage();
 	}
 
-	public static class ActivateMessageHandler implements IMessageHandler<ActivateMessage, IMessage> {
-
-		@Override
-		public IMessage onMessage(ActivateMessage message, MessageContext ctx) {
-			FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
-				AbilityHandler.activateAbility(ctx.getServerHandler().player);
-			});
-			return null;
-		}
-
+	@Override
+	public void handle(ActivateMessage msg, Supplier<Context> ctx) {
+		NetworkUtils.handlePacket(() -> () -> {
+			AbilityHandler.activateAbility(ctx.get().getSender());
+		}, ctx.get());
 	}
 
 }
