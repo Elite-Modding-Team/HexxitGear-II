@@ -59,16 +59,16 @@ public class AbilityHandler {
 			return;
 		}
 		AbilityHandler handler = new AbilityHandler(player);
-		if (!player.capabilities.isCreativeMode && player.experienceTotal < handler.ability.getXpCost()) {
+		if (!player.isCreative() && player.experienceTotal < handler.ability.getXpCost()) {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(4, handler.ability.getId()), (ServerPlayerEntity) player);
 			return;
 		}
 		int food = player.getFoodStats().getFoodLevel();
-		if (!player.capabilities.isCreativeMode && food < handler.ability.getHungerCost()) {
+		if (!player.isCreative() && food < handler.ability.getHungerCost()) {
 			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(5, handler.ability.getId()), (ServerPlayerEntity) player);
 			return;
 		}
-		if (!player.capabilities.isCreativeMode) {
+		if (!player.isCreative()) {
 			player.experienceTotal -= handler.ability.getXpCost();
 			player.getFoodStats().setFoodLevel(food - handler.ability.getHungerCost());
 		}

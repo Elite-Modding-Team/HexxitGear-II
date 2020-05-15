@@ -2,7 +2,7 @@ package sct.hexxitgear.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -24,25 +24,25 @@ public class HexRegistry {
 	public static final Item HEXICAL_ESSENCE = new Item(new Item.Properties().group(HexTab.INSTANCE)).setRegistryName("hexical_essence");
 	public static final Item HEXICAL_DIAMOND = new Item(new Item.Properties().group(HexTab.INSTANCE)).setRegistryName("hexical_diamond");
 
-	public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD);
-	public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST);
-	public static final ItemTribalArmor TRIBAL_LEGS = new ItemTribalArmor("tribal_legs", EntityEquipmentSlot.LEGS);
-	public static final ItemTribalArmor TRIBAL_BOOTS = new ItemTribalArmor("tribal_boots", EntityEquipmentSlot.FEET);
+	public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EquipmentSlotType.HEAD);
+	public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EquipmentSlotType.CHEST);
+	public static final ItemTribalArmor TRIBAL_LEGS = new ItemTribalArmor("tribal_legs", EquipmentSlotType.LEGS);
+	public static final ItemTribalArmor TRIBAL_BOOTS = new ItemTribalArmor("tribal_boots", EquipmentSlotType.FEET);
 
-	public static final Item THIEF_HELMET = new ItemThiefArmor("thief_helmet", EntityEquipmentSlot.HEAD);
-	public static final Item THIEF_CHEST = new ItemThiefArmor("thief_chest", EntityEquipmentSlot.CHEST);
-	public static final Item THIEF_LEGS = new ItemThiefArmor("thief_legs", EntityEquipmentSlot.LEGS);
-	public static final Item THIEF_BOOTS = new ItemThiefArmor("thief_boots", EntityEquipmentSlot.FEET);
+	public static final Item THIEF_HELMET = new ItemThiefArmor("thief_helmet", EquipmentSlotType.HEAD);
+	public static final Item THIEF_CHEST = new ItemThiefArmor("thief_chest", EquipmentSlotType.CHEST);
+	public static final Item THIEF_LEGS = new ItemThiefArmor("thief_legs", EquipmentSlotType.LEGS);
+	public static final Item THIEF_BOOTS = new ItemThiefArmor("thief_boots", EquipmentSlotType.FEET);
 
-	public static final Item SCALE_HELMET = new ItemScaleArmor("scale_helmet", EntityEquipmentSlot.HEAD);
-	public static final Item SCALE_CHEST = new ItemScaleArmor("scale_chest", EntityEquipmentSlot.CHEST);
-	public static final Item SCALE_LEGS = new ItemScaleArmor("scale_legs", EntityEquipmentSlot.LEGS);
-	public static final Item SCALE_BOOTS = new ItemScaleArmor("scale_boots", EntityEquipmentSlot.FEET);
+	public static final Item SCALE_HELMET = new ItemScaleArmor("scale_helmet", EquipmentSlotType.HEAD);
+	public static final Item SCALE_CHEST = new ItemScaleArmor("scale_chest", EquipmentSlotType.CHEST);
+	public static final Item SCALE_LEGS = new ItemScaleArmor("scale_legs", EquipmentSlotType.LEGS);
+	public static final Item SCALE_BOOTS = new ItemScaleArmor("scale_boots", EquipmentSlotType.FEET);
 
-	public static final Item SAGE_HELMET = new ItemMagicianArmor("sage_helmet", EntityEquipmentSlot.HEAD);
-	public static final Item SAGE_CHEST = new ItemMagicianArmor("sage_chest", EntityEquipmentSlot.CHEST);
-	public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
-	public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
+	public static final Item SAGE_HELMET = new ItemMagicianArmor("sage_helmet", EquipmentSlotType.HEAD);
+	public static final Item SAGE_CHEST = new ItemMagicianArmor("sage_chest", EquipmentSlotType.CHEST);
+	public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EquipmentSlotType.LEGS);
+	public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EquipmentSlotType.FEET);
 
 	@SubscribeEvent
 	public void items(Register<Item> event) {

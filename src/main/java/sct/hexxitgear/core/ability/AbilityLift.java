@@ -55,8 +55,8 @@ public class AbilityLift extends Ability {
 		float precalc = player.rotationYaw % 360;
 		float a = 360 + (90 + (precalc < 0 ? precalc + 360 : precalc)) % 360 * -1;
 
-		double x = entity.posX - player.posX;
-		double z = entity.posZ - player.posZ;
+		double x = entity.getX() - player.getX();
+		double z = entity.getZ() - player.getZ();
 
 		x *= getXMult(a, x, z);
 		a = 0;
@@ -88,10 +88,10 @@ public class AbilityLift extends Ability {
 
 	@Override
 	public void renderFirst(PlayerEntity player) {
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.PLAYERS, 1, 1, false);
 		for (LivingEntity e : getHitEntities(player))
 			for (int i = 0; i < 10; i++)
-				player.world.addParticle(ParticleTypes.DRAGON_BREATH, e.posX, e.posY, e.posZ, 0, (i + 1) * 0.1, 0);
+				player.world.addParticle(ParticleTypes.DRAGON_BREATH, e.getX(), e.getY(), e.getZ(), 0, (i + 1) * 0.1, 0);
 	}
 
 }

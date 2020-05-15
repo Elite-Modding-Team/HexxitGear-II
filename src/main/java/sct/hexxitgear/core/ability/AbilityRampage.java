@@ -61,13 +61,13 @@ public class AbilityRampage extends Ability {
 	@Override
 	public void renderFirst(PlayerEntity player) {
 		renderAt(player, 0);
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override
 	public void renderAt(PlayerEntity player, int duration) {
 		if (duration % 20 == 0) for (int i = 0; i < 360; i += 10) {
-			SimpleAnimatedParticle p = (SimpleAnimatedParticle) Minecraft.getInstance().particles.addParticle(ParticleTypes.END_ROD, player.posX, player.posY, player.posZ, Math.sin(i) * 0.1, 0.1F, Math.cos(i) * 0.1);
+			SimpleAnimatedParticle p = (SimpleAnimatedParticle) Minecraft.getInstance().particles.addParticle(ParticleTypes.END_ROD, player.getX(), player.getY(), player.getZ(), Math.sin(i) * 0.1, 0.1F, Math.cos(i) * 0.1);
 			p.setColor(RED);
 			p.setColorFade(RED);
 		}

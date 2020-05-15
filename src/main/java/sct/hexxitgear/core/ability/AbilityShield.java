@@ -52,13 +52,13 @@ public class AbilityShield extends Ability {
 	@Override
 	public void renderFirst(PlayerEntity player) {
 		renderAt(player, 0);
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLUSIONER_PREPARE_MIRROR, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ILLUSIONER_PREPARE_MIRROR, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override
 	public void renderAt(PlayerEntity player, int duration) {
 		if (duration % 10 == 0) for (int i = 0; i < 360; i += 10) {
-			SimpleAnimatedParticle p = (SimpleAnimatedParticle) Minecraft.getInstance().particles.addParticle(ParticleTypes.END_ROD, player.posX + Math.sin(i), player.posY, player.posZ + Math.cos(i), 0, 0.2F, 0);
+			SimpleAnimatedParticle p = (SimpleAnimatedParticle) Minecraft.getInstance().particles.addParticle(ParticleTypes.END_ROD, player.getX() + Math.sin(i), player.getY(), player.getZ() + Math.cos(i), 0, 0.2F, 0);
 			p.setColor(BLUE);
 			p.setColorFade(BLUE);
 		}

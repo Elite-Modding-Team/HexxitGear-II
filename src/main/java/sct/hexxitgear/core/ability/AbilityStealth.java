@@ -54,9 +54,9 @@ public class AbilityStealth extends Ability {
 	@Override
 	public void renderFirst(PlayerEntity player) {
 		for (int i = 0; i < 360; i += 10) {
-			player.world.addParticle(ParticleTypes.SMOKE, player.posX, player.posY + 4, player.posZ, Math.sin(i) * 0.1F, -0.8F, Math.cos(i) * 0.1F);
+			player.world.addParticle(ParticleTypes.SMOKE, player.getX(), player.getY() + 4, player.getZ(), Math.sin(i) * 0.1F, -0.8F, Math.cos(i) * 0.1F);
 		}
-		player.world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, SoundCategory.PLAYERS, 1, 1, false);
+		player.world.playSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	@Override
