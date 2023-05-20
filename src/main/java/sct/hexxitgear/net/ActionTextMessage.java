@@ -2,6 +2,8 @@ package sct.hexxitgear.net;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.StringUtils;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -13,25 +15,31 @@ public class ActionTextMessage implements IMessage {
 
 	private int messageId;
 	private int abilityId;
+	private int data;
 
 	public ActionTextMessage() {
 	}
 
-	public ActionTextMessage(int id1, int id2) {
-		messageId = id1;
-		abilityId = id2;
+	public ActionTextMessage(int messageId, int abilityId, int data) {
+		this.messageId = messageId;
+		this.abilityId = abilityId;
+		this.data = data;
+	}
+
+	public ActionTextMessage(int messageId, int abilityId) {
+		this(messageId, abilityId, 0);
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
-		buf.writeInt(messageId);
-		buf.writeInt(abilityId);
+		buf.writeByte(messageId).writeByte(abilityId).writeInt(data);
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		messageId = buf.readInt();
-		abilityId = buf.readInt();
+		messageId = buf.readByte();
+		abilityId = buf.readByte();
+		data = buf.readInt();
 	}
 
 	public static class ActionTextHandler implements IMessageHandler<ActionTextMessage, IMessage> {
@@ -43,22 +51,31 @@ public class ActionTextMessage implements IMessage {
 				if (ability.isInstant() && message.messageId == 2) return;
 				switch (message.messageId) {
 				case 0:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.cooldown",
+							new TextComponentTranslation(ability.getUnlocalizedName()),
+							new TextComponentString(StringUtils.ticksToElapsedTime(message.data))));
 					break;
 				case 1:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.activated", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.activated",
+							new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 2:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.ended", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.ended",
+							new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 3:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.refreshed",
+							new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 4:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needxp",
+							message.data,
+							new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				case 5:
-					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood", new TextComponentTranslation(ability.getUnlocalizedName())));
+					HexxitGear.proxy.setActionText(new TextComponentTranslation("ability.hexxitgear.needfood",
+							message.data,
+							new TextComponentTranslation(ability.getUnlocalizedName())));
 					break;
 				default:
 					break;

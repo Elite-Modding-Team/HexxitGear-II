@@ -11,10 +11,7 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.block.BlockHexbiscus;
-import sct.hexxitgear.item.ItemMagicianArmor;
-import sct.hexxitgear.item.ItemScaleArmor;
-import sct.hexxitgear.item.ItemThiefArmor;
-import sct.hexxitgear.item.ItemTribalArmor;
+import sct.hexxitgear.item.*;
 import shadows.placebo.item.ItemBase;
 
 public class HexRegistry {
@@ -25,6 +22,7 @@ public class HexRegistry {
 	};
 	public static final Item HEXICAL_DIAMOND = new ItemBase("hexical_diamond", HexxitGear.INFO) {
 	};
+	public static final Item REFRESHER_SHARD = new ItemRefresherShard();
 
 	public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD);
 	public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST);

@@ -18,6 +18,7 @@
 
 package sct.hexxitgear;
 
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -41,7 +42,7 @@ public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
 	public static final String MODNAME = "Hexxit Gear";
-	public static final String VERSION = "2.8.0";
+	public static final String VERSION = "2.8.2";
 
 	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
 	public static IProxy proxy;

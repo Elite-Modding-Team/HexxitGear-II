@@ -54,7 +54,7 @@ public abstract class Ability {
 		this.cooldown = HexConfig.config.getInt(name + " Cooldown", name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
 		this.instant = false;
 		id = curId++;
-		this.xpCost = HexConfig.config.getInt(name + " XP Cost", name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.xpCost = HexConfig.config.getInt(name + " XP Level Cost", name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in levels.");
 		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
 		ABILITIES.add(this);
 	}
@@ -73,7 +73,7 @@ public abstract class Ability {
 		this.cooldown = HexConfig.config.getInt(name + " Cooldown", name, cooldown, 1, Integer.MAX_VALUE, "The cooldown of " + name + " in ticks.");
 		this.instant = true;
 		id = curId++;
-		this.xpCost = HexConfig.config.getInt(name + " XP Cost", name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in numerical xp.");
+		this.xpCost = HexConfig.config.getInt(name + " XP Level Cost", name, xpCost, 0, Integer.MAX_VALUE, "The xp cost of " + name + " in levels.");
 		this.hungerCost = HexConfig.config.getInt(name + " Hunger Cost", name, hungerCost, 0, Integer.MAX_VALUE, "The hunger cost of " + name + " in half-shanks.");
 		ABILITIES.add(this);
 	}
@@ -107,7 +107,7 @@ public abstract class Ability {
 	}
 
 	public boolean canCast(EntityPlayer player) {
-		return player.experience >= getXpCost() && player.getFoodStats().getFoodLevel() >= hungerCost;
+		return player.experienceLevel >= getXpCost() && player.getFoodStats().getFoodLevel() >= hungerCost;
 	}
 
 	/**

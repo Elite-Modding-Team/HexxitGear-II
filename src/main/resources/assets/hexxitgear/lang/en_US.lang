@@ -1,26 +1,38 @@
 gui.hexxitgear.creativetab=Hexxit Gear
 
+gui.hexxitgear.refresher_shard=Consume to reset ability cooldowns.
+
 gui.hexxitgear.set.thief=Thief Set
 gui.hexxitgear.set.tribal=Tribal Set
 gui.hexxitgear.set.scale=Scale Set
 gui.hexxitgear.set.sage=Sage's Set
+gui.hexxitgear.set.more_info=Hold SHIFT to see set bonus...
+gui.hexxitgear.set.set_bonus=Set Bonus
+gui.hexxitgear.set.set_ability=Active
+gui.hexxitgear.set.set_ability_duration=Duration
+gui.hexxitgear.set.set_ability_cooldown=Cooldown
 
 ability.hexxitgear.stealth=Stealth
+ability.hexxitgear.stealth.desc=Become invisible, but slowed. Your\nnext attack breaks the invisibility\nand has increased damage.
 ability.hexxitgear.lift=Arcane Rising
+ability.hexxitgear.lift.desc=Lifts enemies in front of you high\ninto the air.
 ability.hexxitgear.shield=Titanic Shielding
+ability.hexxitgear.shield.desc=Grants total invulnerability.
 ability.hexxitgear.rampage=Rampage
+ability.hexxitgear.rampage.desc=Move faster, hit harder, and gain\nhealth regeneration. Nearby enemies\nare slowed for the duration.
 
 ability.hexxitgear.activated=%s activated!
 ability.hexxitgear.ended=%s has ended.
 ability.hexxitgear.refreshed=%s is now off cooldown!
-ability.hexxitgear.cooldown=%s is on cooldown!
-ability.hexxitgear.needxp=Not enough XP to activate %s!
-ability.hexxitgear.needfood=Not enough hunger to activate %s!
+ability.hexxitgear.cooldown=%s is on cooldown for %s!
+ability.hexxitgear.needxp=Need %d more experience levels to activate %s!
+ability.hexxitgear.needfood=Need %d more hunger to activate %s!
 
 tile.hexxitgear.hexbiscus.name=Hexbiscus
 
 item.hexxitgear.hexical_essence.name=Hexical Essence
 item.hexxitgear.hexical_diamond.name=Hexical Diamond
+item.hexxitgear.refresher_shard.name=Refresher Shard
 
 item.hexxitgear.tribal_helmet.name=Tribal Skull
 item.hexxitgear.tribal_chest.name=Tribal Tunic

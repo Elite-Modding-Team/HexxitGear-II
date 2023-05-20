@@ -35,7 +35,7 @@ public class AbilityLift extends Ability {
 	public static final double FRAC = Math.PI / 180;
 
 	public AbilityLift() {
-		super("Arcane Rising", "ability.hexxitgear.lift", 600, 500, 6);
+		super("Arcane Rising", "ability.hexxitgear.lift", 600, 2, 6);
 	}
 
 	@Override

@@ -18,10 +18,6 @@
 
 package sct.hexxitgear.core;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
@@ -29,6 +25,10 @@ import sct.hexxitgear.core.ability.Ability;
 import sct.hexxitgear.net.AbilityRenderMessage;
 import sct.hexxitgear.net.ActionTextMessage;
 import sct.hexxitgear.net.HexNetwork;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class AbilityHandler {
 
@@ -53,23 +53,25 @@ public class AbilityHandler {
 	}
 
 	public static void activateAbility(EntityPlayer player) {
-		if (ACTIVE_HANDLERS.get(player.getUniqueID()) != null) {
-			Ability ability = ACTIVE_HANDLERS.get(player.getUniqueID()).ability;
-			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(0, ability.getId()), (EntityPlayerMP) player);
+		AbilityHandler handler = ACTIVE_HANDLERS.get(player.getUniqueID());
+		if (handler != null) {
+			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(0, handler.ability.getId(), handler.cooldownTime), (EntityPlayerMP) player);
 			return;
 		}
-		AbilityHandler handler = new AbilityHandler(player);
-		if (!player.capabilities.isCreativeMode && player.experienceTotal < handler.ability.getXpCost()) {
-			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(4, handler.ability.getId()), (EntityPlayerMP) player);
+		handler = new AbilityHandler(player);
+		if (!player.capabilities.isCreativeMode && player.experienceLevel < handler.ability.getXpCost()) {
+			HexNetwork.INSTANCE.sendTo(
+					new ActionTextMessage(4, handler.ability.getId(), handler.ability.getXpCost() - player.experienceLevel), (EntityPlayerMP) player);
 			return;
 		}
 		int food = player.getFoodStats().getFoodLevel();
 		if (!player.capabilities.isCreativeMode && food < handler.ability.getHungerCost()) {
-			HexNetwork.INSTANCE.sendTo(new ActionTextMessage(5, handler.ability.getId()), (EntityPlayerMP) player);
+			HexNetwork.INSTANCE.sendTo(
+					new ActionTextMessage(5, handler.ability.getId(), handler.ability.getHungerCost() - food), (EntityPlayerMP) player);
 			return;
 		}
 		if (!player.capabilities.isCreativeMode) {
-			player.experienceTotal -= handler.ability.getXpCost();
+			player.addExperienceLevel(-handler.ability.getXpCost());
 			player.getFoodStats().setFoodLevel(food - handler.ability.getHungerCost());
 		}
 		ACTIVE_HANDLERS.put(player.getUniqueID(), handler);
@@ -109,5 +111,9 @@ public class AbilityHandler {
 		ended = true;
 		activeTime = 0;
 		if (ability.getDuration() >= 100) HexNetwork.INSTANCE.sendTo(new ActionTextMessage(2, ability.getId()), (EntityPlayerMP) player);
+	}
+
+	public void clearCooldown() {
+		cooldownTime = 0;
 	}
 }

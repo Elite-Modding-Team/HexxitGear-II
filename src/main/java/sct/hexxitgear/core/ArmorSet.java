@@ -18,98 +18,195 @@
 
 package sct.hexxitgear.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StringUtils;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
+import sct.hexxitgear.HexIntegration;
+import sct.hexxitgear.core.ability.*;
+import sct.hexxitgear.item.ItemHexxitArmor;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import sct.hexxitgear.core.ability.Ability;
-import sct.hexxitgear.core.ability.AbilityLift;
-import sct.hexxitgear.core.ability.AbilityRampage;
-import sct.hexxitgear.core.ability.AbilityShield;
-import sct.hexxitgear.core.ability.AbilityStealth;
-import sct.hexxitgear.core.buff.BuffMagicianSet;
-import sct.hexxitgear.core.buff.BuffScaleSet;
-import sct.hexxitgear.core.buff.BuffThiefSet;
-import sct.hexxitgear.core.buff.BuffTribalSet;
-import sct.hexxitgear.core.buff.IBuffHandler;
-import sct.hexxitgear.init.HexRegistry;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class ArmorSet {
 
-	public static final Map<UUID, ArmorSet> CACHED_SETS = new HashMap<>();
+    public static final Map<UUID, ArmorSet> CACHED_SETS = new HashMap<>();
 
-	public static final List<ArmorSet> SETS = new ArrayList<>();
+    public static final List<ArmorSet> SETS = new ArrayList<>();
 
-	public static final ArmorSet TRIBAL = new ArmorSet("Tribal", new Item[] { HexRegistry.TRIBAL_HELMET, HexRegistry.TRIBAL_CHEST, HexRegistry.TRIBAL_LEGS, HexRegistry.TRIBAL_BOOTS }, new BuffTribalSet(), new AbilityRampage());
-	public static final ArmorSet THIEF = new ArmorSet("Thief", new Item[] { HexRegistry.THIEF_HELMET, HexRegistry.THIEF_CHEST, HexRegistry.THIEF_LEGS, HexRegistry.THIEF_BOOTS }, new BuffThiefSet(), new AbilityStealth());
-	public static final ArmorSet SCALE = new ArmorSet("Scale", new Item[] { HexRegistry.SCALE_HELMET, HexRegistry.SCALE_CHEST, HexRegistry.SCALE_LEGS, HexRegistry.SCALE_BOOTS }, new BuffScaleSet(), new AbilityShield());
-	public static final ArmorSet SAGE = new ArmorSet("Sage", new Item[] { HexRegistry.SAGE_HELMET, HexRegistry.SAGE_CHEST, HexRegistry.SAGE_LEGS, HexRegistry.SAGE_BOOTS }, new BuffMagicianSet(), new AbilityLift());
+    public static final ArmorSet TRIBAL = new ArmorSet("tribal", ItemArmor.ArmorMaterial.DIAMOND,
+            new IBuffEffect[] {
+                    new IBuffEffect.Simple(() -> MobEffects.STRENGTH, 0),
+                    new IBuffEffect.Simple(() -> MobEffects.HASTE, 1),
+                    new IBuffEffect.Simple(() -> MobEffects.JUMP_BOOST, 2),
+                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
+            },
+            new AbilityRampage());
+    public static final ArmorSet THIEF = new ArmorSet("thief", ItemArmor.ArmorMaterial.DIAMOND,
+            new IBuffEffect[] {
+                    new IBuffEffect.Simple(() -> MobEffects.SPEED, 2),
+                    new IBuffEffect.Simple(() -> HexIntegration.ELENAI_DODGE_NIMBLE, 0),
+                    new IBuffEffect.Simple(() -> MobEffects.LUCK, 1),
+                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
+            },
+            new AbilityStealth());
+    public static final ArmorSet SCALE = new ArmorSet("scale", ItemArmor.ArmorMaterial.DIAMOND,
+            new IBuffEffect[] {
+                    new IBuffEffect.Absorption(1, 400),
+                    new IBuffEffect.Simple(() -> MobEffects.STRENGTH, 1),
+                    new IBuffEffect.Simple(() -> MobEffects.RESISTANCE, 0)
+            },
+            new AbilityShield());
+    public static final ArmorSet SAGE = new ArmorSet("sage", ItemArmor.ArmorMaterial.DIAMOND,
+            new IBuffEffect[] {
+                    new IBuffEffect.Absorption(2, 500),
+                    new IBuffEffect.Simple(() -> MobEffects.FIRE_RESISTANCE, 0),
+                    new IBuffEffect.Simple(() -> MobEffects.WATER_BREATHING, 0),
+                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
+            },
+            new AbilityLift());
 
-	private final Item[] armors;
-	private final String name;
-	private final IBuffHandler buffHandler;
-	private final Ability ability;
+    private final String name;
+    private final ItemArmor.ArmorMaterial material;
+    private final IBuffEffect[] buffs;
+    private final Ability ability;
 
-	public ArmorSet(String name, Item[] armor, IBuffHandler buffHandler, Ability ability) {
-		this.name = name;
-		this.armors = armor;
-		this.buffHandler = buffHandler;
-		this.ability = ability;
-		SETS.add(this);
-	}
+    public ArmorSet(String name, ItemArmor.ArmorMaterial material, IBuffEffect[] buffs, Ability ability) {
+        this.name = name;
+        this.material = material;
+        this.buffs = buffs;
+        this.ability = ability;
+        SETS.add(this);
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Item[] getArmors() {
-		return armors;
-	}
+    public ItemArmor.ArmorMaterial getMaterial() {
+        return material;
+    }
 
-	public Ability getAbility() {
-		return ability;
-	}
+    public Ability getAbility() {
+        return ability;
+    }
 
-	public void applyBuffs(EntityPlayer player) {
-		buffHandler.applyPlayerBuffs(player);
-	}
+    public void applyBuffs(EntityPlayer player) {
+        if (player.world.getTotalWorldTime() % IBuffEffect.REFRESH_QUERY_INTERVAL != 0) {
+            return;
+        }
+        for (IBuffEffect buff : buffs) {
+            buff.apply(player);
+        }
+    }
 
-	public void removeBuffs(EntityPlayer player) {
-		buffHandler.removePlayerBuffs(player);
-	}
+    public void removeBuffs(EntityPlayer player) {
+        for (IBuffEffect buff : buffs) {
+            buff.purge(player);
+        }
+    }
 
-	@Nullable
-	public static ArmorSet getCurrentArmorSet(EntityPlayer player) {
-		Iterable<ItemStack> curArmor = player.getArmorInventoryList();
-		for (ArmorSet set : SETS) {
-			int i = 0;
-			int matched = 0;
-			for (ItemStack s : curArmor)
-				if (!s.isEmpty() && s.getItem() == set.armors[3 - i++]) ++matched;
+    @SideOnly(Side.CLIENT)
+    public void addTooltip(List<String> tooltip) {
+        tooltip.add(TextFormatting.GRAY + I18n.format("gui.hexxitgear.set." + name));
+        tooltip.add("");
+        if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+            tooltip.add(TextFormatting.GRAY + TextFormatting.ITALIC.toString() + I18n.format("gui.hexxitgear.set.more_info"));
+            return;
+        }
+        tooltip.add(TextFormatting.AQUA + I18n.format("gui.hexxitgear.set.set_bonus"));
+        for (IBuffEffect buff : buffs) {
+            tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", buff.getDescription()));
+        }
+        tooltip.add("");
+        StringBuilder abilityName = new StringBuilder()
+                .append(TextFormatting.AQUA).append(I18n.format("gui.hexxitgear.set.set_ability")).append(": ")
+                .append(TextFormatting.WHITE).append(I18n.format(ability.getUnlocalizedName()));
+        if (ability.getHungerCost() > 0) {
+            if (ability.getXpCost() > 0) {
+                abilityName.append(TextFormatting.GRAY).append(" (")
+                        .append(TextFormatting.YELLOW).append(ability.getHungerCost())
+                        .append(TextFormatting.GRAY).append('+')
+                        .append(TextFormatting.GREEN).append(ability.getXpCost())
+                        .append(TextFormatting.GRAY).append(')');
+            } else {
+                abilityName.append(TextFormatting.GRAY).append(" (")
+                        .append(TextFormatting.YELLOW).append(ability.getHungerCost())
+                        .append(TextFormatting.GRAY).append(')');
+            }
+        } else if (ability.getXpCost() > 0) {
+            abilityName.append(TextFormatting.GRAY).append(" (")
+                    .append(TextFormatting.GREEN).append(ability.getXpCost())
+                    .append(TextFormatting.GRAY).append(')');
+        }
+        tooltip.add(abilityName.toString());
+        for (String line : I18n.format(ability.getUnlocalizedName() + ".desc").split(Pattern.quote("\\n"))) {
+            tooltip.add("  " + TextFormatting.GRAY + line);
+        }
+        if (ability.getDuration() > 1) {
+            tooltip.add(String.format(TextFormatting.GREEN + "%s: " + TextFormatting.WHITE + "%s",
+                    I18n.format("gui.hexxitgear.set.set_ability_duration"), StringUtils.ticksToElapsedTime(ability.getDuration())));
+        }
+        tooltip.add(String.format(TextFormatting.GREEN + "%s: " + TextFormatting.WHITE + "%s",
+                I18n.format("gui.hexxitgear.set.set_ability_cooldown"), StringUtils.ticksToElapsedTime(ability.getCooldown())));
+    }
 
-			if (matched == 4) return set;
-		}
-		return null;
-	}
+    @Nullable
+    public static ArmorSet getCurrentArmorSet(EntityPlayer player) {
+        ItemStack stack = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+        if (stack.isEmpty() || !(stack.getItem() instanceof ItemHexxitArmor)) {
+            return null;
+        }
+        ArmorSet set = ((ItemHexxitArmor)stack.getItem()).getSet();
+        if (isArmorSlotWrong(player, EntityEquipmentSlot.CHEST, set)
+                || isArmorSlotWrong(player, EntityEquipmentSlot.LEGS, set)
+                || isArmorSlotWrong(player, EntityEquipmentSlot.FEET, set)) {
+            return null;
+        }
+        return set;
+    }
 
-	@SubscribeEvent
-	public static void onPlayerTick(PlayerTickEvent e) {
-		ArmorSet s = CACHED_SETS.get(e.player.getUniqueID());
-		if (!e.player.world.isRemote && s != null && getCurrentArmorSet(e.player) != s) {
-			s.removeBuffs(e.player);
-			CACHED_SETS.put(e.player.getUniqueID(), null);
-		}
-	}
+    private static boolean isArmorSlotWrong(EntityPlayer player, EntityEquipmentSlot slot, ArmorSet set) {
+        ItemStack stack = player.getItemStackFromSlot(slot);
+        return stack.isEmpty() || !(stack.getItem() instanceof ItemHexxitArmor)
+                || ((ItemHexxitArmor)stack.getItem()).getSet() != set;
+    }
 
-	public static void classloadForConfigs() {
-	}
+    @SubscribeEvent
+    public static void onPlayerTick(PlayerTickEvent e) {
+        if (e.phase != TickEvent.Phase.END || e.player.world.isRemote) {
+            return;
+        }
+        AbilityHandler abilityHandler = AbilityHandler.getActiveAbility(e.player);
+        ArmorSet s = CACHED_SETS.get(e.player.getUniqueID());
+        if (s == null) {
+            if (abilityHandler != null) {
+                abilityHandler.setEnded(e.player);
+            }
+        } else if (getCurrentArmorSet(e.player) != s) {
+            s.removeBuffs(e.player);
+            CACHED_SETS.put(e.player.getUniqueID(), null);
+            if (abilityHandler != null) {
+                abilityHandler.setEnded(e.player);
+            }
+        } else if (abilityHandler != null) {
+            abilityHandler.onTick(e.player);
+        }
+    }
+
+    public static void classloadForConfigs() {
+    }
+
 }

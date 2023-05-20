@@ -16,6 +16,11 @@
 					"layer0": "hexxitgear:items/hexical_essence"
 				}
 			},
+			"refresher_shard": {
+				"textures": {
+					"layer0": "hexxitgear:items/refresher_shard"
+				}
+			},
 			"sage_boots": {
 				"textures": {
 					"layer0": "hexxitgear:items/sage_boots"

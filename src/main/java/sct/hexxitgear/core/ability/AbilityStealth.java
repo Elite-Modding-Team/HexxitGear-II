@@ -31,7 +31,7 @@ import sct.hexxitgear.core.AbilityHandler;
 public class AbilityStealth extends Ability {
 
 	public AbilityStealth() {
-		super("Stealth", "ability.hexxitgear.stealth", 600, 800, 160, 4);
+		super("Stealth", "ability.hexxitgear.stealth", 600, 800, 1, 4);
 	}
 
 	@Override
