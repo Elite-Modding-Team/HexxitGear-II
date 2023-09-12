@@ -42,7 +42,7 @@ public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
 	public static final String MODNAME = "Hexxit Gear";
-	public static final String VERSION = "2.8.2";
+	public static final String VERSION = "2.8.3";
 
 	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
 	public static IProxy proxy;

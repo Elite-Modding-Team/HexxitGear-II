@@ -47,7 +47,7 @@ public class ArmorSet {
     public static final List<ArmorSet> SETS = new ArrayList<>();
 
     public static final ArmorSet TRIBAL = new ArmorSet("tribal", ItemArmor.ArmorMaterial.DIAMOND,
-            new IBuffEffect[] {
+            new IBuffEffect[]{
                     new IBuffEffect.Simple(() -> MobEffects.STRENGTH, 0),
                     new IBuffEffect.Simple(() -> MobEffects.HASTE, 1),
                     new IBuffEffect.Simple(() -> MobEffects.JUMP_BOOST, 2),
@@ -55,23 +55,23 @@ public class ArmorSet {
             },
             new AbilityRampage());
     public static final ArmorSet THIEF = new ArmorSet("thief", ItemArmor.ArmorMaterial.DIAMOND,
-            new IBuffEffect[] {
-                    new IBuffEffect.Simple(() -> MobEffects.SPEED, 2),
+            new IBuffEffect[]{
+                    new IBuffEffect.Simple(() -> PotionHandler.THIEF, 0),
                     new IBuffEffect.Simple(() -> HexIntegration.ELENAI_DODGE_NIMBLE, 0),
                     new IBuffEffect.Simple(() -> MobEffects.LUCK, 1),
                     new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
             },
             new AbilityStealth());
     public static final ArmorSet SCALE = new ArmorSet("scale", ItemArmor.ArmorMaterial.DIAMOND,
-            new IBuffEffect[] {
+            new IBuffEffect[]{
                     new IBuffEffect.Absorption(1, 400),
                     new IBuffEffect.Simple(() -> MobEffects.STRENGTH, 1),
                     new IBuffEffect.Simple(() -> MobEffects.RESISTANCE, 0)
             },
             new AbilityShield());
     public static final ArmorSet SAGE = new ArmorSet("sage", ItemArmor.ArmorMaterial.DIAMOND,
-            new IBuffEffect[] {
-                    new IBuffEffect.Absorption(2, 500),
+            new IBuffEffect[]{
+                    new IBuffEffect.Absorption(2, 280),
                     new IBuffEffect.Simple(() -> MobEffects.FIRE_RESISTANCE, 0),
                     new IBuffEffect.Simple(() -> MobEffects.WATER_BREATHING, 0),
                     new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
@@ -169,7 +169,7 @@ public class ArmorSet {
         if (stack.isEmpty() || !(stack.getItem() instanceof ItemHexxitArmor)) {
             return null;
         }
-        ArmorSet set = ((ItemHexxitArmor)stack.getItem()).getSet();
+        ArmorSet set = ((ItemHexxitArmor) stack.getItem()).getSet();
         if (isArmorSlotWrong(player, EntityEquipmentSlot.CHEST, set)
                 || isArmorSlotWrong(player, EntityEquipmentSlot.LEGS, set)
                 || isArmorSlotWrong(player, EntityEquipmentSlot.FEET, set)) {
@@ -181,7 +181,7 @@ public class ArmorSet {
     private static boolean isArmorSlotWrong(EntityPlayer player, EntityEquipmentSlot slot, ArmorSet set) {
         ItemStack stack = player.getItemStackFromSlot(slot);
         return stack.isEmpty() || !(stack.getItem() instanceof ItemHexxitArmor)
-                || ((ItemHexxitArmor)stack.getItem()).getSet() != set;
+                || ((ItemHexxitArmor) stack.getItem()).getSet() != set;
     }
 
     @SubscribeEvent

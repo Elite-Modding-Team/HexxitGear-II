@@ -25,14 +25,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.model.ModelSageHood;
-
-import javax.annotation.Nonnull;
 
 public class ItemMagicianArmor extends ItemHexxitArmor {
 
@@ -43,7 +40,7 @@ public class ItemMagicianArmor extends ItemHexxitArmor {
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer)entity;
+            EntityPlayer player = (EntityPlayer) entity;
             if (player.isPotionActive(MobEffects.INVISIBILITY)) return "hexxitgear:textures/armor/invisible.png";
         }
 
@@ -62,17 +59,6 @@ public class ItemMagicianArmor extends ItemHexxitArmor {
     protected ModelSageHood getHoodModel() {
         if (hood == null) hood = new ModelSageHood();
         return hood;
-    }
-
-    @Override
-    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-        if (source.isMagicDamage()) return new ArmorProperties(1, damageReduceAmount / 15D, Integer.MAX_VALUE);
-        return super.getProperties(player, armor, source, damage, slot);
-    }
-
-    @Override
-    public boolean handleUnblockableDamage(EntityLivingBase entity, @Nonnull ItemStack armor, DamageSource source, double damage, int slot) {
-        return source.isMagicDamage() && !source.canHarmInCreative();
     }
 
     @SideOnly(Side.CLIENT)

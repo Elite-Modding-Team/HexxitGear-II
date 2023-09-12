@@ -41,8 +41,7 @@ public interface IBuffEffect {
             PotionEffect activeEffect = target.getActivePotionEffect(potionType);
             if (activeEffect != null) {
                 int activeAmplifier = activeEffect.getAmplifier();
-                if (activeAmplifier > amplifier
-                        || (activeAmplifier == amplifier && MAX_DURATION - activeEffect.getDuration() < REFRESH_INTERVAL)) {
+                if (activeAmplifier > amplifier || (activeAmplifier == amplifier && MAX_DURATION - activeEffect.getDuration() < REFRESH_INTERVAL)) {
                     return;
                 }
             }
@@ -53,15 +52,15 @@ public interface IBuffEffect {
         public void purge(EntityLivingBase target) {
             Potion potionType = potionTypeProvider.get();
             PotionEffect activeEffect = target.getActivePotionEffect(potionType);
-            if (activeEffect != null
-                    && activeEffect.getAmplifier() == amplifier && activeEffect.getDuration() <= MAX_DURATION) {
+            if (activeEffect != null && activeEffect.getAmplifier() == amplifier && activeEffect.getDuration() <= MAX_DURATION) {
                 target.removePotionEffect(potionType);
             }
         }
 
         @Override
         public String getDescription() {
-            return String.format("%s %d", I18n.format(potionTypeProvider.get().getName()), amplifier + 1);
+            String s1 = I18n.format(potionTypeProvider.get().getName());
+            return amplifier > 0 ? s1 + " " + I18n.format("enchantment.level." + (amplifier + 1)) : s1;
         }
 
     }
@@ -96,18 +95,14 @@ public interface IBuffEffect {
         @Override
         public void purge(EntityLivingBase target) {
             PotionEffect activeEffect = target.getActivePotionEffect(MobEffects.ABSORPTION);
-            if (activeEffect != null
-                    && activeEffect.getAmplifier() == amplifier && activeEffect.getDuration() <= refreshInterval) {
+            if (activeEffect != null && activeEffect.getAmplifier() == amplifier && activeEffect.getDuration() <= refreshInterval) {
                 target.removePotionEffect(MobEffects.ABSORPTION);
             }
         }
 
         @Override
         public String getDescription() {
-            return String.format("%s %d (%s)",
-                    I18n.format(MobEffects.ABSORPTION.getName()),
-                    amplifier + 1,
-                    StringUtils.ticksToElapsedTime(refreshInterval));
+            return String.format("%s %d (%s)", I18n.format(MobEffects.ABSORPTION.getName()), amplifier + 1, StringUtils.ticksToElapsedTime(refreshInterval));
         }
 
     }

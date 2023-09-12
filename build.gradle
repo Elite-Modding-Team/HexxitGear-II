@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-2.8.2"
+version = "1.12.2-2.8.3"
 group = "sct.hexxitgear"
 archivesBaseName = "Hexxit Gear"
 
@@ -39,6 +39,12 @@ repositories {
 dependencies {
     deobfCompile "mezz.jei:jei_1.12.2:4.15.0.291"
     deobfCompile "curse.maven:hwyla-253449:2568751" // 1.8.26-B41
+}
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'hexxitgear_at.cfg'
+    }
 }
 
 processResources {

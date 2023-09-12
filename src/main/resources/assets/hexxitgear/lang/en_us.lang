@@ -30,6 +30,8 @@ ability.hexxitgear.needfood=Need %d more hunger to activate %s!
 
 tile.hexxitgear.hexbiscus.name=Hexbiscus
 
+effect.hexxitgear.thief.name=Thief Speed
+
 item.hexxitgear.hexical_essence.name=Hexical Essence
 item.hexxitgear.hexical_diamond.name=Hexical Diamond
 item.hexxitgear.refresher_shard.name=Refresher Shard
