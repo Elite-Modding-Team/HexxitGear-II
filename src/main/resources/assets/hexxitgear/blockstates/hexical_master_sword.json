@@ -1,0 +1,47 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "custom": {
+      "flip-v": true
+    },
+    "model": "hexxitgear:hexical_master_sword.obj"
+  },
+  "variants": {
+    "normal": [
+      {
+        "transform": {
+          "thirdperson_lefthand": {
+            "rotation": [45, 0, -90],
+            "translation": [0.3, 0.4, 0.5],
+            "scale": 0.6
+          },
+          "thirdperson_righthand": {
+            "rotation": [45, 0, 90],
+            "translation": [-0.3, 0.4, 0.5],
+            "scale": 0.6
+          },
+          "gui": {
+            "rotation": [90, 0, 0],
+            "translation": [0.25, -0.25, 0],
+            "scale": 0.5
+          },
+          "firstperson_righthand": {
+            "rotation": [70, 10, 90],
+            "translation": [0.3, -0.15, 0],
+            "scale": 0.6
+          },
+          "firstperson_lefthand": {
+            "rotation": [70, -10, -90],
+            "translation": [0.6, -0.15, 0],
+            "scale": 0.6
+          },
+          "ground": {
+            "rotation": [90, 0, 0],
+            "translation": [0.25, 0, 0],
+            "scale": 0.25
+          }
+        }
+      }
+    ]
+  }
+}

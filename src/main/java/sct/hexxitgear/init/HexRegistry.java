@@ -1,14 +1,17 @@
 package sct.hexxitgear.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.block.BlockHexbiscus;
 import sct.hexxitgear.item.*;
@@ -44,9 +47,13 @@ public class HexRegistry {
 	public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
 	public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
 
+	@GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")
+	public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword();
+
 	@SubscribeEvent
 	public void items(Register<Item> event) {
 		event.getRegistry().registerAll(HexxitGear.INFO.getItemList().toArray(new Item[0]));
+		event.getRegistry().register(HEXICAL_MASTER_SWORD);
 	}
 
 	@SubscribeEvent

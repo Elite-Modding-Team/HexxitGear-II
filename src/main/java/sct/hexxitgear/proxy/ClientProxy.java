@@ -19,12 +19,16 @@
 package sct.hexxitgear.proxy;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.control.HexKeybinds;
@@ -44,6 +48,15 @@ public class ClientProxy implements IProxy {
 		for (Item i : HexxitGear.INFO.getItemList())
 			if (i instanceof IHasModel) ((IHasModel) i).initModels(e);
 		HexRegistry.HEXBISCUS.initModels(e);
+
+		OBJLoader.INSTANCE.addDomain(HexxitGear.MODID);
+		for (final Item item : ForgeRegistries.ITEMS.getValues())
+		{
+			if (item.equals(HexRegistry.HEXICAL_MASTER_SWORD))
+			{
+				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
+			}
+		}
 	}
 
 	@Override
