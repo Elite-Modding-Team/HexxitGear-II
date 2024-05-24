@@ -52,7 +52,7 @@ public class ClientProxy implements IProxy {
 		OBJLoader.INSTANCE.addDomain(HexxitGear.MODID);
 		for (final Item item : ForgeRegistries.ITEMS.getValues())
 		{
-			if (item.equals(HexRegistry.HEXICAL_MASTER_SWORD))
+			if (item.equals(HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) || item.equals(HexRegistry.HEXICAL_MASTER_SWORD))
 			{
 				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
 			}

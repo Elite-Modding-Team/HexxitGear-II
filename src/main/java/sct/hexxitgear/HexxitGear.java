@@ -37,12 +37,12 @@ import sct.hexxitgear.world.HexGenerator;
 import shadows.placebo.registry.RegistryInformation;
 import shadows.placebo.util.RecipeHelper;
 
-@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.2.0,)")
+@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.2.0,);after:cqrepoured;after:mod_lavacow;after:mowziesmobs")
 public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
 	public static final String MODNAME = "Hexxit Gear";
-	public static final String VERSION = "2.8.3";
+	public static final String VERSION = "2.9.0";
 
 	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
 	public static IProxy proxy;

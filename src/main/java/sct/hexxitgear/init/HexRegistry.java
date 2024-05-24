@@ -1,19 +1,20 @@
 package sct.hexxitgear.init;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.block.BlockHexbiscus;
+import sct.hexxitgear.core.RecipeUtils;
 import sct.hexxitgear.item.*;
 import shadows.placebo.item.ItemBase;
 
@@ -47,12 +48,16 @@ public class HexRegistry {
 	public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
 	public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
 
+	public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 3, 3122, 12.0F, 12.0F, 24).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
+	@GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword_inactive")
+	public static final Item HEXICAL_MASTER_SWORD_INACTIVE = new ItemMasterSword("hexical_master_sword_inactive", Item.ToolMaterial.DIAMOND).setNoRepair();
 	@GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")
-	public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword();
+	public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword("hexical_master_sword", HEXICAL);
 
 	@SubscribeEvent
 	public void items(Register<Item> event) {
 		event.getRegistry().registerAll(HexxitGear.INFO.getItemList().toArray(new Item[0]));
+		event.getRegistry().register(HEXICAL_MASTER_SWORD_INACTIVE);
 		event.getRegistry().register(HEXICAL_MASTER_SWORD);
 	}
 
@@ -82,6 +87,17 @@ public class HexRegistry {
 		HexxitGear.HELPER.addShaped(SAGE_LEGS, 3, 3, "ingotGold", Items.BOOK, "ingotGold", Blocks.WOOL, HEXICAL_DIAMOND, Blocks.WOOL, "ingotGold", null, "ingotGold");
 		HexxitGear.HELPER.addShaped(SAGE_BOOTS, 3, 2, Blocks.WOOL, HEXICAL_DIAMOND, Blocks.WOOL, "ingotGold", null, "ingotGold");
 		e.getRegistry().registerAll(HexxitGear.INFO.getRecipeList().toArray(new IRecipe[0]));
-	}
 
+		String[] hexicalMasterSwordInputItems = {
+				"cqrepoured:sword_walker", "mowziesmobs:wrought_axe", "mod_lavacow:skeletonking_mace",
+				"minecraft:gold_ingot", "hexxitgear:hexical_diamond", "minecraft:gold_ingot",
+				null, "minecraft:obsidian", null
+		};
+		String[] hexicalMasterSwordRemainingItems = {
+				"cqrepoured:sword_walker", "mowziesmobs:wrought_axe", "mod_lavacow:skeletonking_mace",
+				null, null, null,
+				null, null, null
+		};
+		RecipeUtils.addShapedRecipe(e.getRegistry(), new ResourceLocation(HexxitGear.MODID, "hexical_master_sword_inactive_recipe"), new ItemStack(HEXICAL_MASTER_SWORD_INACTIVE), 3, 3, hexicalMasterSwordInputItems, hexicalMasterSwordRemainingItems);
+	}
 }
