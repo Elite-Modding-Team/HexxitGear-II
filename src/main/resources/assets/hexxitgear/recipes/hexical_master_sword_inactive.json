@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " B ",
+    "GHG",
+    " O "
+  ],
+  "key": {
+    "B": {
+      "item": "hexxitgear:hexical_master_sword_blade"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "H": {
+      "item": "hexxitgear:hexical_diamond"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    }
+  },
+  "result": {
+    "item": "hexxitgear:hexical_master_sword_inactive"
+  }
+}

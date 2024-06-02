@@ -1,0 +1,9 @@
+{
+  "items.hexical_master_sword.activation": {
+    "sounds": [
+      {
+        "name": "hexxitgear:items/hexical_master_sword_activation"
+      }
+    ]
+  }
+}

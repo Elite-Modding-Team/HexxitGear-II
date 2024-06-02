@@ -21,6 +21,16 @@
 					"layer0": "hexxitgear:items/refresher_shard"
 				}
 			},
+			"hexical_master_sword_blade": {
+				"textures": {
+					"layer0": "hexxitgear:items/hexical_master_sword_blade"
+				}
+			},
+			"hexical_master_sword_activation": {
+				"textures": {
+					"layer0": "hexxitgear:items/hexical_master_sword"
+				}
+			},
 			"sage_boots": {
 				"textures": {
 					"layer0": "hexxitgear:items/sage_boots"
