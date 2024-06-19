@@ -6,11 +6,12 @@ gui.hexxitgear.set.thief=Thief Set
 gui.hexxitgear.set.tribal=Tribal Set
 gui.hexxitgear.set.scale=Scale Set
 gui.hexxitgear.set.sage=Sage's Set
-gui.hexxitgear.set.more_info=Hold SHIFT to see set bonus...
+gui.hexxitgear.set.more_info=Hold SHIFT to see more info...
 gui.hexxitgear.set.set_bonus=Set Bonus
 gui.hexxitgear.set.set_ability=Active
 gui.hexxitgear.set.set_ability_duration=Duration
 gui.hexxitgear.set.set_ability_cooldown=Cooldown
+gui.hexxitgear.set.abilities=Abilities
 
 ability.hexxitgear.stealth=Stealth
 ability.hexxitgear.stealth.desc=Become invisible, but slowed. Your\nnext attack breaks the invisibility\nand has increased damage.
@@ -61,7 +62,12 @@ item.hexxitgear.hexical_master_sword_activation.name=Hexical Master Sword (Activ
 item.hexxitgear.hexical_master_sword.name=Hexical Master Sword
 item.hexxitgear.hexical_master_sword_blade.name=Hexical Master Sword Blade
 
-tooltip.hexxitgear.hexical_master_sword_inactive.1=Upon the peak where clouds enfold
-tooltip.hexxitgear.hexical_master_sword_inactive.2=The sword awaits, its story told
-tooltip.hexxitgear.hexical_master_sword_inactive.3=In lightning's dance, it finds its might
-tooltip.hexxitgear.hexical_master_sword_inactive.4=A sovereign blade, born of storm's light
+tooltip.hexxitgear.hexical_master_sword_active.1=Only the truest adventurers have managed to get their hands on this powerful sword...
+tooltip.hexxitgear.hexical_master_sword_active.2=Strength is increased with each enchantment.
+tooltip.hexxitgear.hexical_master_sword_active.3=A powerful projectile is fired upon right-click.
+tooltip.hexxitgear.hexical_master_sword_active.4=All attack damage will completely ignore armor.
+
+tooltip.hexxitgear.hexical_master_sword_inactive.1=Upon the peak where clouds enfold.
+tooltip.hexxitgear.hexical_master_sword_inactive.2=The sword awaits, its story told.
+tooltip.hexxitgear.hexical_master_sword_inactive.3=In lightning's dance, it finds its might.
+tooltip.hexxitgear.hexical_master_sword_inactive.4=A sovereign blade, born of storm's light.

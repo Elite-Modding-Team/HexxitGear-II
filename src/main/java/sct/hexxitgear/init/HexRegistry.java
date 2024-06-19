@@ -48,7 +48,7 @@ public class HexRegistry {
     public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
     public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
 
-    public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 3, 9001, 12.0F, 12.0F, 24).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
+    public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 100, 9001, 50.0F, 19.0F, 50).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")
     public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword("hexical_master_sword", HEXICAL);
     public static final Item HEXICAL_MASTER_SWORD_BLADE = new ItemBase("hexical_master_sword_blade", HexxitGear.INFO) {

@@ -6,10 +6,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityDragonFireball;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -30,6 +33,12 @@ import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
 
 import javax.annotation.Nullable;
+
+import org.lwjgl.input.Keyboard;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 import java.util.List;
 
 public class ItemMasterSword extends ItemSword {
@@ -121,15 +130,41 @@ public class ItemMasterSword extends ItemSword {
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
+    
+    @Override
+    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+        Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
+
+        if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Damage modifier", (double) this.getAttackDamage(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", (double) 100.0D - 4.0D, 0));
+        }
+
+        return multimap;
+    }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
-        tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.1"));
-        tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.2"));
-        tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.3"));
-        tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.4"));
+        
+        if (inactive) {
+        	tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.1"));
+        	tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.2"));
+        	tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.3"));
+        	tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.4"));
+        } else {
+        	tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_active.1"));
+            tooltip.add("");
+            if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+                tooltip.add(TextFormatting.GRAY + TextFormatting.ITALIC.toString() + I18n.format("gui.hexxitgear.set.more_info"));
+                return;
+            }
+            tooltip.add(TextFormatting.AQUA + I18n.format("gui.hexxitgear.set.abilities"));
+            tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.2")));
+            tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.3")));
+            tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.4")));
+        }
     }
 
     @SideOnly(Side.CLIENT)
