@@ -103,9 +103,20 @@ public class ItemMasterSword extends ItemSword {
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
         super.onUpdate(stack, world, entity, itemSlot, isSelected);
+        EntityPlayer player = (EntityPlayer) entity;
 
+        // Activation particles
+        if (inactive && entity instanceof EntityPlayer && player.posY > 128 && isSelected && world.isThundering()) {
+            for (int k = 0; k < 40; ++k) {
+                double d2 = world.rand.nextGaussian() * 0.02D;
+                double d0 = world.rand.nextGaussian() * 0.02D;
+                double d1 = world.rand.nextGaussian() * 0.02D;
+                world.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (double) (world.rand.nextFloat() * player.width * 2.0F) - (double) player.width, player.posY + (double) (world.rand.nextFloat() * player.height), player.posZ + (double) (world.rand.nextFloat() * player.width * 2.0F) - (double) player.width, d2, d0, d1);
+            }
+        }
+
+        // Activation event
         if (!world.isRemote && inactive && entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
             if (player.posY > 128) {
                 highUp = true;
                 if (isSelected && world.isThundering()) {
