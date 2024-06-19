@@ -53,7 +53,7 @@ public class HexRegistry {
     public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword("hexical_master_sword", HEXICAL);
     public static final Item HEXICAL_MASTER_SWORD_BLADE = new ItemBase("hexical_master_sword_blade", HexxitGear.INFO) {
     };
-    public static final Item HEXICAL_MASTER_SWORD_ACTIVATION = new ItemBase("hexical_master_sword_activation", HexxitGear.INFO) {
+    public static final Item HEXICAL_MASTER_SWORD_ACTIVATION = new ItemBaseNoTab("hexical_master_sword_activation", HexxitGear.INFO) {
     };
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword_inactive")
     public static final Item HEXICAL_MASTER_SWORD_INACTIVE = new ItemMasterSword("hexical_master_sword_inactive", Item.ToolMaterial.DIAMOND).setNoRepair();
