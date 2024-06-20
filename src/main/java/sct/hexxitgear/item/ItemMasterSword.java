@@ -159,6 +159,7 @@ public class ItemMasterSword extends ItemSword {
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
 
+        tooltip.add(TextFormatting.GRAY + I18n.format("gui.hexxitgear.set.impenetrable"));
         if (inactive) {
             tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.1"));
             tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.2"));

@@ -1,14 +1,10 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    " B ",
     "GHG",
     " O "
   ],
   "key": {
-    "B": {
-      "item": "hexxitgear:hexical_master_sword_blade"
-    },
     "G": {
       "type": "forge:ore_dict",
       "ore": "ingotGold"
@@ -22,6 +18,6 @@
     }
   },
   "result": {
-    "item": "hexxitgear:hexical_master_sword_inactive"
+    "item": "hexxitgear:hexical_master_sword_hilt"
   }
 }
