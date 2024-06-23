@@ -5,5 +5,26 @@
         "name": "hexxitgear:items/hexical_master_sword_activation"
       }
     ]
+  },
+  "items.hexical_master_sword.explode": {
+    "sounds": [
+      {
+        "name": "hexxitgear:items/hexical_master_sword_explode"
+      }
+    ]
+  },
+  "items.hexical_master_sword.projectile": {
+    "sounds": [
+      {
+        "name": "hexxitgear:items/hexical_master_sword_projectile"
+      }
+    ]
+  },
+  "items.hexical_master_sword.shoot": {
+    "sounds": [
+      {
+        "name": "hexxitgear:items/hexical_master_sword_shoot"
+      }
+    ]
   }
 }

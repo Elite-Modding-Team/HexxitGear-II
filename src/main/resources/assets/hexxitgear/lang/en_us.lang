@@ -34,6 +34,8 @@ tile.hexxitgear.hexbiscus.name=Hexbiscus
 
 effect.hexxitgear.thief.name=Thief Speed
 
+entity.hexxitgear.mini_sword.name=Spinning Sword
+
 item.hexxitgear.hexical_essence.name=Hexical Essence
 item.hexxitgear.hexical_diamond.name=Hexical Diamond
 item.hexxitgear.refresher_shard.name=Refresher Shard

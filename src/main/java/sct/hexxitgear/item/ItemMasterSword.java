@@ -4,14 +4,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityDragonFireball;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.EnumRarity;
@@ -20,8 +20,6 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -29,6 +27,7 @@ import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.entity.EntityMiniSword;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
 
@@ -58,17 +57,13 @@ public class ItemMasterSword extends ItemSword {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         if (!inactive) {
             if (!world.isRemote) {
-                Vec3d look = player.getLook(0.0F);
-                EntityDragonFireball fireball = new EntityDragonFireball(world, player, look.x, look.y, look.z);
-                fireball.posX = player.posX + look.x * 2.0D;
-                fireball.posY = player.posY + look.y + 0.9D;
-                fireball.posZ = player.posZ + look.z * 2.0D;
-                double sqrt = MathHelper.sqrt(look.x * look.x + look.y * look.y + look.z * look.z);
-                fireball.accelerationX = look.x / sqrt * 0.1D;
-                fireball.accelerationY = look.y / sqrt * 0.1D;
-                fireball.accelerationZ = look.z / sqrt * 0.1D;
-                world.spawnEntity(fireball);
-                world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.PLAYERS, 0.8F, 0.5F + world.rand.nextFloat());
+                ItemStack stack = player.getHeldItem(hand);
+                EntityMiniSword sword = new EntityMiniSword(world, player);
+                sword.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 0.8F, 3.0F);
+                sword.setKnockbackStrength(EnchantmentHelper.getEnchantmentLevel(Enchantments.KNOCKBACK, stack));
+                world.spawnEntity(sword);
+                player.getCooldownTracker().setCooldown(this, 10);
+                world.playSound(null, player.posX, player.posY, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_SHOOT_SOUND, SoundCategory.PLAYERS, 1.0F, 0.6F + world.rand.nextFloat());
             } else {
                 player.swingArm(hand);
             }

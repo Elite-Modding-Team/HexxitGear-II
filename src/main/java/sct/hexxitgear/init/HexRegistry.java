@@ -9,13 +9,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.block.BlockHexbiscus;
+import sct.hexxitgear.entity.EntityMiniSword;
 import sct.hexxitgear.item.*;
+import sct.hexxitgear.render.RenderMiniSword;
 import shadows.placebo.item.ItemBase;
 
 public class HexRegistry {
@@ -60,6 +68,9 @@ public class HexRegistry {
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword_inactive")
     public static final Item HEXICAL_MASTER_SWORD_INACTIVE = new ItemMasterSword("hexical_master_sword_inactive", Item.ToolMaterial.DIAMOND).setNoRepair();
     public static final SoundEvent HEXICAL_MASTER_SWORD_ACTIVATION_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.activation"));
+    public static final SoundEvent HEXICAL_MASTER_SWORD_EXPLODE_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.explode"));
+    public static final SoundEvent HEXICAL_MASTER_SWORD_PROJECTILE_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.projectile"));
+    public static final SoundEvent HEXICAL_MASTER_SWORD_SHOOT_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.shoot"));
 
     @SubscribeEvent
     public void items(Register<Item> event) {
@@ -71,6 +82,20 @@ public class HexRegistry {
     @SubscribeEvent
     public void blocks(Register<Block> event) {
         event.getRegistry().register(HEXBISCUS);
+    }
+
+    @SubscribeEvent
+    public void entities(Register<EntityEntry> event) {
+        int id = 1;
+        event.getRegistry().registerAll(
+                EntityEntryBuilder.create().entity(EntityMiniSword.class).id(new ResourceLocation(HexxitGear.MODID, "mini_sword"), id++).name(HexxitGear.MODID + ".mini_sword").tracker(64, 1, true).build()
+        );
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void registerEntityRenderers(ModelRegistryEvent event) {
+        RenderingRegistry.registerEntityRenderingHandler(EntityMiniSword.class, i -> new RenderMiniSword(i));
     }
 
     @SubscribeEvent
