@@ -1,4 +1,4 @@
-Hexxit Gear
+Hexxit Gear II
 ================
 
 Three ancient armors of legend, lost to the world. Can you restore the pieces one by one and reclaim one of these
@@ -20,7 +20,7 @@ Credits
 License
 ---------
 
-HexxitGear is licensed under the GPL. You can find out more by reading the LICENSE file including with the mod.
+Hexxit Gear II is licensed under the GPL. You can find out more by reading the LICENSE file including with the mod.
 
 The model and texture of the Hexical Master Sword were created by IcarussOne.
 It is licensed as All Rights Reserved and use of it is only allowed in Hexxit II or other official projects by Technic.

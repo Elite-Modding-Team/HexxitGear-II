@@ -41,7 +41,7 @@ import shadows.placebo.util.RecipeHelper;
 public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";
-	public static final String MODNAME = "Hexxit Gear";
+	public static final String MODNAME = "Hexxit Gear II";
 	public static final String VERSION = "2.9.0";
 
 	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")

@@ -1,21 +1,23 @@
 [
-{
+  {
     "modid": "hexxitgear",
-    "name": "Hexxit Gear",
-    "description": "Special gear designed to work in conjunction with the Hexxit modpack.",
+    "name": "Hexxit Gear II",
+    "description": "Special gear designed to work in conjunction with the Hexxit II modpack.",
     "mcversion": "${mcversion}",
     "version": "${version}",
-    "url": "https://github.com/Shadows-of-Fire/HexxitGear",
+    "url": "https://github.com/Elite-Modding-Team/HexxitGear",
     "updateUrl": "",
     "authors": [
-        "Shadows_of_Fire"
+      "Shadows_of_Fire",
+      "ACGaming",
+      "IcarussOne"
     ],
-    "credits": "Originally by sct. Artwork by Cheapshot.",
+    "credits": "Originally by sct. Artwork by Cheapshot. Model and texture of the Hexical Master Sword by IcarussOne.",
     "logoFile": "/hexxitgear.png",
     "screenshots": [
     ],
-    "parent":"",
+    "parent": "",
     "dependencies": [
     ]
-}
+  }
 ]
