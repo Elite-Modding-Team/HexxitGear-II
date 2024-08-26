@@ -18,7 +18,8 @@
       "ore": "obsidian"
     },
     "T": {
-      "item": "xreliquary:alkahestry_tome"
+      "item": "xreliquary:alkahestry_tome",
+      "data": 32767
     }
   },
   "result": {

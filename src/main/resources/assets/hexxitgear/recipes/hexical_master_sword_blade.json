@@ -8,15 +8,18 @@
   "key": {
     "W": {
       "item": "cqrepoured:sword_walker"
+      "data": 32767
     },
     "H": {
       "item": "hexxitgear:hexical_diamond"
     },
     "A": {
-      "item": "mowziesmobs:wrought_axe"
+      "item": "mowziesmobs:wrought_axe",
+      "data": 32767
     },
     "D": {
-      "item": "mod_lavacow:skeletonking_mace"
+      "item": "mod_lavacow:skeletonking_mace",
+      "data": 32767
     }
   },
   "result": {
