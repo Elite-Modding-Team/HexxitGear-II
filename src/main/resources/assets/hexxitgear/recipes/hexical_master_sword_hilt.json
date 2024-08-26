@@ -1,6 +1,7 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
+    " T ",
     "GHG",
     " O "
   ],
@@ -15,6 +16,9 @@
     "O": {
       "type": "forge:ore_dict",
       "ore": "obsidian"
+    },
+    "T": {
+      "item": "xreliquary:alkahestry_tome"
     }
   },
   "result": {
