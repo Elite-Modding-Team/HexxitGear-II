@@ -26,6 +26,11 @@
 					"layer0": "hexxitgear:items/hexical_master_sword_blade"
 				}
 			},
+			"hexical_master_sword_hilt": {
+				"textures": {
+					"layer0": "hexxitgear:items/hexical_master_sword_hilt"
+				}
+			},
 			"hexical_master_sword_activation": {
 				"textures": {
 					"layer0": "hexxitgear:items/hexical_master_sword"
