@@ -27,18 +27,14 @@ minecraft {
 
 repositories {
     maven {
-        name 'Mod Maven'
-        url "https://modmaven.dev"
-    }
-    maven {
         name 'CurseMaven'
         url 'https://www.cursemaven.com/'
     }
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_1.12.2:4.15.0.291"
-    deobfCompile "curse.maven:hwyla-253449:2568751" // 1.8.26-B41
+    deobfCompile "curse.maven:had-enough-items-557549:5471944" // Had Enough Items 4.25.5
+    deobfCompile "curse.maven:hwyla-253449:2568751" // HWYLA 1.8.26-B41
 }
 
 jar {
