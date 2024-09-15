@@ -69,15 +69,19 @@ public class ItemMasterSword extends ItemSword {
         return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     }
 
+    private float getBonusDamage(ItemStack stack) {
+        float bonusDamage = 0;
+        NBTTagList enchants = stack.getEnchantmentTagList();
+        for (int enchant = 0; enchant < enchants.tagCount(); enchant++) {
+            bonusDamage += enchants.getCompoundTagAt(enchant).getShort("lvl");
+        }
+        return bonusDamage;
+    }
+
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if (attacker instanceof EntityPlayer) {
-            NBTTagList enchants = stack.getEnchantmentTagList();
-            int bonus = 0;
-            for (int enchant = 0; enchant < enchants.tagCount(); enchant++) {
-                bonus += enchants.getCompoundTagAt(enchant).getShort("lvl");
-            }
-            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker).setDamageBypassesArmor(), bonus + 4.0F);
+            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker).setDamageBypassesArmor(), this.getAttackDamage() + this.getBonusDamage(stack));
         }
         return true;
     }
@@ -137,11 +141,11 @@ public class ItemMasterSword extends ItemSword {
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Damage modifier", this.getAttackDamage(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Damage modifier", this.getAttackDamage() + this.getBonusDamage(stack), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", 100.0D - 4.0D, 0));
         }
 
