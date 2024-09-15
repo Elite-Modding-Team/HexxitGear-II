@@ -148,6 +148,11 @@ public class ItemMasterSword extends ItemSword {
         return multimap;
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return !inactive;
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
