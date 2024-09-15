@@ -1,5 +1,7 @@
 package sct.hexxitgear.item;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -26,18 +28,13 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.entity.EntityMiniSword;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
 
 import javax.annotation.Nullable;
-
-import org.lwjgl.input.Keyboard;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
 import java.util.List;
 
 public class ItemMasterSword extends ItemSword {
@@ -98,20 +95,22 @@ public class ItemMasterSword extends ItemSword {
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
         super.onUpdate(stack, world, entity, itemSlot, isSelected);
+
+        if (!(entity instanceof EntityPlayer)) return;
         EntityPlayer player = (EntityPlayer) entity;
 
         // Activation particles
-        if (inactive && entity instanceof EntityPlayer && player.posY > 128 && isSelected && world.isThundering()) {
+        if (inactive && player.posY > 128 && isSelected && world.isThundering()) {
             for (int k = 0; k < 40; ++k) {
                 double d2 = world.rand.nextGaussian() * 0.02D;
                 double d0 = world.rand.nextGaussian() * 0.02D;
                 double d1 = world.rand.nextGaussian() * 0.02D;
-                world.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (double) (world.rand.nextFloat() * player.width * 2.0F) - (double) player.width, player.posY + (double) (world.rand.nextFloat() * player.height), player.posZ + (double) (world.rand.nextFloat() * player.width * 2.0F) - (double) player.width, d2, d0, d1);
+                world.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (world.rand.nextFloat() * player.width * 2.0F) - player.width, player.posY + (world.rand.nextFloat() * player.height), player.posZ + (world.rand.nextFloat() * player.width * 2.0F) - player.width, d2, d0, d1);
             }
         }
 
         // Activation event
-        if (!world.isRemote && inactive && entity instanceof EntityPlayer) {
+        if (!world.isRemote && inactive) {
             if (player.posY > 128) {
                 highUp = true;
                 if (isSelected && world.isThundering()) {
@@ -139,11 +138,11 @@ public class ItemMasterSword extends ItemSword {
 
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-        Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
+        Multimap<String, AttributeModifier> multimap = HashMultimap.create();
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Damage modifier", (double) this.getAttackDamage(), 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", (double) 100.0D - 4.0D, 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Damage modifier", this.getAttackDamage(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", 100.0D - 4.0D, 0));
         }
 
         return multimap;

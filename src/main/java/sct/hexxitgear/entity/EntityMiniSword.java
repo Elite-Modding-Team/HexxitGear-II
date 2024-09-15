@@ -1,12 +1,7 @@
 package sct.hexxitgear.entity;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,36 +15,31 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketChangeGameState;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 import sct.hexxitgear.init.HexRegistry;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
     @SuppressWarnings("unchecked")
     private static final Predicate<Entity> WEAPON_TARGETS = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith);
-    protected int xTile;
-    protected int yTile;
-    protected int zTile;
+    private final float damage;
     @Nullable
-    protected IBlockState inBlockState;
-    protected boolean inGround;
-    public PickupStatus pickupStatus;
-    protected int ticksInGround;
-    protected int ticksInAir;
-    public boolean beenInGround;
-    public float damage;
-    public int knockBack;
-
-    public static final String NAME = "mini_sword";
-
+    private IBlockState inBlockState;
+    private int ticksInGround;
+    private int ticksInAir;
+    private boolean beenInGround;
+    private int knockBack;
+    private int xTile;
+    private int yTile;
+    private int zTile;
     private int soundTimer;
 
     public EntityMiniSword(World world) {
@@ -86,12 +76,6 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
     @Override
     public void setThrower(Entity entity) {
         shootingEntity = entity;
-
-    }
-
-    public Entity getDamagingEntity() {
-        Entity shooter = getThrower();
-        return shooter != null ? shooter : this;
     }
 
     @Override
@@ -195,8 +179,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         if (inGround) {
-            if (!iblockstate.equals(inBlockState) &&
-                    !world.collidesWithAnyBlock(getEntityBoundingBox().grow(0.05D))) {
+            if (!iblockstate.equals(inBlockState) && !world.collidesWithAnyBlock(getEntityBoundingBox().grow(0.05D))) {
                 inGround = false;
                 motionX *= rand.nextFloat() * 0.2F;
                 motionY *= rand.nextFloat() * 0.2F;
@@ -245,9 +228,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
 
         if (getIsCritical()) {
             for (int i1 = 0; i1 < 2; ++i1) {
-                world.spawnParticle(EnumParticleTypes.CRIT, posX + motionX * i1 / 4.0D,
-                        posY + motionY * i1 / 4.0D, posZ + motionZ * i1 / 4.0D, -motionX,
-                        -motionY + 0.2D, -motionZ);
+                world.spawnParticle(EnumParticleTypes.CRIT, posX + motionX * i1 / 4.0D, posY + motionY * i1 / 4.0D, posZ + motionZ * i1 / 4.0D, -motionX, -motionY + 0.2D, -motionZ);
             }
         }
         posX += motionX;
@@ -270,9 +251,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
             beenInGround = true;
             for (int i2 = 0; i2 < 4; ++i2) {
                 float f3 = 0.25f;
-                world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f3,
-                        posY - motionY * f3, posZ - motionZ * f3, motionX, motionY,
-                        motionZ);
+                world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
             }
             res *= 0.6f;
         }
@@ -291,10 +270,9 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
 
     public void onEntityHit(Entity entity) {
         if (entity != null && entity == this.shootingEntity) return;
-        this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
-        playSound(HexRegistry.HEXICAL_MASTER_SWORD_EXPLODE_SOUND, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-        setDead();
         applyEntityHitEffects(entity);
+        this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
+        playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
     }
 
     public void applyEntityHitEffects(Entity entity) {
@@ -303,32 +281,32 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         if (entity instanceof EntityLivingBase) {
-            EntityLivingBase entityliving = (EntityLivingBase) entity;
+            EntityLivingBase entityLiving = (EntityLivingBase) entity;
+
+            float motionDamage = (float) ((Math.abs(motionY) * 2) + damage);
+            entityLiving.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), motionDamage);
 
             if (knockBack > 0) {
                 float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
                 if (f > 0.0F) {
-                    entity.addVelocity(motionX * knockBack * 0.6D / f, 0.1D,
-                            motionZ * knockBack * 0.6D / f);
+                    entity.addVelocity(motionX * knockBack * 0.6D / f, 0.1D, motionZ * knockBack * 0.6D / f);
                 }
             }
 
             if (shootingEntity instanceof EntityLivingBase) {
-                EnchantmentHelper.applyThornEnchantments(entityliving, shootingEntity);
-                EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase) shootingEntity, entityliving);
+                EnchantmentHelper.applyThornEnchantments(entityLiving, shootingEntity);
+                EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase) shootingEntity, entityLiving);
             }
 
             if (shootingEntity instanceof EntityPlayerMP && shootingEntity != entity && entity instanceof EntityPlayer) {
                 ((EntityPlayerMP) shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
             }
 
-            if (shootingEntity instanceof EntityLivingBase && entity instanceof EntityLivingBase) {
+            if (shootingEntity instanceof EntityLivingBase) {
                 int i = EnchantmentHelper.getKnockbackModifier((EntityLivingBase) shootingEntity);
 
                 if (i != 0) {
-                    ((EntityLivingBase) entity).knockBack(this, i * 0.4F,
-                            -MathHelper.sin(rotationYaw * 0.017453292f),
-                            -MathHelper.cos(rotationYaw * 0.017453292f));
+                    ((EntityLivingBase) entity).knockBack(this, i * 0.4F, -MathHelper.sin(rotationYaw * 0.017453292f), -MathHelper.cos(rotationYaw * 0.017453292f));
                 }
 
                 i = EnchantmentHelper.getFireAspectModifier((EntityLivingBase) shootingEntity);
@@ -404,7 +382,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
     }
 
     public float getGravity() {
-        return 0.03F;
+        return 0.02F;
     }
 
     public float getAirResistance() {
