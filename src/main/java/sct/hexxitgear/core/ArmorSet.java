@@ -32,7 +32,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-import sct.hexxitgear.HexIntegration;
+import sct.hexxitgear.compat.HexIntegration;
 import sct.hexxitgear.core.ability.*;
 import sct.hexxitgear.item.ItemHexxitArmor;
 
