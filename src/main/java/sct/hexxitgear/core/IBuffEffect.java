@@ -62,7 +62,6 @@ public interface IBuffEffect {
             String s1 = I18n.format(potionTypeProvider.get().getName());
             return amplifier > 0 ? s1 + " " + I18n.format("enchantment.level." + (amplifier + 1)) : s1;
         }
-
     }
 
     class Absorption implements IBuffEffect {
@@ -104,7 +103,23 @@ public interface IBuffEffect {
         public String getDescription() {
             return String.format("%s %d (%s)", I18n.format(MobEffects.ABSORPTION.getName()), amplifier + 1, StringUtils.ticksToElapsedTime(refreshInterval));
         }
-
     }
 
+    class StepAssist implements IBuffEffect {
+
+        @Override
+        public void apply(EntityLivingBase target) {
+            target.stepHeight = 1.25F;
+        }
+
+        @Override
+        public void purge(EntityLivingBase target) {
+            target.stepHeight = 1.0F;
+        }
+
+        @Override
+        public String getDescription() {
+            return I18n.format("buff.hexxitgear.stepassist");
+        }
+    }
 }

@@ -30,6 +30,8 @@ ability.hexxitgear.cooldown=%s is on cooldown for %s!
 ability.hexxitgear.needxp=Need %d more experience levels to activate %s!
 ability.hexxitgear.needfood=Need %d more hunger to activate %s!
 
+buff.hexxitgear.stepassist=Step Assist
+
 tile.hexxitgear.hexbiscus.name=Hexbiscus
 
 effect.hexxitgear.thief.name=Thief Speed

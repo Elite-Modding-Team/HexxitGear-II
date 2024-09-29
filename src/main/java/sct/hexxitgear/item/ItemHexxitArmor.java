@@ -78,7 +78,6 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (world.isRemote) return;
 		if (this.armorType != EntityEquipmentSlot.HEAD) return;
 
 		ArmorSet set = ArmorSet.getCurrentArmorSet(player);

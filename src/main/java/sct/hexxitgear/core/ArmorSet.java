@@ -51,7 +51,8 @@ public class ArmorSet {
                     new IBuffEffect.Simple(() -> MobEffects.STRENGTH, 0),
                     new IBuffEffect.Simple(() -> MobEffects.HASTE, 1),
                     new IBuffEffect.Simple(() -> MobEffects.JUMP_BOOST, 2),
-                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
+                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0),
+                    new IBuffEffect.StepAssist()
             },
             new AbilityRampage());
     public static final ArmorSet THIEF = new ArmorSet("thief", ItemArmor.ArmorMaterial.DIAMOND,
