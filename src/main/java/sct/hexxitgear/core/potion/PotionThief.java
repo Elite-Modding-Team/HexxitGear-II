@@ -25,12 +25,8 @@ public class PotionThief extends Potion {
         EntityPlayer player = (EntityPlayer) entity;
         player.landMovementFactor = 0.15F;
         player.jumpMovementFactor = player.landMovementFactor * 0.5F;
-        if (player.onGround && !player.capabilities.isFlying && player.moveForward > 0.0F) {
-            float speedBoost = 0.05F;
-            if (player.isInWater()) {
-                speedBoost /= 4.0F;
-            }
-            player.moveRelative(0.0F, 0.0F, speedBoost, 1.0F);
+        if (player.onGround && !player.isInWater() && !player.capabilities.isFlying && player.moveForward > 0.0F) {
+            player.moveRelative(0.0F, 0.0F, 0.05F, 1.0F);
         }
     }
 
