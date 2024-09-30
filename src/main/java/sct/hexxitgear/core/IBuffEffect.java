@@ -109,12 +109,14 @@ public interface IBuffEffect {
 
         @Override
         public void apply(EntityLivingBase target) {
-            target.stepHeight = 1.25F;
+            target.stepHeight = 1.003F;
         }
 
         @Override
         public void purge(EntityLivingBase target) {
-            target.stepHeight = 1.0F;
+            if (target.stepHeight == 1.003F) {
+                target.stepHeight = 0.5001F;
+            }
         }
 
         @Override

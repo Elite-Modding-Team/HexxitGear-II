@@ -187,7 +187,7 @@ public class ArmorSet {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent e) {
-        if (e.phase != TickEvent.Phase.END || e.player.world.isRemote) {
+        if (e.phase != TickEvent.Phase.END) {
             return;
         }
         AbilityHandler abilityHandler = AbilityHandler.getActiveAbility(e.player);
@@ -209,5 +209,4 @@ public class ArmorSet {
 
     public static void classloadForConfigs() {
     }
-
 }
