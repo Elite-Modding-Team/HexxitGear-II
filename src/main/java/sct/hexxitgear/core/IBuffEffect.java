@@ -124,4 +124,25 @@ public interface IBuffEffect {
             return I18n.format("buff.hexxitgear.stepassist");
         }
     }
+
+    class AquaDash implements IBuffEffect {
+
+        @Override
+        public void apply(EntityLivingBase target) {
+            if (target.isInWater() && !target.isRiding()) {
+                target.motionX *= 5;
+                target.motionZ *= 5;
+                target.motionY *= 5;
+            }
+        }
+
+        @Override
+        public void purge(EntityLivingBase target) {
+        }
+
+        @Override
+        public String getDescription() {
+            return I18n.format("buff.hexxitgear.aquadash");
+        }
+    }
 }

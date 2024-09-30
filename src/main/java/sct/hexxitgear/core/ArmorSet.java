@@ -75,7 +75,8 @@ public class ArmorSet {
                     new IBuffEffect.Absorption(2, 280),
                     new IBuffEffect.Simple(() -> MobEffects.FIRE_RESISTANCE, 0),
                     new IBuffEffect.Simple(() -> MobEffects.WATER_BREATHING, 0),
-                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
+                    new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0),
+                    new IBuffEffect.AquaDash()
             },
             new AbilityLift());
 
