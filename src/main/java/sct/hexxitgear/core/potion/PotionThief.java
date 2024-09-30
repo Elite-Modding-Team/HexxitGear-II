@@ -3,6 +3,7 @@ package sct.hexxitgear.core.potion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -20,8 +21,17 @@ public class PotionThief extends Potion {
 
     @Override
     public void performEffect(EntityLivingBase entity, int amplifier) {
-        entity.landMovementFactor = 0.15F;
-        entity.jumpMovementFactor = entity.landMovementFactor * 0.5F;
+        if (!(entity instanceof EntityPlayer)) return;
+        EntityPlayer player = (EntityPlayer) entity;
+        player.landMovementFactor = 0.15F;
+        player.jumpMovementFactor = player.landMovementFactor * 0.5F;
+        if (player.onGround && !player.capabilities.isFlying && player.moveForward > 0.0F) {
+            float speedBoost = 0.05F;
+            if (player.isInWater()) {
+                speedBoost /= 4.0F;
+            }
+            player.moveRelative(0.0F, 0.0F, speedBoost, 1.0F);
+        }
     }
 
     @Override
