@@ -9,7 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -27,6 +29,18 @@ import sct.hexxitgear.render.RenderMiniSword;
 import shadows.placebo.item.ItemBase;
 
 public class HexRegistry {
+	
+    public static final IRarity RARITY_INACTIVE = new IRarity() {
+        @Override
+        public String getName() {
+            return "Inactive";
+        }
+
+        @Override
+        public TextFormatting getColor() {
+            return TextFormatting.GRAY;
+        }
+    };
 
     public static final BlockHexbiscus HEXBISCUS = new BlockHexbiscus();
 

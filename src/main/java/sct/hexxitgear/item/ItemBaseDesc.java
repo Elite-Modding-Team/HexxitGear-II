@@ -10,6 +10,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.HexxitGear;
@@ -27,9 +28,9 @@ public class ItemBaseDesc extends ItemBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        if (this == HexRegistry.HEXICAL_MASTER_SWORD_BLADE || this == HexRegistry.HEXICAL_MASTER_SWORD_HILT) {
-            return EnumRarity.EPIC;
+    public IRarity getForgeRarity(ItemStack stack) {
+    	if (this == HexRegistry.HEXICAL_MASTER_SWORD_BLADE || this == HexRegistry.HEXICAL_MASTER_SWORD_HILT) {
+            return HexRegistry.RARITY_INACTIVE;
         }
 
         return EnumRarity.COMMON;

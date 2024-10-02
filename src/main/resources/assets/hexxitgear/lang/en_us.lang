@@ -2,7 +2,7 @@ gui.hexxitgear.creativetab=Hexxit Gear II
 
 gui.hexxitgear.refresher_shard=Consume to reset ability cooldowns.
 
-gui.hexxitgear.set.thief=Thief Set
+gui.hexxitgear.set.thief=Thief's Set
 gui.hexxitgear.set.tribal=Tribal Set
 gui.hexxitgear.set.scale=Scale Set
 gui.hexxitgear.set.sage=Sage's Set
@@ -12,7 +12,6 @@ gui.hexxitgear.set.set_ability=Active
 gui.hexxitgear.set.set_ability_duration=Duration
 gui.hexxitgear.set.set_ability_cooldown=Cooldown
 gui.hexxitgear.set.abilities=Abilities
-gui.hexxitgear.set.impenetrable=Impenetrable
 
 ability.hexxitgear.stealth=Stealth
 ability.hexxitgear.stealth.desc=Become invisible, but slowed. Your\nnext attack breaks the invisibility\nand has increased damage.
@@ -69,13 +68,14 @@ item.hexxitgear.hexical_master_sword.name=Hexical Master Sword
 item.hexxitgear.hexical_master_sword_blade.name=Hexical Master Sword Blade
 item.hexxitgear.hexical_master_sword_hilt.name=Hexical Master Sword Hilt
 
-tooltip.hexxitgear.hexical_master_sword_blade=You'll need to combine this with the hilt counterpart at an anvil.
-tooltip.hexxitgear.hexical_master_sword_hilt=You'll need to combine this with the blade counterpart at an anvil.
+tooltip.hexxitgear.hexical_master_sword_blade=You'll need to combine this with the hilt counterpart.
+tooltip.hexxitgear.hexical_master_sword_hilt=You'll need to combine this with the blade counterpart.
 
 tooltip.hexxitgear.hexical_master_sword_active.1=Only the truest adventurers have managed to get their hands on this powerful sword...
 tooltip.hexxitgear.hexical_master_sword_active.2=Strength is increased with each enchantment.
 tooltip.hexxitgear.hexical_master_sword_active.3=A powerful projectile is fired upon right-click.
 tooltip.hexxitgear.hexical_master_sword_active.4=All attack damage will completely ignore armor.
+tooltip.hexxitgear.hexical_master_sword_active.5=Impenetrable and cannot be destroyed from usage.
 
 tooltip.hexxitgear.hexical_master_sword_inactive.1=Upon the peak where clouds enfold.
 tooltip.hexxitgear.hexical_master_sword_inactive.2=The sword awaits, its story told.

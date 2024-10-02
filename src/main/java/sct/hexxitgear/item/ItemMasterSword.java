@@ -24,6 +24,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -136,7 +137,11 @@ public class ItemMasterSword extends ItemSword {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
+    	if (this == HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) {
+            return HexRegistry.RARITY_INACTIVE;
+        }
+
         return EnumRarity.EPIC;
     }
 
@@ -162,7 +167,6 @@ public class ItemMasterSword extends ItemSword {
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
 
-        tooltip.add(TextFormatting.GRAY + I18n.format("gui.hexxitgear.set.impenetrable"));
         if (inactive) {
             tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.1"));
             tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_inactive.2"));
@@ -179,6 +183,7 @@ public class ItemMasterSword extends ItemSword {
             tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.2")));
             tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.3")));
             tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.4")));
+            tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.5")));
         }
     }
 
