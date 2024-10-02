@@ -2,12 +2,17 @@ package sct.hexxitgear.core;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StringUtils;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import sct.hexxitgear.item.ItemHexxitArmor;
 
 import java.util.function.Supplier;
 
@@ -125,15 +130,15 @@ public interface IBuffEffect {
         }
     }
 
-    class AquaDash implements IBuffEffect {
+    /**
+     * Functionality is outsourced
+     * See {@link ArmorSet#onPlayerBreakSpeed(PlayerEvent.BreakSpeed)}
+     * and {@link ItemHexxitArmor#onArmorTick(World, EntityPlayer, ItemStack)}
+     */
+    class WaterDexterity implements IBuffEffect {
 
         @Override
         public void apply(EntityLivingBase target) {
-            if (target.isInWater() && !target.isRiding()) {
-                target.motionX *= 5;
-                target.motionZ *= 5;
-                target.motionY *= 5;
-            }
         }
 
         @Override
@@ -142,7 +147,7 @@ public interface IBuffEffect {
 
         @Override
         public String getDescription() {
-            return I18n.format("buff.hexxitgear.aquadash");
+            return I18n.format("buff.hexxitgear.waterdexterity");
         }
     }
 }

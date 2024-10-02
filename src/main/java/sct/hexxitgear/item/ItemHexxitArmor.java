@@ -84,6 +84,12 @@ public class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasMod
 		if (set != null) {
 			ArmorSet.CACHED_SETS.put(player.getUniqueID(), set);
 			set.applyBuffs(player);
+
+			// Sage buff
+			if (set == ArmorSet.SAGE && player.isInWater() && !player.capabilities.isFlying && player.moveForward > 0.0F) {
+				player.moveRelative(0.0F, 0.0F, 0.025F, 1.0F);
+				player.jumpMovementFactor = 0.05F;
+			}
 		}
 	}
 

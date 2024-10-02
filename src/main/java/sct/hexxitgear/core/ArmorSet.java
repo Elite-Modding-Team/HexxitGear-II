@@ -18,6 +18,7 @@
 
 package sct.hexxitgear.core;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -26,6 +27,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -76,7 +78,7 @@ public class ArmorSet {
                     new IBuffEffect.Simple(() -> MobEffects.FIRE_RESISTANCE, 0),
                     new IBuffEffect.Simple(() -> MobEffects.WATER_BREATHING, 0),
                     new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0),
-                    new IBuffEffect.AquaDash()
+                    new IBuffEffect.WaterDexterity()
             },
             new AbilityLift());
 
@@ -205,6 +207,14 @@ public class ArmorSet {
             }
         } else if (abilityHandler != null) {
             abilityHandler.onTick(e.player);
+        }
+    }
+
+    // Sage buff
+    @SubscribeEvent
+    public static void onPlayerBreakSpeed(PlayerEvent.BreakSpeed e) {
+        if (ArmorSet.getCurrentArmorSet(e.getEntityPlayer()) == ArmorSet.SAGE && e.getEntityPlayer().isInsideOfMaterial(Material.WATER)) {
+            e.setNewSpeed(e.getNewSpeed() * 5);
         }
     }
 
