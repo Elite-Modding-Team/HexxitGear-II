@@ -35,6 +35,7 @@ repositories {
 dependencies {
     deobfCompile "curse.maven:had-enough-items-557549:5471944" // Had Enough Items 4.25.5
     deobfCompile "curse.maven:hwyla-253449:2568751" // HWYLA 1.8.26-B41
+    deobfCompile "curse.maven:elenai-dodge-373104:3188646" // Elenai Dodge 1.13.2
 }
 
 jar {

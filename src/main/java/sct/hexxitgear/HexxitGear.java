@@ -37,7 +37,7 @@ import sct.hexxitgear.world.HexGenerator;
 import shadows.placebo.registry.RegistryInformation;
 import shadows.placebo.util.RecipeHelper;
 
-@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.2.0,);after:cqrepoured;after:mod_lavacow;after:mowziesmobs")
+@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.2.0,);required-after:elenaidodge@[,1.13.2];after:cqrepoured;after:mod_lavacow;after:mowziesmobs")
 public class HexxitGear {
 
 	public static final String MODID = "hexxitgear";

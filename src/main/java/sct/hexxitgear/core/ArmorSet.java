@@ -18,6 +18,7 @@
 
 package sct.hexxitgear.core;
 
+import com.elenai.elenaidodge.modpacks.potions.PotionInit;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +35,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-import sct.hexxitgear.compat.HexIntegration;
 import sct.hexxitgear.core.ability.*;
 import sct.hexxitgear.item.ItemHexxitArmor;
 
@@ -60,7 +60,7 @@ public class ArmorSet {
     public static final ArmorSet THIEF = new ArmorSet("thief", ItemArmor.ArmorMaterial.DIAMOND,
             new IBuffEffect[]{
                     new IBuffEffect.Simple(() -> PotionHandler.THIEF, 0),
-                    new IBuffEffect.Simple(() -> HexIntegration.ELENAI_DODGE_NIMBLE, 0),
+                    new IBuffEffect.Simple(() -> PotionInit.CAN_WALLJUMP, 0),
                     new IBuffEffect.Simple(() -> MobEffects.LUCK, 1),
                     new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
             },
