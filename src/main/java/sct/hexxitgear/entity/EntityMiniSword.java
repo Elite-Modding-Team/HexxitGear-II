@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketChangeGameState;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
@@ -23,8 +24,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 import sct.hexxitgear.init.HexRegistry;
+import sct.hexxitgear.proxy.ClientProxy;
 
 import javax.annotation.Nullable;
+
+import java.awt.Color;
 import java.util.List;
 
 public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
@@ -115,8 +119,14 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
     public void onUpdate() {
         onEntityUpdate();
 
+        float randColor = ((float) (this.ticksExisted % 5 / 5.0F));
+
         if (inGround || beenInGround) {
             return;
+        }
+
+        if (world.isRemote && !this.inGround) {
+            ClientProxy.spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.posX, this.posY, this.posZ, Color.getHSBColor(randColor, 0.4F, 0.8F), 0.0D, 0.0D, 0.0D);
         }
 
         rotationPitch -= 70.0F;

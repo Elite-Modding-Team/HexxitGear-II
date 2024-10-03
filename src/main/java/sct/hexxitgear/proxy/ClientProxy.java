@@ -18,9 +18,13 @@
 
 package sct.hexxitgear.proxy;
 
+import java.awt.Color;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -35,33 +39,38 @@ import sct.hexxitgear.control.HexKeybinds;
 import sct.hexxitgear.init.HexRegistry;
 import shadows.placebo.client.IHasModel;
 
+@SuppressWarnings("deprecation")
 @EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements IProxy {
 
-	@Override
-	public void registerKeybinds() {
-		MinecraftForge.EVENT_BUS.register(new HexKeybinds());
-	}
+    @Override
+    public void registerKeybinds() {
+        MinecraftForge.EVENT_BUS.register(new HexKeybinds());
+    }
 
-	@SubscribeEvent
-	public static void modelRegistry(ModelRegistryEvent e) {
-		for (Item i : HexxitGear.INFO.getItemList())
-			if (i instanceof IHasModel) ((IHasModel) i).initModels(e);
-		HexRegistry.HEXBISCUS.initModels(e);
+    @SubscribeEvent
+    public static void modelRegistry(ModelRegistryEvent e) {
+        for (Item i : HexxitGear.INFO.getItemList())
+            if (i instanceof IHasModel) ((IHasModel) i).initModels(e);
+        HexRegistry.HEXBISCUS.initModels(e);
 
-		OBJLoader.INSTANCE.addDomain(HexxitGear.MODID);
-		for (final Item item : ForgeRegistries.ITEMS.getValues())
-		{
-			if (item.equals(HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) || item.equals(HexRegistry.HEXICAL_MASTER_SWORD))
-			{
-				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
-			}
-		}
-	}
+        OBJLoader.INSTANCE.addDomain(HexxitGear.MODID);
+        for (final Item item : ForgeRegistries.ITEMS.getValues()) {
+            if (item.equals(HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) || item.equals(HexRegistry.HEXICAL_MASTER_SWORD)) {
+                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
+            }
+        }
+    }
 
-	@Override
-	public void setActionText(ITextComponent message) {
-		Minecraft.getMinecraft().ingameGUI.setOverlayMessage(message, false);
-	}
+    public static void spawnParticle(EnumParticleTypes type, double x, double y, double z, Color color, double velX, double velY, double velZ) {
+        Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(type.getParticleID(), x, y, z, velX, velY, velZ);
+
+        particle.setRBGColorF((float) color.getRed() / 255.0F, (float) color.getGreen() / 255.0F, (float) color.getBlue() / 255.0F);
+    }
+
+    @Override
+    public void setActionText(ITextComponent message) {
+        Minecraft.getMinecraft().ingameGUI.setOverlayMessage(message, false);
+    }
 
 }
