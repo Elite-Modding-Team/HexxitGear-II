@@ -15,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketChangeGameState;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
@@ -126,7 +125,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         if (world.isRemote && !this.inGround) {
-            ClientProxy.spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.posX, this.posY, this.posZ, Color.getHSBColor(randColor, 0.4F, 0.8F), 0.0D, 0.0D, 0.0D);
+            ClientProxy.spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.posX, this.posY, this.posZ, Color.getHSBColor(randColor, 0.75F, 0.6F), 0.0D, 0.0D, 0.0D);
         }
 
         rotationPitch -= 70.0F;

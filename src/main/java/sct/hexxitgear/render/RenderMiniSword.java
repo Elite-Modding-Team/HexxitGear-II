@@ -42,7 +42,7 @@ public class RenderMiniSword extends Render<EntityMiniSword> {
         
         if (renderOutlines) {
             GlStateManager.enableColorMaterial();
-            GlStateManager.enableOutlineMode(getTeamColor(entity));
+            GlStateManager.enableOutlineMode(8214271);
         }
         
         itemRender.renderItem(getStackToRender(entity), TransformType.NONE);
