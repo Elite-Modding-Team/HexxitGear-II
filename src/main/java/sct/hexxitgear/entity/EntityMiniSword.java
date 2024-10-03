@@ -118,14 +118,15 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
     public void onUpdate() {
         onEntityUpdate();
 
-        float randColor = ((float) (this.ticksExisted % 5 / 5.0F));
+        //float randColor = ((float) (this.ticksExisted % 5 / 5.0F));
 
         if (inGround || beenInGround) {
             return;
         }
 
         if (world.isRemote && !this.inGround) {
-            ClientProxy.spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.posX, this.posY, this.posZ, Color.getHSBColor(randColor, 0.75F, 0.6F), 0.0D, 0.0D, 0.0D);
+            //ClientProxy.spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.posX, this.posY, this.posZ, Color.getHSBColor(randColor, 0.75F, 0.6F), 0.0D, 0.0D, 0.0D);
+            ClientProxy.spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.posX, this.posY, this.posZ, Color.getColor("Purple", 6303124), 0.0D, 0.0D, 0.0D);
         }
 
         rotationPitch -= 70.0F;
