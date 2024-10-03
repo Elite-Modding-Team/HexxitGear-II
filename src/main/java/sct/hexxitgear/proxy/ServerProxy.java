@@ -28,11 +28,6 @@ public class ServerProxy implements IProxy {
             event.setOutput(new ItemStack(HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE).copy());
             event.getOutput().setTagCompound(outputStack.getTagCompound());
             event.setMaterialCost(1);
-        } else if (left.getItem() == HexRegistry.HEXICAL_MASTER_SWORD_BLADE && right.getItem() == HexRegistry.HEXICAL_MASTER_SWORD_HILT) {
-            event.setCost(20);
-            event.setOutput(new ItemStack(HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE).copy());
-            event.getOutput().setTagCompound(outputStack.getTagCompound());
-            event.setMaterialCost(1);
         }
     }
 }
