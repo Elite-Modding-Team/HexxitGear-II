@@ -73,9 +73,9 @@ public class HexRegistry {
     public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 100, 9001, 50.0F, 19.0F, 50).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")
     public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword("hexical_master_sword", HEXICAL);
-    public static final Item HEXICAL_MASTER_SWORD_BLADE = new ItemBaseDesc("hexical_master_sword_blade", HexxitGear.INFO) {
+    public static final Item HEXICAL_MASTER_SWORD_BLADE = new ItemBaseRarity("hexical_master_sword_blade", HexxitGear.INFO) {
     };
-    public static final Item HEXICAL_MASTER_SWORD_HILT = new ItemBaseDesc("hexical_master_sword_hilt", HexxitGear.INFO) {
+    public static final Item HEXICAL_MASTER_SWORD_HILT = new ItemBaseRarity("hexical_master_sword_hilt", HexxitGear.INFO) {
     };
     public static final Item HEXICAL_MASTER_SWORD_ACTIVATION = new ItemBaseNoTab("hexical_master_sword_activation", HexxitGear.INFO) {
     };
