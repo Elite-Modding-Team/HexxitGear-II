@@ -29,7 +29,7 @@ import sct.hexxitgear.render.RenderMiniSword;
 import shadows.placebo.item.ItemBase;
 
 public class HexRegistry {
-	
+
     public static final IRarity RARITY_INACTIVE = new IRarity() {
         @Override
         public String getName() {
@@ -69,6 +69,21 @@ public class HexRegistry {
     public static final Item SAGE_CHEST = new ItemMagicianArmor("sage_chest", EntityEquipmentSlot.CHEST);
     public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
     public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
+
+    public static final ItemTribalArmor ANCIENT_TRIBAL_HELMET = new ItemTribalArmor("ancient_tribal_helmet", EntityEquipmentSlot.HEAD);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_CHEST = new ItemTribalArmor("ancient_tribal_chest", EntityEquipmentSlot.CHEST);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_LEGS = new ItemTribalArmor("ancient_tribal_legs", EntityEquipmentSlot.LEGS);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_BOOTS = new ItemTribalArmor("ancient_tribal_boots", EntityEquipmentSlot.FEET);
+
+    public static final Item ANCIENT_THIEF_HELMET = new ItemThiefArmor("ancient_thief_helmet", EntityEquipmentSlot.HEAD);
+    public static final Item ANCIENT_THIEF_CHEST = new ItemThiefArmor("ancient_thief_chest", EntityEquipmentSlot.CHEST);
+    public static final Item ANCIENT_THIEF_LEGS = new ItemThiefArmor("ancient_thief_legs", EntityEquipmentSlot.LEGS);
+    public static final Item ANCIENT_THIEF_BOOTS = new ItemThiefArmor("ancient_thief_boots", EntityEquipmentSlot.FEET);
+
+    public static final Item ANCIENT_SCALE_HELMET = new ItemScaleArmor("ancient_scale_helmet", EntityEquipmentSlot.HEAD);
+    public static final Item ANCIENT_SCALE_CHEST = new ItemScaleArmor("ancient_scale_chest", EntityEquipmentSlot.CHEST);
+    public static final Item ANCIENT_SCALE_LEGS = new ItemScaleArmor("ancient_scale_legs", EntityEquipmentSlot.LEGS);
+    public static final Item ANCIENT_SCALE_BOOTS = new ItemScaleArmor("ancient_scale_boots", EntityEquipmentSlot.FEET);
 
     public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 100, 9001, 50.0F, 19.0F, 50).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")

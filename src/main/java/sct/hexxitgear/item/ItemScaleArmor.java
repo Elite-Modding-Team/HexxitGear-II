@@ -31,37 +31,43 @@ import sct.hexxitgear.model.ModelScaleHelmet;
 
 public class ItemScaleArmor extends ItemHexxitArmor {
 
-	public ItemScaleArmor(String regname, EntityEquipmentSlot slot) {
-		super(regname, ArmorSet.SCALE, 1, slot);
-	}
+    public ItemScaleArmor(String regname, EntityEquipmentSlot slot) {
+        super(regname, ArmorSet.SCALE, 1, slot);
+    }
 
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/scale_helm.png";
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+        if (slot == EntityEquipmentSlot.HEAD && !(stack.getItem() == HexRegistry.ANCIENT_SCALE_HELMET))
+            return "hexxitgear:textures/maps/scale_helm.png";
+        if (slot == EntityEquipmentSlot.HEAD && stack.getItem() == HexRegistry.ANCIENT_SCALE_HELMET)
+            return "hexxitgear:textures/maps/ancient_scale_helm.png";
 
-		if (stack.getItem() == HexRegistry.SCALE_LEGS) return "hexxitgear:textures/armor/scale2.png";
+        if (stack.getItem() == HexRegistry.SCALE_LEGS) return "hexxitgear:textures/armor/scale2.png";
+        if (stack.getItem() == HexRegistry.ANCIENT_SCALE_LEGS) return "hexxitgear:textures/armor/ancient_scale2.png";
 
-		return "hexxitgear:textures/armor/scale.png";
-	}
+        if (stack.getItem() == HexRegistry.ANCIENT_SCALE_CHEST || stack.getItem() == HexRegistry.ANCIENT_SCALE_BOOTS)
+            return "hexxitgear:textures/armor/ancient_scale.png";
+        return "hexxitgear:textures/armor/scale.png";
+    }
 
-	@SideOnly(Side.CLIENT)
-	private static ModelScaleHelmet scaleHelmet;
+    @SideOnly(Side.CLIENT)
+    private static ModelScaleHelmet scaleHelmet;
 
-	@SideOnly(Side.CLIENT)
-	private ModelBiped getHelmet() {
-		if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet();
-		return scaleHelmet;
-	}
+    @SideOnly(Side.CLIENT)
+    private ModelBiped getHelmet() {
+        if (scaleHelmet == null) scaleHelmet = new ModelScaleHelmet();
+        return scaleHelmet;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (armorSlot == EntityEquipmentSlot.HEAD) {
-			ModelBiped helmet = getHelmet();
-			helmet.isSneak = entityLiving.isSneaking();
-			return helmet;
-		}
-		return null;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+        if (armorSlot == EntityEquipmentSlot.HEAD) {
+            ModelBiped helmet = getHelmet();
+            helmet.isSneak = entityLiving.isSneaking();
+            return helmet;
+        }
+        return null;
+    }
 
 }

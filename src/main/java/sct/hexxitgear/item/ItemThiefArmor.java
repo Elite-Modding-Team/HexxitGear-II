@@ -33,44 +33,50 @@ import sct.hexxitgear.model.ModelHoodHelmet;
 
 public class ItemThiefArmor extends ItemHexxitArmor {
 
-	public ItemThiefArmor(String regname, EntityEquipmentSlot slot) {
-		super(regname, ArmorSet.THIEF, 0, slot);
-	}
+    public ItemThiefArmor(String regname, EntityEquipmentSlot slot) {
+        super(regname, ArmorSet.THIEF, 0, slot);
+    }
 
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entity;
-			if (player.isPotionActive(MobEffects.INVISIBILITY)) return "hexxitgear:textures/armor/invisible.png";
-		}
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            if (player.isPotionActive(MobEffects.INVISIBILITY)) return "hexxitgear:textures/armor/invisible.png";
+        }
 
-		// If the helmet slot, return helmet texture map
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/thief_hood.png";
+        // If the helmet slot, return helmet texture map
+        if (slot == EntityEquipmentSlot.HEAD && !(stack.getItem() == HexRegistry.ANCIENT_THIEF_HELMET))
+            return "hexxitgear:textures/maps/thief_hood.png";
+        if (slot == EntityEquipmentSlot.HEAD && stack.getItem() == HexRegistry.ANCIENT_THIEF_HELMET)
+            return "hexxitgear:textures/maps/ancient_thief_hood.png";
 
-		if (stack.getItem() == HexRegistry.THIEF_LEGS) return "hexxitgear:textures/armor/thief2.png";
+        if (stack.getItem() == HexRegistry.THIEF_LEGS) return "hexxitgear:textures/armor/thief2.png";
+        if (stack.getItem() == HexRegistry.ANCIENT_THIEF_LEGS) return "hexxitgear:textures/armor/ancient_thief2.png";
 
-		return "hexxitgear:textures/armor/thief.png";
-	}
+        if (stack.getItem() == HexRegistry.ANCIENT_THIEF_CHEST || stack.getItem() == HexRegistry.ANCIENT_THIEF_BOOTS)
+            return "hexxitgear:textures/armor/ancient_thief.png";
+        return "hexxitgear:textures/armor/thief.png";
+    }
 
-	@SideOnly(Side.CLIENT)
-	private static ModelHoodHelmet hoodHelmet;
+    @SideOnly(Side.CLIENT)
+    private static ModelHoodHelmet hoodHelmet;
 
-	@SideOnly(Side.CLIENT)
-	private ModelBiped getHelmet() {
-		if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet();
+    @SideOnly(Side.CLIENT)
+    private ModelBiped getHelmet() {
+        if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet();
 
-		return hoodHelmet;
-	}
+        return hoodHelmet;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (armorSlot == EntityEquipmentSlot.HEAD) {
-			ModelBiped helmet = getHelmet();
-			helmet.isSneak = entityLiving.isSneaking();
-			return helmet;
-		}
-		return null;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+        if (armorSlot == EntityEquipmentSlot.HEAD) {
+            ModelBiped helmet = getHelmet();
+            helmet.isSneak = entityLiving.isSneaking();
+            return helmet;
+        }
+        return null;
+    }
 
 }

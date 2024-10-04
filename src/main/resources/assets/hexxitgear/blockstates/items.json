@@ -1,121 +1,181 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "builtin/generated",
-		"transform": "forge:default-item"
-	},
-	"variants": {
-		"item": {
-			"hexical_diamond": {
-				"textures": {
-					"layer0": "hexxitgear:items/hexical_diamond"
-				}
-			},
-			"hexical_essence": {
-				"textures": {
-					"layer0": "hexxitgear:items/hexical_essence"
-				}
-			},
-			"refresher_shard": {
-				"textures": {
-					"layer0": "hexxitgear:items/refresher_shard"
-				}
-			},
-			"hexical_master_sword_blade": {
-				"textures": {
-					"layer0": "hexxitgear:items/hexical_master_sword_blade"
-				}
-			},
-			"hexical_master_sword_hilt": {
-				"textures": {
-					"layer0": "hexxitgear:items/hexical_master_sword_hilt"
-				}
-			},
-			"hexical_master_sword_activation": {
-				"textures": {
-					"layer0": "hexxitgear:items/hexical_master_sword"
-				}
-			},
-			"sage_boots": {
-				"textures": {
-					"layer0": "hexxitgear:items/sage_boots"
-				}
-			},
-			"sage_chest": {
-				"textures": {
-					"layer0": "hexxitgear:items/sage_chest"
-				}
-			},
-			"sage_helmet": {
-				"textures": {
-					"layer0": "hexxitgear:items/sage_helmet"
-				}
-			},
-			"sage_legs": {
-				"textures": {
-					"layer0": "hexxitgear:items/sage_legs"
-				}
-			},
-			"scale_boots": {
-				"textures": {
-					"layer0": "hexxitgear:items/scale_boots"
-				}
-			},
-			"scale_chest": {
-				"textures": {
-					"layer0": "hexxitgear:items/scale_chest"
-				}
-			},
-			"scale_helmet": {
-				"textures": {
-					"layer0": "hexxitgear:items/scale_helmet"
-				}
-			},
-			"scale_legs": {
-				"textures": {
-					"layer0": "hexxitgear:items/scale_legs"
-				}
-			},
-			"thief_boots": {
-				"textures": {
-					"layer0": "hexxitgear:items/thief_boots"
-				}
-			},
-			"thief_chest": {
-				"textures": {
-					"layer0": "hexxitgear:items/thief_chest"
-				}
-			},
-			"thief_helmet": {
-				"textures": {
-					"layer0": "hexxitgear:items/thief_helmet"
-				}
-			},
-			"thief_legs": {
-				"textures": {
-					"layer0": "hexxitgear:items/thief_legs"
-				}
-			},
-			"tribal_boots": {
-				"textures": {
-					"layer0": "hexxitgear:items/tribal_boots"
-				}
-			},
-			"tribal_chest": {
-				"textures": {
-					"layer0": "hexxitgear:items/tribal_chest"
-				}
-			},
-			"tribal_helmet": {
-				"textures": {
-					"layer0": "hexxitgear:items/tribal_helmet"
-				}
-			},
-			"tribal_legs": {
-				"textures": {
-					"layer0": "hexxitgear:items/tribal_legs"
-				}
-			}
-		}
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "item": {
+      "ancient_scale_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_scale_boots"
+        }
+      },
+      "ancient_scale_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_scale_chest"
+        }
+      },
+      "ancient_scale_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_scale_helmet"
+        }
+      },
+      "ancient_scale_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_scale_legs"
+        }
+      },
+      "ancient_thief_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_thief_boots"
+        }
+      },
+      "ancient_thief_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_thief_chest"
+        }
+      },
+      "ancient_thief_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_thief_helmet"
+        }
+      },
+      "ancient_thief_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_thief_legs"
+        }
+      },
+      "ancient_tribal_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_tribal_boots"
+        }
+      },
+      "ancient_tribal_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_tribal_chest"
+        }
+      },
+      "ancient_tribal_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_tribal_helmet"
+        }
+      },
+      "ancient_tribal_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/ancient_tribal_legs"
+        }
+      },
+      "hexical_diamond": {
+        "textures": {
+          "layer0": "hexxitgear:items/hexical_diamond"
+        }
+      },
+      "hexical_essence": {
+        "textures": {
+          "layer0": "hexxitgear:items/hexical_essence"
+        }
+      },
+      "refresher_shard": {
+        "textures": {
+          "layer0": "hexxitgear:items/refresher_shard"
+        }
+      },
+      "hexical_master_sword_blade": {
+        "textures": {
+          "layer0": "hexxitgear:items/hexical_master_sword_blade"
+        }
+      },
+      "hexical_master_sword_hilt": {
+        "textures": {
+          "layer0": "hexxitgear:items/hexical_master_sword_hilt"
+        }
+      },
+      "hexical_master_sword_activation": {
+        "textures": {
+          "layer0": "hexxitgear:items/hexical_master_sword"
+        }
+      },
+      "sage_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/sage_boots"
+        }
+      },
+      "sage_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/sage_chest"
+        }
+      },
+      "sage_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/sage_helmet"
+        }
+      },
+      "sage_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/sage_legs"
+        }
+      },
+      "scale_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/scale_boots"
+        }
+      },
+      "scale_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/scale_chest"
+        }
+      },
+      "scale_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/scale_helmet"
+        }
+      },
+      "scale_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/scale_legs"
+        }
+      },
+      "thief_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/thief_boots"
+        }
+      },
+      "thief_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/thief_chest"
+        }
+      },
+      "thief_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/thief_helmet"
+        }
+      },
+      "thief_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/thief_legs"
+        }
+      },
+      "tribal_boots": {
+        "textures": {
+          "layer0": "hexxitgear:items/tribal_boots"
+        }
+      },
+      "tribal_chest": {
+        "textures": {
+          "layer0": "hexxitgear:items/tribal_chest"
+        }
+      },
+      "tribal_helmet": {
+        "textures": {
+          "layer0": "hexxitgear:items/tribal_helmet"
+        }
+      },
+      "tribal_legs": {
+        "textures": {
+          "layer0": "hexxitgear:items/tribal_legs"
+        }
+      }
+    }
+  }
 }

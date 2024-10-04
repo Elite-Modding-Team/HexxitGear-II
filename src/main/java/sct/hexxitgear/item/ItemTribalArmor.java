@@ -31,37 +31,43 @@ import sct.hexxitgear.model.ModelSkullHelmet;
 
 public class ItemTribalArmor extends ItemHexxitArmor {
 
-	public ItemTribalArmor(String regname, EntityEquipmentSlot slot) {
-		super(regname, ArmorSet.TRIBAL, 0, slot);
-	}
+    public ItemTribalArmor(String regname, EntityEquipmentSlot slot) {
+        super(regname, ArmorSet.TRIBAL, 0, slot);
+    }
 
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		if (slot == EntityEquipmentSlot.HEAD) return "hexxitgear:textures/maps/tribal_skull.png";
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+        if (slot == EntityEquipmentSlot.HEAD && !(stack.getItem() == HexRegistry.ANCIENT_TRIBAL_HELMET))
+            return "hexxitgear:textures/maps/tribal_skull.png";
+        if (slot == EntityEquipmentSlot.HEAD && stack.getItem() == HexRegistry.ANCIENT_TRIBAL_HELMET)
+            return "hexxitgear:textures/maps/ancient_tribal_skull.png";
 
-		if (stack.getItem() == HexRegistry.TRIBAL_LEGS) return "hexxitgear:textures/armor/tribal2.png";
+        if (stack.getItem() == HexRegistry.TRIBAL_LEGS) return "hexxitgear:textures/armor/tribal2.png";
+        if (stack.getItem() == HexRegistry.ANCIENT_TRIBAL_LEGS) return "hexxitgear:textures/armor/ancient_tribal2.png";
 
-		return "hexxitgear:textures/armor/tribal.png";
-	}
+        if (stack.getItem() == HexRegistry.ANCIENT_TRIBAL_CHEST || stack.getItem() == HexRegistry.ANCIENT_TRIBAL_BOOTS)
+            return "hexxitgear:textures/armor/ancient_tribal.png";
+        return "hexxitgear:textures/armor/tribal.png";
+    }
 
-	@SideOnly(Side.CLIENT)
-	private static ModelSkullHelmet skullHelmet;
+    @SideOnly(Side.CLIENT)
+    private static ModelSkullHelmet skullHelmet;
 
-	@SideOnly(Side.CLIENT)
-	private ModelSkullHelmet getHelmet() {
-		if (skullHelmet == null) skullHelmet = new ModelSkullHelmet();
-		return skullHelmet;
-	}
+    @SideOnly(Side.CLIENT)
+    private ModelSkullHelmet getHelmet() {
+        if (skullHelmet == null) skullHelmet = new ModelSkullHelmet();
+        return skullHelmet;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (armorSlot == EntityEquipmentSlot.HEAD) {
-			ModelBiped skull = getHelmet();
-			skull.isSneak = entityLiving.isSneaking();
-			return skull;
-		}
-		return null;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+        if (armorSlot == EntityEquipmentSlot.HEAD) {
+            ModelBiped skull = getHelmet();
+            skull.isSneak = entityLiving.isSneaking();
+            return skull;
+        }
+        return null;
+    }
 
 }

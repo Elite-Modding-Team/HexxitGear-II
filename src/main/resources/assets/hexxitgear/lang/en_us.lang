@@ -38,6 +38,21 @@ effect.hexxitgear.thief.name=Thief Speed
 
 entity.hexxitgear.mini_sword.name=Spinning Sword
 
+item.hexxitgear.ancient_tribal_helmet.name=Ancient Tribal Skull
+item.hexxitgear.ancient_tribal_chest.name=Ancient Tribal Tunic
+item.hexxitgear.ancient_tribal_legs.name=Ancient Tribal Leggings
+item.hexxitgear.ancient_tribal_boots.name=Ancient Tribal Shoes
+
+item.hexxitgear.ancient_scale_helmet.name=Ancient Scale Full Helm
+item.hexxitgear.ancient_scale_chest.name=Ancient Scale Chestplate
+item.hexxitgear.ancient_scale_legs.name=Ancient Scale Legplates
+item.hexxitgear.ancient_scale_boots.name=Ancient Scale Boots
+
+item.hexxitgear.ancient_thief_helmet.name=Ancient Thief's Hood
+item.hexxitgear.ancient_thief_chest.name=Ancient Thief's Chestpiece
+item.hexxitgear.ancient_thief_legs.name=Ancient Thief's Leggings
+item.hexxitgear.ancient_thief_boots.name=Ancient Thief's Boots
+
 item.hexxitgear.hexical_essence.name=Hexical Essence
 item.hexxitgear.hexical_diamond.name=Hexical Diamond
 item.hexxitgear.refresher_shard.name=Refresher Shard
