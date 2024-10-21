@@ -42,6 +42,7 @@ public class ItemMasterSword extends ItemSword {
 
     private final boolean inactive;
     private boolean highUp;
+    private int activationTime = 0;
 
     public ItemMasterSword(String regname, ToolMaterial material) {
         super(material);
@@ -105,20 +106,22 @@ public class ItemMasterSword extends ItemSword {
         EntityPlayer player = (EntityPlayer) entity;
 
         // Activation particles
-        if (inactive && player.posY > 128 && isSelected && world.isThundering()) {
-            for (int k = 0; k < 40; ++k) {
+        if (inactive && activationTime > 0 && isSelected && world.isThundering()) {
+            for (int k = 0; k < (activationTime / 5); ++k) {
                 double d2 = world.rand.nextGaussian() * 0.02D;
                 double d0 = world.rand.nextGaussian() * 0.02D;
                 double d1 = world.rand.nextGaussian() * 0.02D;
                 world.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (world.rand.nextFloat() * player.width * 2.0F) - player.width, player.posY + (world.rand.nextFloat() * player.height), player.posZ + (world.rand.nextFloat() * player.width * 2.0F) - player.width, d2, d0, d1);
             }
+            world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_SHOOT_SOUND, SoundCategory.PLAYERS, 0.5F, 0.5F + (activationTime / 50F));
         }
 
         // Activation event
         if (!world.isRemote && inactive) {
-            if (player.posY > 128) {
+            if (player.posY > 120) {
                 highUp = true;
-                if (isSelected && world.isThundering()) {
+                activationTime++;
+                if (isSelected && world.isThundering() && activationTime >= 80) {
                     world.addWeatherEffect(new EntityLightningBolt(world, player.posX, player.posY, player.posZ, true));
                     player.inventory.deleteStack(stack);
                     player.inventory.add(itemSlot, new ItemStack(HexRegistry.HEXICAL_MASTER_SWORD));
@@ -129,16 +132,18 @@ public class ItemMasterSword extends ItemSword {
                     if (FMLLaunchHandler.side().isClient()) {
                         displayItemActivation();
                     }
+                    activationTime = 0;
                 }
             } else {
                 highUp = false;
+                activationTime = Math.max(0, activationTime - 2);
             }
         }
     }
 
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
-    	if (this == HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) {
+        if (this == HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) {
             return HexRegistry.RARITY_INACTIVE;
         }
 
