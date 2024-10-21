@@ -34,8 +34,10 @@ import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.entity.EntityMiniSword;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
+import sct.hexxitgear.proxy.ClientProxy;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.List;
 
 public class ItemMasterSword extends ItemSword {
@@ -111,7 +113,7 @@ public class ItemMasterSword extends ItemSword {
                 double d2 = world.rand.nextGaussian() * 0.02D;
                 double d0 = world.rand.nextGaussian() * 0.02D;
                 double d1 = world.rand.nextGaussian() * 0.02D;
-                world.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (world.rand.nextFloat() * player.width * 2.0F) - player.width, player.posY + (world.rand.nextFloat() * player.height), player.posZ + (world.rand.nextFloat() * player.width * 2.0F) - player.width, d2, d0, d1);
+                ClientProxy.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (world.rand.nextFloat() * player.width * 2.0F) - player.width, player.posY + (world.rand.nextFloat() * player.height), player.posZ + (world.rand.nextFloat() * player.width * 2.0F) - player.width, Color.getColor("Purple", 6303124), d2, d0, d1);
             }
             world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_SHOOT_SOUND, SoundCategory.PLAYERS, 0.5F, 0.5F + (activationTime / 50F));
         }

@@ -18,8 +18,6 @@
 
 package sct.hexxitgear.proxy;
 
-import java.awt.Color;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -39,14 +37,11 @@ import sct.hexxitgear.control.HexKeybinds;
 import sct.hexxitgear.init.HexRegistry;
 import shadows.placebo.client.IHasModel;
 
+import java.awt.*;
+
 @SuppressWarnings("deprecation")
 @EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements IProxy {
-
-    @Override
-    public void registerKeybinds() {
-        MinecraftForge.EVENT_BUS.register(new HexKeybinds());
-    }
 
     @SubscribeEvent
     public static void modelRegistry(ModelRegistryEvent e) {
@@ -64,13 +59,17 @@ public class ClientProxy implements IProxy {
 
     public static void spawnParticle(EnumParticleTypes type, double x, double y, double z, Color color, double velX, double velY, double velZ) {
         Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(type.getParticleID(), x, y, z, velX, velY, velZ);
+        float randBrightness = 0.5F + (float) Math.random();
+        particle.setRBGColorF((color.getRed() / 255.0F) * randBrightness, (color.getGreen() / 255.0F) * randBrightness, (color.getBlue() / 255.0F) * randBrightness);
+    }
 
-        particle.setRBGColorF((float) color.getRed() / 255.0F, (float) color.getGreen() / 255.0F, (float) color.getBlue() / 255.0F);
+    @Override
+    public void registerKeybinds() {
+        MinecraftForge.EVENT_BUS.register(new HexKeybinds());
     }
 
     @Override
     public void setActionText(ITextComponent message) {
         Minecraft.getMinecraft().ingameGUI.setOverlayMessage(message, false);
     }
-
 }
