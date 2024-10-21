@@ -26,8 +26,7 @@ import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.proxy.ClientProxy;
 
 import javax.annotation.Nullable;
-
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 
 public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
@@ -55,8 +54,8 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         arrowShake = 0;
         ticksInAir = 0;
         pickupStatus = PickupStatus.DISALLOWED;
-        damage = 4.0F;
-        knockBack = 0;
+        damage = 6.0F;
+        knockBack = 1;
         setSize(0.5F, 0.5F);
     }
 
@@ -293,13 +292,14 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         if (entity instanceof EntityLivingBase) {
             EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
-            float motionDamage = (float) ((Math.abs(motionY) * 2) + damage);
-            entityLiving.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), motionDamage);
-
-            if (knockBack > 0) {
-                float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
-                if (f > 0.0F) {
-                    entity.addVelocity(motionX * knockBack * 0.6D / f, 0.1D, motionZ * knockBack * 0.6D / f);
+            for (EntityLivingBase entityLivingArea : world.getEntitiesWithinAABB(EntityLivingBase.class, entityLiving.getEntityBoundingBox().grow(2.0D, 1.0D, 2.0D))) {
+                float motionDamage = (float) ((Math.abs(motionY) * 2) + damage);
+                entityLivingArea.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), motionDamage);
+                if (knockBack > 0) {
+                    float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
+                    if (f > 0.0F) {
+                        entityLivingArea.addVelocity(motionX * knockBack * 0.6D / f, 0.1D, motionZ * knockBack * 0.6D / f);
+                    }
                 }
             }
 
@@ -392,7 +392,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
     }
 
     public float getGravity() {
-        return 0.02F;
+        return 0.01F;
     }
 
     public float getAirResistance() {
