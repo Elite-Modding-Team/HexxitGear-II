@@ -167,7 +167,7 @@ public abstract class ItemHexxitArmor extends ItemArmor implements ISpecialArmor
         ModelBiped biped;
 
         if (armorSlot == EntityEquipmentSlot.HEAD) {
-            biped = getHeadModel();
+            biped = getHeadModel(itemStack);
         } else {
             biped = getBodyModel(armorSlot);
         }
@@ -204,5 +204,5 @@ public abstract class ItemHexxitArmor extends ItemArmor implements ISpecialArmor
     }
 
     @SideOnly(Side.CLIENT)
-    protected abstract ModelBiped getHeadModel();
+    protected abstract ModelBiped getHeadModel(ItemStack itemStack);
 }

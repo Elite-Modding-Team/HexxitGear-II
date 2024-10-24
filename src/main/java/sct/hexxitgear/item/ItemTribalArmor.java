@@ -20,15 +20,19 @@ package sct.hexxitgear.item;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
+import sct.hexxitgear.init.HexRegistry;
+import sct.hexxitgear.model.ModelAncientTribalSkull;
 import sct.hexxitgear.model.ModelTribalSkull;
 
 public class ItemTribalArmor extends ItemHexxitArmor {
 
     @SideOnly(Side.CLIENT)
     private static final ModelTribalSkull TRIBAL_SKULL = new ModelTribalSkull();
+    private static final ModelAncientTribalSkull ANCIENT_TRIBAL_SKULL = new ModelAncientTribalSkull();
 
     public ItemTribalArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
         super(regname, ArmorSet.TRIBAL, 0, slot);
@@ -39,7 +43,7 @@ public class ItemTribalArmor extends ItemHexxitArmor {
 
     @Override
     @SideOnly(Side.CLIENT)
-    protected ModelBiped getHeadModel() {
-        return TRIBAL_SKULL;
+    protected ModelBiped getHeadModel(ItemStack itemStack) {
+        return itemStack.getItem() == HexRegistry.ANCIENT_TRIBAL_HELMET ? ANCIENT_TRIBAL_SKULL : TRIBAL_SKULL;
     }
 }
