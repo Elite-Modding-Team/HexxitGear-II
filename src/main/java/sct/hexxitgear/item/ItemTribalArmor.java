@@ -19,55 +19,27 @@
 package sct.hexxitgear.item;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.model.ModelSkullHelmet;
+import sct.hexxitgear.model.ModelTribalSkull;
 
 public class ItemTribalArmor extends ItemHexxitArmor {
 
-    public ItemTribalArmor(String regname, EntityEquipmentSlot slot) {
+    @SideOnly(Side.CLIENT)
+    private static final ModelTribalSkull TRIBAL_SKULL = new ModelTribalSkull();
+
+    public ItemTribalArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
         super(regname, ArmorSet.TRIBAL, 0, slot);
+        this.hoodTexture = ancient ? "hexxitgear:textures/maps/ancient_tribal_skull.png" : "hexxitgear:textures/maps/tribal_skull.png";
+        this.bodyTexture = ancient ? "hexxitgear:textures/armor/ancient_tribal2.png" : "hexxitgear:textures/armor/tribal2.png";
+        this.overlayTexture = ancient ? "hexxitgear:textures/armor/ancient_tribal.png" : "hexxitgear:textures/armor/tribal.png";
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        if (slot == EntityEquipmentSlot.HEAD && !(stack.getItem() == HexRegistry.ANCIENT_TRIBAL_HELMET))
-            return "hexxitgear:textures/maps/tribal_skull.png";
-        if (slot == EntityEquipmentSlot.HEAD && stack.getItem() == HexRegistry.ANCIENT_TRIBAL_HELMET)
-            return "hexxitgear:textures/maps/ancient_tribal_skull.png";
-
-        if (stack.getItem() == HexRegistry.TRIBAL_LEGS) return "hexxitgear:textures/armor/tribal2.png";
-        if (stack.getItem() == HexRegistry.ANCIENT_TRIBAL_LEGS) return "hexxitgear:textures/armor/ancient_tribal2.png";
-
-        if (stack.getItem() == HexRegistry.ANCIENT_TRIBAL_CHEST || stack.getItem() == HexRegistry.ANCIENT_TRIBAL_BOOTS)
-            return "hexxitgear:textures/armor/ancient_tribal.png";
-        return "hexxitgear:textures/armor/tribal.png";
-    }
-
     @SideOnly(Side.CLIENT)
-    private static ModelSkullHelmet skullHelmet;
-
-    @SideOnly(Side.CLIENT)
-    private ModelSkullHelmet getHelmet() {
-        if (skullHelmet == null) skullHelmet = new ModelSkullHelmet();
-        return skullHelmet;
+    protected ModelBiped getHeadModel() {
+        return TRIBAL_SKULL;
     }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-        if (armorSlot == EntityEquipmentSlot.HEAD) {
-            ModelBiped skull = getHelmet();
-            skull.isSneak = entityLiving.isSneaking();
-            return skull;
-        }
-        return null;
-    }
-
 }

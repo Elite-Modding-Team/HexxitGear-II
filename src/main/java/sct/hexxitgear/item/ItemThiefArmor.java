@@ -19,64 +19,27 @@
 package sct.hexxitgear.item;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.init.HexRegistry;
-import sct.hexxitgear.model.ModelHoodHelmet;
+import sct.hexxitgear.model.ModelThiefHood;
 
 public class ItemThiefArmor extends ItemHexxitArmor {
 
-    public ItemThiefArmor(String regname, EntityEquipmentSlot slot) {
+    @SideOnly(Side.CLIENT)
+    private static final ModelThiefHood THIEF_HOOD = new ModelThiefHood();
+
+    public ItemThiefArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
         super(regname, ArmorSet.THIEF, 0, slot);
+        this.hoodTexture = ancient ? "hexxitgear:textures/maps/ancient_thief_hood.png" : "hexxitgear:textures/maps/thief_hood.png";
+        this.bodyTexture = ancient ? "hexxitgear:textures/armor/ancient_thief2.png" : "hexxitgear:textures/armor/thief2.png";
+        this.overlayTexture = ancient ? "hexxitgear:textures/armor/ancient_thief.png" : "hexxitgear:textures/armor/thief.png";
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
-            if (player.isPotionActive(MobEffects.INVISIBILITY)) return "hexxitgear:textures/armor/invisible.png";
-        }
-
-        // If the helmet slot, return helmet texture map
-        if (slot == EntityEquipmentSlot.HEAD && !(stack.getItem() == HexRegistry.ANCIENT_THIEF_HELMET))
-            return "hexxitgear:textures/maps/thief_hood.png";
-        if (slot == EntityEquipmentSlot.HEAD && stack.getItem() == HexRegistry.ANCIENT_THIEF_HELMET)
-            return "hexxitgear:textures/maps/ancient_thief_hood.png";
-
-        if (stack.getItem() == HexRegistry.THIEF_LEGS) return "hexxitgear:textures/armor/thief2.png";
-        if (stack.getItem() == HexRegistry.ANCIENT_THIEF_LEGS) return "hexxitgear:textures/armor/ancient_thief2.png";
-
-        if (stack.getItem() == HexRegistry.ANCIENT_THIEF_CHEST || stack.getItem() == HexRegistry.ANCIENT_THIEF_BOOTS)
-            return "hexxitgear:textures/armor/ancient_thief.png";
-        return "hexxitgear:textures/armor/thief.png";
-    }
-
     @SideOnly(Side.CLIENT)
-    private static ModelHoodHelmet hoodHelmet;
-
-    @SideOnly(Side.CLIENT)
-    private ModelBiped getHelmet() {
-        if (hoodHelmet == null) hoodHelmet = new ModelHoodHelmet();
-
-        return hoodHelmet;
+    protected ModelBiped getHeadModel() {
+        return THIEF_HOOD;
     }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-        if (armorSlot == EntityEquipmentSlot.HEAD) {
-            ModelBiped helmet = getHelmet();
-            helmet.isSneak = entityLiving.isSneaking();
-            return helmet;
-        }
-        return null;
-    }
-
 }

@@ -50,40 +50,40 @@ public class HexRegistry {
     };
     public static final Item REFRESHER_SHARD = new ItemRefresherShard();
 
-    public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD);
-    public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST);
-    public static final ItemTribalArmor TRIBAL_LEGS = new ItemTribalArmor("tribal_legs", EntityEquipmentSlot.LEGS);
-    public static final ItemTribalArmor TRIBAL_BOOTS = new ItemTribalArmor("tribal_boots", EntityEquipmentSlot.FEET);
+    public static final ItemTribalArmor TRIBAL_HELMET = new ItemTribalArmor("tribal_helmet", EntityEquipmentSlot.HEAD, false);
+    public static final ItemTribalArmor TRIBAL_CHEST = new ItemTribalArmor("tribal_chest", EntityEquipmentSlot.CHEST, false);
+    public static final ItemTribalArmor TRIBAL_LEGS = new ItemTribalArmor("tribal_legs", EntityEquipmentSlot.LEGS, false);
+    public static final ItemTribalArmor TRIBAL_BOOTS = new ItemTribalArmor("tribal_boots", EntityEquipmentSlot.FEET, false);
 
-    public static final Item THIEF_HELMET = new ItemThiefArmor("thief_helmet", EntityEquipmentSlot.HEAD);
-    public static final Item THIEF_CHEST = new ItemThiefArmor("thief_chest", EntityEquipmentSlot.CHEST);
-    public static final Item THIEF_LEGS = new ItemThiefArmor("thief_legs", EntityEquipmentSlot.LEGS);
-    public static final Item THIEF_BOOTS = new ItemThiefArmor("thief_boots", EntityEquipmentSlot.FEET);
+    public static final Item THIEF_HELMET = new ItemThiefArmor("thief_helmet", EntityEquipmentSlot.HEAD, false);
+    public static final Item THIEF_CHEST = new ItemThiefArmor("thief_chest", EntityEquipmentSlot.CHEST, false);
+    public static final Item THIEF_LEGS = new ItemThiefArmor("thief_legs", EntityEquipmentSlot.LEGS, false);
+    public static final Item THIEF_BOOTS = new ItemThiefArmor("thief_boots", EntityEquipmentSlot.FEET, false);
 
-    public static final Item SCALE_HELMET = new ItemScaleArmor("scale_helmet", EntityEquipmentSlot.HEAD);
-    public static final Item SCALE_CHEST = new ItemScaleArmor("scale_chest", EntityEquipmentSlot.CHEST);
-    public static final Item SCALE_LEGS = new ItemScaleArmor("scale_legs", EntityEquipmentSlot.LEGS);
-    public static final Item SCALE_BOOTS = new ItemScaleArmor("scale_boots", EntityEquipmentSlot.FEET);
+    public static final Item SCALE_HELMET = new ItemScaleArmor("scale_helmet", EntityEquipmentSlot.HEAD, false);
+    public static final Item SCALE_CHEST = new ItemScaleArmor("scale_chest", EntityEquipmentSlot.CHEST, false);
+    public static final Item SCALE_LEGS = new ItemScaleArmor("scale_legs", EntityEquipmentSlot.LEGS, false);
+    public static final Item SCALE_BOOTS = new ItemScaleArmor("scale_boots", EntityEquipmentSlot.FEET, false);
 
-    public static final Item SAGE_HELMET = new ItemMagicianArmor("sage_helmet", EntityEquipmentSlot.HEAD);
-    public static final Item SAGE_CHEST = new ItemMagicianArmor("sage_chest", EntityEquipmentSlot.CHEST);
-    public static final Item SAGE_LEGS = new ItemMagicianArmor("sage_legs", EntityEquipmentSlot.LEGS);
-    public static final Item SAGE_BOOTS = new ItemMagicianArmor("sage_boots", EntityEquipmentSlot.FEET);
+    public static final Item SAGE_HELMET = new ItemSageArmor("sage_helmet", EntityEquipmentSlot.HEAD, false);
+    public static final Item SAGE_CHEST = new ItemSageArmor("sage_chest", EntityEquipmentSlot.CHEST, false);
+    public static final Item SAGE_LEGS = new ItemSageArmor("sage_legs", EntityEquipmentSlot.LEGS, false);
+    public static final Item SAGE_BOOTS = new ItemSageArmor("sage_boots", EntityEquipmentSlot.FEET, false);
 
-    public static final ItemTribalArmor ANCIENT_TRIBAL_HELMET = new ItemTribalArmor("ancient_tribal_helmet", EntityEquipmentSlot.HEAD);
-    public static final ItemTribalArmor ANCIENT_TRIBAL_CHEST = new ItemTribalArmor("ancient_tribal_chest", EntityEquipmentSlot.CHEST);
-    public static final ItemTribalArmor ANCIENT_TRIBAL_LEGS = new ItemTribalArmor("ancient_tribal_legs", EntityEquipmentSlot.LEGS);
-    public static final ItemTribalArmor ANCIENT_TRIBAL_BOOTS = new ItemTribalArmor("ancient_tribal_boots", EntityEquipmentSlot.FEET);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_HELMET = new ItemTribalArmor("ancient_tribal_helmet", EntityEquipmentSlot.HEAD, true);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_CHEST = new ItemTribalArmor("ancient_tribal_chest", EntityEquipmentSlot.CHEST, true);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_LEGS = new ItemTribalArmor("ancient_tribal_legs", EntityEquipmentSlot.LEGS, true);
+    public static final ItemTribalArmor ANCIENT_TRIBAL_BOOTS = new ItemTribalArmor("ancient_tribal_boots", EntityEquipmentSlot.FEET, true);
 
-    public static final Item ANCIENT_THIEF_HELMET = new ItemThiefArmor("ancient_thief_helmet", EntityEquipmentSlot.HEAD);
-    public static final Item ANCIENT_THIEF_CHEST = new ItemThiefArmor("ancient_thief_chest", EntityEquipmentSlot.CHEST);
-    public static final Item ANCIENT_THIEF_LEGS = new ItemThiefArmor("ancient_thief_legs", EntityEquipmentSlot.LEGS);
-    public static final Item ANCIENT_THIEF_BOOTS = new ItemThiefArmor("ancient_thief_boots", EntityEquipmentSlot.FEET);
+    public static final Item ANCIENT_THIEF_HELMET = new ItemThiefArmor("ancient_thief_helmet", EntityEquipmentSlot.HEAD, true);
+    public static final Item ANCIENT_THIEF_CHEST = new ItemThiefArmor("ancient_thief_chest", EntityEquipmentSlot.CHEST, true);
+    public static final Item ANCIENT_THIEF_LEGS = new ItemThiefArmor("ancient_thief_legs", EntityEquipmentSlot.LEGS, true);
+    public static final Item ANCIENT_THIEF_BOOTS = new ItemThiefArmor("ancient_thief_boots", EntityEquipmentSlot.FEET, true);
 
-    public static final Item ANCIENT_SCALE_HELMET = new ItemScaleArmor("ancient_scale_helmet", EntityEquipmentSlot.HEAD);
-    public static final Item ANCIENT_SCALE_CHEST = new ItemScaleArmor("ancient_scale_chest", EntityEquipmentSlot.CHEST);
-    public static final Item ANCIENT_SCALE_LEGS = new ItemScaleArmor("ancient_scale_legs", EntityEquipmentSlot.LEGS);
-    public static final Item ANCIENT_SCALE_BOOTS = new ItemScaleArmor("ancient_scale_boots", EntityEquipmentSlot.FEET);
+    public static final Item ANCIENT_SCALE_HELMET = new ItemScaleArmor("ancient_scale_helmet", EntityEquipmentSlot.HEAD, true);
+    public static final Item ANCIENT_SCALE_CHEST = new ItemScaleArmor("ancient_scale_chest", EntityEquipmentSlot.CHEST, true);
+    public static final Item ANCIENT_SCALE_LEGS = new ItemScaleArmor("ancient_scale_legs", EntityEquipmentSlot.LEGS, true);
+    public static final Item ANCIENT_SCALE_BOOTS = new ItemScaleArmor("ancient_scale_boots", EntityEquipmentSlot.FEET, true);
 
     public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 100, 9001, 50.0F, 19.0F, 50).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")

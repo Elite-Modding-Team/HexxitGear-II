@@ -23,23 +23,23 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.model.ModelScaleFullHelm;
+import sct.hexxitgear.model.ModelSageCap;
 
-public class ItemScaleArmor extends ItemHexxitArmor {
+public class ItemSageArmor extends ItemHexxitArmor {
 
     @SideOnly(Side.CLIENT)
-    private static final ModelScaleFullHelm SCALE_FULL_HELM = new ModelScaleFullHelm();
+    private static final ModelSageCap SAGE_CAP = new ModelSageCap();
 
-    public ItemScaleArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
-        super(regname, ArmorSet.SCALE, 1, slot);
-        this.hoodTexture = ancient ? "hexxitgear:textures/maps/ancient_scale_helm.png" : "hexxitgear:textures/maps/scale_helm.png";
-        this.bodyTexture = ancient ? "hexxitgear:textures/armor/ancient_scale2.png" : "hexxitgear:textures/armor/scale2.png";
-        this.overlayTexture = ancient ? "hexxitgear:textures/armor/ancient_scale.png" : "hexxitgear:textures/armor/scale.png";
+    public ItemSageArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
+        super(regname, ArmorSet.SAGE, 0, slot);
+        this.hoodTexture = "hexxitgear:textures/maps/sage_hood.png";
+        this.bodyTexture = "hexxitgear:textures/armor/sage2.png";
+        this.overlayTexture = "hexxitgear:textures/armor/sage.png";
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     protected ModelBiped getHeadModel() {
-        return SCALE_FULL_HELM;
+        return SAGE_CAP;
     }
 }
