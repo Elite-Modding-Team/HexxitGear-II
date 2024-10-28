@@ -129,7 +129,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         rotationPitch -= 70.0F;
-
+        if (rotationPitch <= -360) rotationPitch += 360;
         if (soundTimer >= 3) {
             if (!isInsideOfMaterial(Material.WATER)) {
                 playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 0.4F, 2.0F / (rand.nextFloat() * 0.2F + 0.6F + ticksInAir / 15.0F));
