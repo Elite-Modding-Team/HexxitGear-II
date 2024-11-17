@@ -24,12 +24,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.model.ModelThiefHood;
+import sct.hexxitgear.proxy.ClientProxy;
 
 public class ItemThiefArmor extends ItemHexxitArmor {
-
-    @SideOnly(Side.CLIENT)
-    private static final ModelThiefHood THIEF_HOOD = new ModelThiefHood();
 
     public ItemThiefArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
         super(regname, ArmorSet.THIEF, 0, slot);
@@ -41,6 +38,6 @@ public class ItemThiefArmor extends ItemHexxitArmor {
     @Override
     @SideOnly(Side.CLIENT)
     protected ModelBiped getHeadModel(ItemStack itemStack) {
-        return THIEF_HOOD;
+        return ClientProxy.THIEF_HOOD;
     }
 }

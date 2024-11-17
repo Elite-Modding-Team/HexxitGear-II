@@ -24,12 +24,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.model.ModelScaleFullHelm;
+import sct.hexxitgear.proxy.ClientProxy;
 
 public class ItemScaleArmor extends ItemHexxitArmor {
-
-    @SideOnly(Side.CLIENT)
-    private static final ModelScaleFullHelm SCALE_FULL_HELM = new ModelScaleFullHelm();
 
     public ItemScaleArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
         super(regname, ArmorSet.SCALE, 1, slot);
@@ -41,6 +38,6 @@ public class ItemScaleArmor extends ItemHexxitArmor {
     @Override
     @SideOnly(Side.CLIENT)
     protected ModelBiped getHeadModel(ItemStack itemStack) {
-        return SCALE_FULL_HELM;
+        return ClientProxy.SCALE_FULL_HELM;
     }
 }

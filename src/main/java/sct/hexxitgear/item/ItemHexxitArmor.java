@@ -40,19 +40,13 @@ import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.model.ModelDualLayerArmor;
+import sct.hexxitgear.proxy.ClientProxy;
 import shadows.placebo.client.IHasModel;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class ItemHexxitArmor extends ItemArmor implements ISpecialArmor, IHasModel {
-
-    @SideOnly(Side.CLIENT)
-    private static final ModelDualLayerArmor HEXXIT_CHEST = new ModelDualLayerArmor(1.0f);
-    @SideOnly(Side.CLIENT)
-    private static final ModelDualLayerArmor HEXXIT_LEGGINGS = new ModelDualLayerArmor(0.6f);
-    @SideOnly(Side.CLIENT)
-    private static final ModelDualLayerArmor HEXXIT_FEET = new ModelDualLayerArmor(0.6f);
 
     private final ArmorSet set;
 
@@ -132,9 +126,9 @@ public abstract class ItemHexxitArmor extends ItemArmor implements ISpecialArmor
 
     @SideOnly(Side.CLIENT)
     protected ModelDualLayerArmor getBodyModel(EntityEquipmentSlot slot) {
-        if (slot == EntityEquipmentSlot.CHEST) return HEXXIT_CHEST;
-        if (slot == EntityEquipmentSlot.LEGS) return HEXXIT_LEGGINGS;
-        if (slot == EntityEquipmentSlot.FEET) return HEXXIT_FEET;
+        if (slot == EntityEquipmentSlot.CHEST) return ClientProxy.HEXXIT_CHEST;
+        if (slot == EntityEquipmentSlot.LEGS) return ClientProxy.HEXXIT_LEGGINGS;
+        if (slot == EntityEquipmentSlot.FEET) return ClientProxy.HEXXIT_FEET;
         return null;
     }
 

@@ -24,12 +24,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import sct.hexxitgear.core.ArmorSet;
-import sct.hexxitgear.model.ModelSageCap;
+import sct.hexxitgear.proxy.ClientProxy;
 
 public class ItemSageArmor extends ItemHexxitArmor {
-
-    @SideOnly(Side.CLIENT)
-    private static final ModelSageCap SAGE_CAP = new ModelSageCap();
 
     public ItemSageArmor(String regname, EntityEquipmentSlot slot, boolean ancient) {
         super(regname, ArmorSet.SAGE, 0, slot);
@@ -41,6 +38,6 @@ public class ItemSageArmor extends ItemHexxitArmor {
     @Override
     @SideOnly(Side.CLIENT)
     protected ModelBiped getHeadModel(ItemStack itemStack) {
-        return SAGE_CAP;
+        return ClientProxy.SAGE_CAP;
     }
 }

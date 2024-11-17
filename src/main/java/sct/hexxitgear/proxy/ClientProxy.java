@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.control.HexKeybinds;
 import sct.hexxitgear.init.HexRegistry;
+import sct.hexxitgear.model.*;
 import shadows.placebo.client.IHasModel;
 
 import java.awt.*;
@@ -42,6 +43,16 @@ import java.awt.*;
 @SuppressWarnings("deprecation")
 @EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements IProxy {
+
+    public static final ModelDualLayerArmor HEXXIT_CHEST = new ModelDualLayerArmor(1.0f);
+    public static final ModelDualLayerArmor HEXXIT_LEGGINGS = new ModelDualLayerArmor(0.6f);
+    public static final ModelDualLayerArmor HEXXIT_FEET = new ModelDualLayerArmor(0.6f);
+
+    public static final ModelSageCap SAGE_CAP = new ModelSageCap();
+    public static final ModelScaleFullHelm SCALE_FULL_HELM = new ModelScaleFullHelm();
+    public static final ModelThiefHood THIEF_HOOD = new ModelThiefHood();
+    public static final ModelTribalSkull TRIBAL_SKULL = new ModelTribalSkull();
+    public static final ModelAncientTribalSkull ANCIENT_TRIBAL_SKULL = new ModelAncientTribalSkull();
 
     @SubscribeEvent
     public static void modelRegistry(ModelRegistryEvent e) {
