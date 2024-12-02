@@ -24,6 +24,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringUtils;
@@ -36,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import sct.hexxitgear.core.ability.*;
+import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.item.ItemHexxitArmor;
 
 import javax.annotation.Nullable;
@@ -180,6 +182,11 @@ public class ArmorSet {
             return null;
         }
         return set;
+    }
+
+    public static boolean isAncientSet(ArmorSet set, EntityPlayer player) {
+        Item itemChest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
+        return set != null && (itemChest == HexRegistry.ANCIENT_SCALE_CHEST || itemChest == HexRegistry.ANCIENT_THIEF_CHEST || itemChest == HexRegistry.ANCIENT_TRIBAL_CHEST);
     }
 
     private static boolean isArmorSlotWrong(EntityPlayer player, EntityEquipmentSlot slot, ArmorSet set) {

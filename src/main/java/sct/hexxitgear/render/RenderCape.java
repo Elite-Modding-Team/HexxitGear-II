@@ -32,15 +32,15 @@ public class RenderCape {
             EntityPlayer player = event.getEntityPlayer();
             UUID playerId = player.getUniqueID();
             ArmorSet set = ArmorSet.getCurrentArmorSet(player);
-            connection.getPlayerInfo(playerId).playerTextures.put(MinecraftProfileTexture.Type.CAPE, getCapeTexture(set));
+            connection.getPlayerInfo(playerId).playerTextures.put(MinecraftProfileTexture.Type.CAPE, getCapeTexture(set, player));
         }
     }
 
-    private static ResourceLocation getCapeTexture(ArmorSet set) {
+    private static ResourceLocation getCapeTexture(ArmorSet set, EntityPlayer player) {
         if (set == ArmorSet.SAGE) return SAGE_CAPE_TEXTURE;
         if (set == ArmorSet.SCALE) return SCALE_CAPE_TEXTURE;
-        if (set == ArmorSet.THIEF) return THIEF_CAPE_TEXTURE;
-        if (set == ArmorSet.TRIBAL) return TRIBAL_CAPE_TEXTURE;
+        if (set == ArmorSet.THIEF) return ArmorSet.isAncientSet(set, player) ? ANCIENT_THIEF_CAPE_TEXTURE : THIEF_CAPE_TEXTURE;
+        if (set == ArmorSet.TRIBAL) return ArmorSet.isAncientSet(set, player) ? ANCIENT_TRIBAL_CAPE_TEXTURE : TRIBAL_CAPE_TEXTURE;
         return null;
     }
 }
