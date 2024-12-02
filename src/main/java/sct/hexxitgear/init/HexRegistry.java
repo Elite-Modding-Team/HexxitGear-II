@@ -13,6 +13,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -148,5 +149,82 @@ public class HexRegistry {
         HexxitGear.HELPER.addShaped(SAGE_LEGS, 3, 3, "ingotGold", Items.BOOK, "ingotGold", Blocks.WOOL, HEXICAL_DIAMOND, Blocks.WOOL, "ingotGold", null, "ingotGold");
         HexxitGear.HELPER.addShaped(SAGE_BOOTS, 3, 2, Blocks.WOOL, HEXICAL_DIAMOND, Blocks.WOOL, "ingotGold", null, "ingotGold");
         e.getRegistry().registerAll(HexxitGear.INFO.getRecipeList().toArray(new IRecipe[0]));
+    }
+
+    @SubscribeEvent
+    public void anvilRecipes(AnvilUpdateEvent event) {
+        ItemStack tool = event.getLeft();
+        ItemStack ench = event.getRight();
+        ItemStack outputStack = tool.copy();
+
+        // Conversion to the 1.5.2 designs of the Hexxit sets using refresher shards
+        // Tribal
+        if (tool.getItem() == TRIBAL_HELMET && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_TRIBAL_HELMET).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == TRIBAL_CHEST && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_TRIBAL_CHEST).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == TRIBAL_LEGS && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_TRIBAL_LEGS).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == TRIBAL_BOOTS && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_TRIBAL_BOOTS).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        }
+
+        // Thief
+        else if (tool.getItem() == THIEF_HELMET && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_THIEF_HELMET).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == THIEF_CHEST && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_THIEF_CHEST).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == THIEF_LEGS && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_THIEF_LEGS).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == THIEF_BOOTS && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_THIEF_BOOTS).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        }
+
+        // Scale
+        else if (tool.getItem() == SCALE_HELMET && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_SCALE_HELMET).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == SCALE_CHEST && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_SCALE_CHEST).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == SCALE_LEGS && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_SCALE_LEGS).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        } else if (tool.getItem() == SCALE_BOOTS && ench.getItem() == REFRESHER_SHARD) {
+            event.setCost(4);
+            event.setOutput(new ItemStack(ANCIENT_SCALE_BOOTS).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        }
     }
 }
