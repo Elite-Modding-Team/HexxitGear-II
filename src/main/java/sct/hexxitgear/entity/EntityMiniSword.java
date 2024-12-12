@@ -54,7 +54,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         arrowShake = 0;
         ticksInAir = 0;
         pickupStatus = PickupStatus.DISALLOWED;
-        damage = 6.0F;
+        damage = 10.0F; // Damage is half as the melee damage
         knockBack = 1;
         setSize(0.5F, 0.5F);
     }
@@ -200,7 +200,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
                 int t = getMaxLifetime();
                 if (t != 0 && ticksInGround >= t) {
                     this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
-                    playSound(HexRegistry.HEXICAL_MASTER_SWORD_EXPLODE_SOUND, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+                    playSound(HexRegistry.HEXICAL_MASTER_SWORD_EXPLODE_SOUND, 3.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
                     setDead();
                 }
             }
@@ -281,7 +281,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         if (entity != null && entity == this.shootingEntity) return;
         applyEntityHitEffects(entity);
         this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
-        playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+        playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 1.5F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
     }
 
     public void applyEntityHitEffects(Entity entity) {
@@ -351,7 +351,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
-        playSound(HexRegistry.HEXICAL_MASTER_SWORD_EXPLODE_SOUND, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+        playSound(HexRegistry.HEXICAL_MASTER_SWORD_EXPLODE_SOUND, 3.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
         setDead();
     }
 
