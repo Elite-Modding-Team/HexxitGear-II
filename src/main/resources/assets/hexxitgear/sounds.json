@@ -26,5 +26,12 @@
         "name": "hexxitgear:items/hexical_master_sword_shoot"
       }
     ]
+  },
+  "items.hexical_master_sword.zap": {
+    "sounds": [
+      {
+        "name": "hexxitgear:items/hexical_master_sword_zap"
+      }
+    ]
   }
 }

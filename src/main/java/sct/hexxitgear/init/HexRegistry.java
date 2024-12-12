@@ -101,6 +101,7 @@ public class HexRegistry {
     public static final SoundEvent HEXICAL_MASTER_SWORD_EXPLODE_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.explode"));
     public static final SoundEvent HEXICAL_MASTER_SWORD_PROJECTILE_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.projectile"));
     public static final SoundEvent HEXICAL_MASTER_SWORD_SHOOT_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.shoot"));
+    public static final SoundEvent HEXICAL_MASTER_SWORD_ZAP_SOUND = new SoundEvent(new ResourceLocation(HexxitGear.MODID, "items.hexical_master_sword.zap"));
 
     @SubscribeEvent
     public void items(Register<Item> event) {
