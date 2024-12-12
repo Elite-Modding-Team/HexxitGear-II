@@ -1,6 +1,6 @@
 gui.hexxitgear.creativetab=Hexxit Gear II
 
-gui.hexxitgear.refresher_shard=A powerful shard used to reset Hexxit Gear ability cooldowns upon right-clicking. It is also rumored to have the ability to reverse objects through time.
+gui.hexxitgear.refresher_shard=A powerful shard used to reset Hexxit Gear armor set ability cooldowns upon right-clicking. It is also rumored to have the ability to reverse objects through time.
 
 gui.hexxitgear.set.thief=Thief's Set
 gui.hexxitgear.set.tribal=Tribal Set
@@ -96,3 +96,11 @@ tooltip.hexxitgear.hexical_master_sword_inactive.1=Upon the peak where clouds en
 tooltip.hexxitgear.hexical_master_sword_inactive.2=The sword awaits, its story told.
 tooltip.hexxitgear.hexical_master_sword_inactive.3=In lightning's dance, it finds its might.
 tooltip.hexxitgear.hexical_master_sword_inactive.4=A sovereign blade, born of storm's light.
+
+# Tinkers' Construct
+material.hexical_diamond.name=Hexical Diamond
+
+modifier.hexical_adventurer.name=Hexical Adventurer
+modifier.hexical_adventurer.desc=§oAdventure awaits! HUZZAH!§r\nYour tool deals +50% damage while a full set of Hexxit Gear armor is equipped.
+modifier.hexical_spark.name=Hexical Spark
+modifier.hexical_spark.desc=§oI HAAAVE THE POWER!!!!§r\nYour tool has a small chance to cause a lightning strike that deals area of effect damage. The chance is increased while a full set of Hexxit Gear armor is equipped.

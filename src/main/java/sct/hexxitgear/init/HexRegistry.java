@@ -158,6 +158,14 @@ public class HexRegistry {
         ItemStack ench = event.getRight();
         ItemStack outputStack = tool.copy();
 
+        // Hexical Master Sword
+        if (tool.getItem() == HexRegistry.HEXICAL_MASTER_SWORD_HILT && ench.getItem() == HexRegistry.HEXICAL_MASTER_SWORD_BLADE) {
+            event.setCost(20);
+            event.setOutput(new ItemStack(HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE).copy());
+            event.getOutput().setTagCompound(outputStack.getTagCompound());
+            event.setMaterialCost(1);
+        }
+
         // Conversion to the 1.5.2 designs of the Hexxit sets using refresher shards
         // Tribal
         if (tool.getItem() == TRIBAL_HELMET && ench.getItem() == REFRESHER_SHARD) {

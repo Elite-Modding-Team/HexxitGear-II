@@ -18,7 +18,6 @@
 
 package sct.hexxitgear;
 
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -27,6 +26,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import sct.hexxitgear.compat.HexIntegration;
 import sct.hexxitgear.core.ArmorSet;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexConfig;
@@ -37,34 +37,35 @@ import sct.hexxitgear.world.HexGenerator;
 import shadows.placebo.registry.RegistryInformation;
 import shadows.placebo.util.RecipeHelper;
 
-@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.2.0,);required-after:elenaidodge@[,1.13.2];after:cqrepoured;after:mod_lavacow;after:mowziesmobs")
+@Mod(modid = HexxitGear.MODID, name = HexxitGear.MODNAME, version = HexxitGear.VERSION, dependencies = "required-after:placebo@[1.2.0,);required-after:elenaidodge@[,1.13.2];after:tconstruct;after:cqrepoured;after:mod_lavacow;after:mowziesmobs")
 public class HexxitGear {
 
-	public static final String MODID = "hexxitgear";
-	public static final String MODNAME = "Hexxit Gear II";
-	public static final String VERSION = "2.9.0";
+    public static final String MODID = "hexxitgear";
+    public static final String MODNAME = "Hexxit Gear II";
+    public static final String VERSION = "2.9.0";
 
-	@SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
-	public static IProxy proxy;
+    @SidedProxy(clientSide = "sct.hexxitgear.proxy.ClientProxy", serverSide = "sct.hexxitgear.proxy.ServerProxy")
+    public static IProxy proxy;
 
-	public static Logger logger;
+    public static Logger logger;
 
-	public static final RegistryInformation INFO = new RegistryInformation(MODID, HexTab.INSTANCE);
-	public static final RecipeHelper HELPER = new RecipeHelper(MODID, MODNAME, INFO.getRecipeList());
+    public static final RegistryInformation INFO = new RegistryInformation(MODID, HexTab.INSTANCE);
+    public static final RecipeHelper HELPER = new RecipeHelper(MODID, MODNAME, INFO.getRecipeList());
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent evt) {
-		logger = evt.getModLog();
-		HexConfig.loadCommonConfig(evt);
-		MinecraftForge.EVENT_BUS.register(new HexRegistry());
-	}
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent evt) {
+        logger = evt.getModLog();
+        HexConfig.loadCommonConfig(evt);
+        MinecraftForge.EVENT_BUS.register(new HexRegistry());
+        HexIntegration.preInit();
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent evt) {
-		HexNetwork.init();
-		proxy.registerKeybinds();
-		MinecraftForge.TERRAIN_GEN_BUS.register(new HexGenerator());
-		MinecraftForge.EVENT_BUS.register(ArmorSet.class);
-	}
+    @EventHandler
+    public void init(FMLInitializationEvent evt) {
+        HexNetwork.init();
+        proxy.registerKeybinds();
+        MinecraftForge.TERRAIN_GEN_BUS.register(new HexGenerator());
+        MinecraftForge.EVENT_BUS.register(ArmorSet.class);
+    }
 
 }
