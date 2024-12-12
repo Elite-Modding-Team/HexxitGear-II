@@ -36,6 +36,8 @@ dependencies {
     deobfCompile "curse.maven:had-enough-items-557549:5471944" // Had Enough Items 4.25.5
     deobfCompile "curse.maven:hwyla-253449:2568751" // HWYLA 1.8.26-B41
     deobfCompile "curse.maven:elenai-dodge-373104:3188646" // Elenai Dodge 1.13.2
+    deobfCompile "curse.maven:mantle-74924:2713386" // Mantle 1.3.3.55
+    deobfCompile "curse.maven:tinkers-construct-74072:2902483" // Tinkers' Construct 2.13.0.183
 }
 
 jar {
