@@ -59,6 +59,7 @@ public class ClientProxy implements IProxy {
         for (Item i : HexxitGear.INFO.getItemList())
             if (i instanceof IHasModel) ((IHasModel) i).initModels(e);
         HexRegistry.HEXBISCUS.initModels(e);
+        HexRegistry.HEXICAL_DIAMOND_BLOCK.initModels(e);
 
         OBJLoader.INSTANCE.addDomain(HexxitGear.MODID);
         for (final Item item : ForgeRegistries.ITEMS.getValues()) {

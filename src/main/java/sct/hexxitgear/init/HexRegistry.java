@@ -22,8 +22,10 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.block.BlockHexbiscus;
+import sct.hexxitgear.block.BlockHexicalDiamond;
 import sct.hexxitgear.entity.EntityMiniSword;
 import sct.hexxitgear.item.*;
 import sct.hexxitgear.render.RenderMiniSword;
@@ -44,6 +46,7 @@ public class HexRegistry {
     };
 
     public static final BlockHexbiscus HEXBISCUS = new BlockHexbiscus();
+    public static final BlockHexicalDiamond HEXICAL_DIAMOND_BLOCK = new BlockHexicalDiamond();
 
     public static final Item HEXICAL_ESSENCE = new ItemBase("hexical_essence", HexxitGear.INFO) {
     };
@@ -86,7 +89,7 @@ public class HexRegistry {
     public static final Item ANCIENT_SCALE_LEGS = new ItemScaleArmor("ancient_scale_legs", EntityEquipmentSlot.LEGS, true);
     public static final Item ANCIENT_SCALE_BOOTS = new ItemScaleArmor("ancient_scale_boots", EntityEquipmentSlot.FEET, true);
 
-    public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("HEXICAL", 100, 9001, 50.0F, 19.0F, 50).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
+    public static final Item.ToolMaterial HEXICAL = EnumHelper.addToolMaterial("hexxit_hexical", 100, 9001, 50.0F, 19.0F, 50).setRepairItem(new ItemStack(HEXICAL_DIAMOND));
     @GameRegistry.ObjectHolder(HexxitGear.MODID + ":hexical_master_sword")
     public static final Item HEXICAL_MASTER_SWORD = new ItemMasterSword("hexical_master_sword", HEXICAL);
     public static final Item HEXICAL_MASTER_SWORD_BLADE = new ItemBaseRarity("hexical_master_sword_blade", HexxitGear.INFO) {
@@ -113,6 +116,7 @@ public class HexRegistry {
     @SubscribeEvent
     public void blocks(Register<Block> event) {
         event.getRegistry().register(HEXBISCUS);
+        event.getRegistry().register(HEXICAL_DIAMOND_BLOCK);
     }
 
     @SubscribeEvent
@@ -132,6 +136,12 @@ public class HexRegistry {
     @SubscribeEvent
     public void recipes(Register<IRecipe> e) {
         ItemStack rWool = new ItemStack(Blocks.WOOL, 1, 14);
+
+        // Done to make the block work with Tinkers'
+        OreDictionary.registerOre("blockHexical", new ItemStack(HEXICAL_DIAMOND_BLOCK));
+
+        HexxitGear.HELPER.addShaped(HEXICAL_DIAMOND_BLOCK, 3, 3, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND, HEXICAL_DIAMOND);
+        HexxitGear.HELPER.addShapeless(new ItemStack(HEXICAL_DIAMOND, 9), HEXICAL_DIAMOND_BLOCK);
         HexxitGear.HELPER.addShaped(HEXICAL_DIAMOND, 3, 3, null, HEXICAL_ESSENCE, null, HEXICAL_ESSENCE, Items.DIAMOND, HEXICAL_ESSENCE, null, HEXICAL_ESSENCE, null);
         HexxitGear.HELPER.addShaped(TRIBAL_HELMET, 3, 2, Items.BONE, Items.BONE, Items.BONE, Items.BONE, HEXICAL_DIAMOND, Items.BONE);
         HexxitGear.HELPER.addShaped(TRIBAL_CHEST, 3, 3, "ingotIron", null, "ingotIron", Items.LEATHER, HEXICAL_DIAMOND, Items.LEATHER, "ingotIron", Items.LEATHER, "ingotIron");
