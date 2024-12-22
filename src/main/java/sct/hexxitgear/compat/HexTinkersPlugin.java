@@ -29,7 +29,7 @@ public class HexTinkersPlugin {
         HEXICAL_DIAMOND.setRepresentativeItem(HexRegistry.HEXICAL_DIAMOND);
         HEXICAL_DIAMOND.setCraftable(true).setCastable(false);
         TinkerRegistry.addMaterialStats(HEXICAL_DIAMOND,
-                new HeadMaterialStats(1270, 8.00F, 5.00F, HarvestLevels.DIAMOND),
+                new HeadMaterialStats(1270, 8.00F, 5.00F, HarvestLevels.OBSIDIAN),
                 new HandleMaterialStats(1.10F, 100),
                 new ExtraMaterialStats(269),
                 new BowMaterialStats(0.5F, 1.5F, 1.75F));
