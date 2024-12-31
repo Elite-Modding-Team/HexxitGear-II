@@ -31,6 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.core.HGDamageSource;
 import sct.hexxitgear.entity.EntityMiniSword;
 import sct.hexxitgear.gui.HexTab;
 import sct.hexxitgear.init.HexRegistry;
@@ -68,8 +69,10 @@ public class ItemMasterSword extends ItemSword {
             } else {
                 player.swingArm(hand);
             }
+            
             return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
         }
+        
         return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     }
 
@@ -79,14 +82,16 @@ public class ItemMasterSword extends ItemSword {
         for (int enchant = 0; enchant < enchants.tagCount(); enchant++) {
             bonusDamage += enchants.getCompoundTagAt(enchant).getShort("lvl");
         }
+        
         return bonusDamage;
     }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if (attacker instanceof EntityPlayer) {
-            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker).setDamageBypassesArmor(), this.getAttackDamage() + this.getBonusDamage(stack));
+            target.attackEntityFrom(new HGDamageSource("hg_hexical_master_sword", attacker).setDamageBypassesArmor(), this.getAttackDamage() + this.getBonusDamage(stack));
         }
+        
         return true;
     }
 
@@ -115,6 +120,7 @@ public class ItemMasterSword extends ItemSword {
                 double d1 = world.rand.nextGaussian() * 0.02D;
                 ClientProxy.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (world.rand.nextFloat() * player.width * 2.0F) - player.width, player.posY + (world.rand.nextFloat() * player.height), player.posZ + (world.rand.nextFloat() * player.width * 2.0F) - player.width, Color.getColor("Purple", 6303124), d2, d0, d1);
             }
+            
             world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_SHOOT_SOUND, SoundCategory.PLAYERS, 0.5F, 0.5F + (activationTime / 50F));
         }
 
@@ -132,9 +138,11 @@ public class ItemMasterSword extends ItemSword {
                     InventoryHelper.spawnItemStack(world, player.posX, player.posY + 1.0D, player.posZ, new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("mod_lavacow:skeletonking_mace"))));
                     world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_ACTIVATION_SOUND, SoundCategory.PLAYERS, 0.5F, 1.0F);
                     world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_ZAP_SOUND, SoundCategory.PLAYERS, 0.5F, 1.0F);
+                    
                     if (FMLLaunchHandler.side().isClient()) {
                         displayItemActivation();
                     }
+                    
                     activationTime = 0;
                 }
             } else {

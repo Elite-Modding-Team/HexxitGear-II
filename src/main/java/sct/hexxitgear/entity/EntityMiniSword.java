@@ -15,13 +15,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketChangeGameState;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
+import sct.hexxitgear.core.HGDamageSource;
 import sct.hexxitgear.init.HexRegistry;
 import sct.hexxitgear.proxy.ClientProxy;
 
@@ -129,11 +129,13 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         rotationPitch -= 70.0F;
+
         if (rotationPitch <= -360) rotationPitch += 360;
         if (soundTimer >= 3) {
             if (!isInsideOfMaterial(Material.WATER)) {
                 playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 0.4F, 2.0F / (rand.nextFloat() * 0.2F + 0.6F + ticksInAir / 15.0F));
             }
+
             soundTimer = 0;
         }
 
@@ -168,6 +170,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
             rotationPitch = n2;
             prevRotationPitch = n2;
         }
+
         BlockPos blockpos = new BlockPos(xTile, yTile, zTile);
         IBlockState iblockstate = world.getBlockState(blockpos);
 
@@ -198,6 +201,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
             } else if (!world.isRemote) {
                 ++ticksInGround;
                 int t = getMaxLifetime();
+
                 if (t != 0 && ticksInGround >= t) {
                     this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
                     playSound(HexRegistry.HEXICAL_MASTER_SWORD_EXPLODE_SOUND, 3.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -253,6 +257,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
             rotationPitch = n4;
             prevRotationPitch = n4;
         }
+
         float res = getAirResistance();
         float grav = getGravity();
 
@@ -282,6 +287,13 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         applyEntityHitEffects(entity);
         this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D);
         playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 1.5F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+
+        // Ignore invincibility frames
+        if (entity instanceof EntityLivingBase) {
+            EntityLivingBase base = (EntityLivingBase) entity;
+            base.hurtResistantTime = 0;
+            base.hurtTime = 0;
+        }
     }
 
     public void applyEntityHitEffects(Entity entity) {
@@ -294,7 +306,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
 
             for (EntityLivingBase entityLivingArea : world.getEntitiesWithinAABB(EntityLivingBase.class, entityLiving.getEntityBoundingBox().grow(2.0D, 1.0D, 2.0D))) {
                 float motionDamage = (float) ((Math.abs(motionY) * 2) + damage);
-                entityLivingArea.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), motionDamage);
+                entityLivingArea.attackEntityFrom(new HGDamageSource("hg_hexical_master_sword", getThrower()).setDamageBypassesArmor(), motionDamage);
                 if (knockBack > 0) {
                     float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
                     if (f > 0.0F) {

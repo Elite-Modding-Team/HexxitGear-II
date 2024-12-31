@@ -98,6 +98,8 @@ tooltip.hexxitgear.hexical_master_sword_inactive.2=The sword awaits, its story t
 tooltip.hexxitgear.hexical_master_sword_inactive.3=In lightning's dance, it finds its might.
 tooltip.hexxitgear.hexical_master_sword_inactive.4=A sovereign blade, born of storm's light.
 
+message.hexxitgear.hg_hexical_master_sword=%s was reduced to ashes by the Hexical Master Sword's power
+
 # Tinkers' Construct
 material.hexical_diamond.name=Hexical Diamond
 
