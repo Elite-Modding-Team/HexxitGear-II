@@ -3,6 +3,7 @@ package sct.hexxitgear.render;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -25,6 +26,7 @@ public class RenderCape {
     private static final ResourceLocation ANCIENT_THIEF_CAPE_TEXTURE = new ResourceLocation(HexxitGear.MODID, "textures/armor/capes/ancient_thief.png");
     private static final ResourceLocation ANCIENT_TRIBAL_CAPE_TEXTURE = new ResourceLocation(HexxitGear.MODID, "textures/armor/capes/ancient_tribal.png");
 
+    @SuppressWarnings("ConstantValue")
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderPlayer(RenderPlayerEvent.Post event) {
         NetHandlerPlayClient connection = Minecraft.getMinecraft().getConnection();
@@ -32,7 +34,10 @@ public class RenderCape {
             EntityPlayer player = event.getEntityPlayer();
             UUID playerId = player.getUniqueID();
             ArmorSet set = ArmorSet.getCurrentArmorSet(player);
-            connection.getPlayerInfo(playerId).playerTextures.put(MinecraftProfileTexture.Type.CAPE, getCapeTexture(set, player));
+            NetworkPlayerInfo playerInfo = connection.getPlayerInfo(playerId);
+            if (playerInfo != null) {
+                playerInfo.playerTextures.put(MinecraftProfileTexture.Type.CAPE, getCapeTexture(set, player));
+            }
         }
     }
 
