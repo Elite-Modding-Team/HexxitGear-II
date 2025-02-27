@@ -5,7 +5,7 @@
     "description": "Special gear designed to work in conjunction with the Hexxit II modpack.",
     "mcversion": "${mcversion}",
     "version": "${version}",
-    "url": "https://github.com/Elite-Modding-Team/HexxitGear-II",
+    "url": "https://github.com/xJon/Hexxit-II",
     "updateUrl": "",
     "authors": [
       "Shadows_of_Fire",

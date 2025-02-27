@@ -11,6 +11,9 @@ diamonds and sow them into the thread of your armor, restoring the legendary pie
 Each set grants unique bonuses and has a completely unique style like no set of armor you have ever seen before in
 Minecraft!
 
+Regarding issues please report them here:
+https://github.com/xJon/Hexxit-II/issues
+
 Credits
 --------
 
