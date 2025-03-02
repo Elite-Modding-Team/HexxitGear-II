@@ -132,10 +132,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
 
         if (rotationPitch <= -360) rotationPitch += 360;
         if (soundTimer >= 3) {
-            if (!isInsideOfMaterial(Material.WATER)) {
-                playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 0.4F, 2.0F / (rand.nextFloat() * 0.2F + 0.6F + ticksInAir / 15.0F));
-            }
-
+            playSound(HexRegistry.HEXICAL_MASTER_SWORD_PROJECTILE_SOUND, 0.4F, 2.0F / (rand.nextFloat() * 0.2F + 0.6F + ticksInAir / 15.0F));
             soundTimer = 0;
         }
 
@@ -262,12 +259,10 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         float grav = getGravity();
 
         if (isInWater()) {
-            beenInGround = true;
             for (int i2 = 0; i2 < 4; ++i2) {
                 float f3 = 0.25f;
                 world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
             }
-            res *= 0.6f;
         }
 
         motionX *= res;
