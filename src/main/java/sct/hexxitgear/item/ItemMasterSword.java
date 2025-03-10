@@ -154,7 +154,7 @@ public class ItemMasterSword extends ItemSword {
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
         if (this == HexRegistry.HEXICAL_MASTER_SWORD_INACTIVE) {
-            return HexRegistry.RARITY_INACTIVE;
+            return EnumRarity.COMMON;
         }
 
         return EnumRarity.EPIC;
