@@ -2,7 +2,7 @@
   "type": "forge:ore_shaped",
   "pattern": [
     " W ",
-    " H ",
+    " E ",
     "A D"
   ],
   "key": {
@@ -10,8 +10,8 @@
       "item": "cqrepoured:sword_walker",
       "data": 32767
     },
-    "H": {
-      "item": "hexxitgear:hexical_diamond"
+    "E": {
+      "item": "nyx:celestial_emblem"
     },
     "A": {
       "item": "mowziesmobs:wrought_axe",
