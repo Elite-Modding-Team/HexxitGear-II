@@ -62,6 +62,7 @@ public class ArmorSet {
     public static final ArmorSet THIEF = new ArmorSet("thief", ItemArmor.ArmorMaterial.DIAMOND,
             new IBuffEffect[]{
                     new IBuffEffect.Simple(() -> PotionHandler.THIEF, 0),
+                    new IBuffEffect.Simple(() -> PotionInit.CAN_LEDGEGRAB, 0),
                     new IBuffEffect.Simple(() -> PotionInit.CAN_WALLJUMP, 0),
                     new IBuffEffect.Simple(() -> MobEffects.LUCK, 1),
                     new IBuffEffect.Simple(() -> MobEffects.NIGHT_VISION, 0)
