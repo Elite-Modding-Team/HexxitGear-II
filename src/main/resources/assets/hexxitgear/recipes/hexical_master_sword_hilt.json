@@ -2,7 +2,7 @@
   "type": "forge:ore_shaped",
   "pattern": [
     " T ",
-    "GHG",
+    "GEG",
     " O "
   ],
   "key": {
@@ -10,8 +10,8 @@
       "type": "forge:ore_dict",
       "ore": "ingotGold"
     },
-    "H": {
-      "item": "hexxitgear:hexical_diamond"
+    "E": {
+      "item": "nyx:celestial_emblem"
     },
     "O": {
       "type": "forge:ore_dict",

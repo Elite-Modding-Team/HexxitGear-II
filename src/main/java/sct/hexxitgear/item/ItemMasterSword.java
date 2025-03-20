@@ -41,7 +41,6 @@ import java.awt.*;
 import java.util.List;
 
 public class ItemMasterSword extends ItemSword {
-
     private final boolean inactive;
     private boolean highUp;
     private int activationTime = 0;
@@ -68,20 +67,21 @@ public class ItemMasterSword extends ItemSword {
             } else {
                 player.swingArm(hand);
             }
-            
+
             return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
         }
-        
+
         return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     }
 
     private float getBonusDamage(ItemStack stack) {
         float bonusDamage = 0;
         NBTTagList enchants = stack.getEnchantmentTagList();
+
         for (int enchant = 0; enchant < enchants.tagCount(); enchant++) {
             bonusDamage += enchants.getCompoundTagAt(enchant).getShort("lvl");
         }
-        
+
         return bonusDamage;
     }
 
@@ -89,8 +89,12 @@ public class ItemMasterSword extends ItemSword {
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if (attacker instanceof EntityPlayer) {
             target.attackEntityFrom(new HGDamageSource("hg_hexical_master_sword", attacker).setDamageBypassesArmor(), this.getAttackDamage() + this.getBonusDamage(stack));
+
+            // Also ignore invincibility frames
+            target.hurtResistantTime = 0;
+            target.hurtTime = 0;
         }
-        
+
         return true;
     }
 
@@ -119,7 +123,7 @@ public class ItemMasterSword extends ItemSword {
                 double d1 = world.rand.nextGaussian() * 0.02D;
                 HexxitGear.proxy.spawnParticle(EnumParticleTypes.END_ROD, player.posX + (world.rand.nextFloat() * player.width * 2.0F) - player.width, player.posY + (world.rand.nextFloat() * player.height), player.posZ + (world.rand.nextFloat() * player.width * 2.0F) - player.width, Color.getColor("Purple", 6303124), d2, d0, d1);
             }
-            
+
             world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_SHOOT_SOUND, SoundCategory.PLAYERS, 0.5F, 0.5F + (activationTime / 50F));
         }
 
@@ -128,6 +132,7 @@ public class ItemMasterSword extends ItemSword {
             if (player.posY > 120) {
                 highUp = true;
                 activationTime++;
+
                 if (isSelected && world.isThundering() && activationTime >= 80) {
                     world.addWeatherEffect(new EntityLightningBolt(world, player.posX, player.posY, player.posZ, true));
                     player.inventory.deleteStack(stack);
@@ -137,11 +142,11 @@ public class ItemMasterSword extends ItemSword {
                     InventoryHelper.spawnItemStack(world, player.posX, player.posY + 1.0D, player.posZ, new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("mod_lavacow:skeletonking_mace"))));
                     world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_ACTIVATION_SOUND, SoundCategory.PLAYERS, 0.5F, 1.0F);
                     world.playSound(null, player.posX, player.posY + 1.0D, player.posZ, HexRegistry.HEXICAL_MASTER_SWORD_ZAP_SOUND, SoundCategory.PLAYERS, 0.5F, 1.0F);
-                    
+
                     if (FMLLaunchHandler.side().isClient()) {
                         displayItemActivation();
                     }
-                    
+
                     activationTime = 0;
                 }
             } else {
@@ -190,10 +195,12 @@ public class ItemMasterSword extends ItemSword {
         } else {
             tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip.hexxitgear.hexical_master_sword_active.1"));
             tooltip.add("");
+
             if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
                 tooltip.add(TextFormatting.GRAY + TextFormatting.ITALIC.toString() + I18n.format("gui.hexxitgear.set.more_info"));
                 return;
             }
+
             tooltip.add(TextFormatting.AQUA + I18n.format("gui.hexxitgear.set.abilities"));
             tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.2")));
             tooltip.add(String.format(TextFormatting.GRAY + "+ " + TextFormatting.WHITE + "%s", I18n.format("tooltip.hexxitgear.hexical_master_sword_active.3")));

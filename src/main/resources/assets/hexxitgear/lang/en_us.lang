@@ -89,8 +89,8 @@ tooltip.hexxitgear.hexical_master_sword_hilt=You'll need to combine this with th
 
 tooltip.hexxitgear.hexical_master_sword_active.1=Only the truest adventurers have managed to get their hands on this powerful sword...
 tooltip.hexxitgear.hexical_master_sword_active.2=Strength is increased with each enchantment.
-tooltip.hexxitgear.hexical_master_sword_active.3=A powerful projectile is fired upon right-click. Projectiles will completely ignore armor and invincibility frames.
-tooltip.hexxitgear.hexical_master_sword_active.4=All attack damage will completely ignore armor.
+tooltip.hexxitgear.hexical_master_sword_active.3=A powerful projectile is fired upon right-click. The projectile will completely ignore armor and invincibility frames.
+tooltip.hexxitgear.hexical_master_sword_active.4=All attack damage will completely ignore armor and invincibility frames.
 tooltip.hexxitgear.hexical_master_sword_active.5=Impenetrable and cannot be destroyed from usage.
 
 tooltip.hexxitgear.hexical_master_sword_inactive.1=Upon the peak where clouds enfold.

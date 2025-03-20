@@ -229,7 +229,7 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
         }
 
         if (raytraceresult != null) {
-            if (raytraceresult.entityHit != null) {
+            if (raytraceresult.entityHit != null && raytraceresult.entityHit != this.shootingEntity) {
                 onEntityHit(raytraceresult.entityHit);
             } else {
                 onGroundHit(raytraceresult);
@@ -296,16 +296,19 @@ public class EntityMiniSword extends EntityArrow implements IThrowableEntity, IE
             entity.setFire(5);
         }
 
-        if (entity instanceof EntityLivingBase) {
+        if (entity instanceof EntityLivingBase && entity != shootingEntity) {
             EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
             for (EntityLivingBase entityLivingArea : world.getEntitiesWithinAABB(EntityLivingBase.class, entityLiving.getEntityBoundingBox().grow(2.0D, 1.0D, 2.0D))) {
                 float motionDamage = (float) ((Math.abs(motionY) * 2) + damage);
-                entityLivingArea.attackEntityFrom(new HGDamageSource("hg_hexical_master_sword", getThrower()).setDamageBypassesArmor(), motionDamage);
-                if (knockBack > 0) {
-                    float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
-                    if (f > 0.0F) {
-                        entityLivingArea.addVelocity(motionX * knockBack * 0.6D / f, 0.1D, motionZ * knockBack * 0.6D / f);
+
+                if (entityLivingArea != shootingEntity) {
+                    entityLivingArea.attackEntityFrom(new HGDamageSource("hg_hexical_master_sword", getThrower()).setDamageBypassesArmor(), motionDamage);
+                    if (knockBack > 0) {
+                        float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
+                        if (f > 0.0F) {
+                            entityLivingArea.addVelocity(motionX * knockBack * 0.6D / f, 0.1D, motionZ * knockBack * 0.6D / f);
+                        }
                     }
                 }
             }
