@@ -9,6 +9,10 @@ public class ModelWtfMojang extends ModelBiped {
 	public ModelWtfMojang() {
 	}
 
+    public ModelWtfMojang(float v, float v1, int i, int i1) {
+        super(v, v1, i, i1);
+    }
+
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
 		// [VanillaCopy] ModelArmorStandArmor (But really I copied it from twilight forest)

@@ -1,14 +1,13 @@
 package sct.hexxitgear.model;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelDualLayerArmor extends ModelWtfMojang {
-    private final ModelBiped skinModel;
-    private final ModelBiped armorModel;
+    private final ModelWtfMojang skinModel;
+    private final ModelWtfMojang armorModel;
     private boolean drawOverlay = false;
 
     public ModelDualLayerArmor() {
@@ -16,8 +15,8 @@ public class ModelDualLayerArmor extends ModelWtfMojang {
     }
 
     public ModelDualLayerArmor(float skinSize) {
-        skinModel = new ModelBiped(0.06f, 0.0f, 64, 32);
-        armorModel = new ModelBiped(skinSize, 0.0f, 64, 32);
+        skinModel = new ModelWtfMojang(0.06f, 0.0f, 64, 32);
+        armorModel = new ModelWtfMojang(skinSize, 0.0f, 64, 32);
     }
 
     public void prepareForOverlay() {
@@ -31,7 +30,7 @@ public class ModelDualLayerArmor extends ModelWtfMojang {
     @Override
     public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         //Pick out the correct model to draw
-        ModelBiped biped;
+        ModelWtfMojang biped;
         if (drawOverlay) {
             biped = armorModel;
             drawOverlay = false;
@@ -42,7 +41,7 @@ public class ModelDualLayerArmor extends ModelWtfMojang {
         biped.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     }
 
-    private void setupRenderData(ModelBiped biped) {
+    private void setupRenderData(ModelWtfMojang biped) {
         biped.isSneak = this.isSneak;
         biped.leftArmPose = this.leftArmPose;
         biped.rightArmPose = this.rightArmPose;
