@@ -3,7 +3,7 @@
   "pattern": [
     " T ",
     "GHG",
-    " E "
+    " O "
   ],
   "key": {
     "G": {
@@ -13,8 +13,9 @@
     "H": {
       "item": "hexxitgear:hexical_diamond"
     },
-    "E": {
-      "item": "nyx:celestial_emblem"
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
     },
     "T": {
       "item": "xreliquary:alkahestry_tome",
