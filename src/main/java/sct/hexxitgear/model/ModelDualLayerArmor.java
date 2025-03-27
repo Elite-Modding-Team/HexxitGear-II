@@ -11,11 +11,11 @@ public class ModelDualLayerArmor extends ModelWtfMojang {
     private boolean drawOverlay = false;
 
     public ModelDualLayerArmor() {
-        this(0.06f);
+        this(0.3f);
     }
 
     public ModelDualLayerArmor(float skinSize) {
-        skinModel = new ModelWtfMojang(0.06f, 0.0f, 64, 32);
+        skinModel = new ModelWtfMojang(0.3f, 0.0f, 64, 32);
         armorModel = new ModelWtfMojang(skinSize, 0.0f, 64, 32);
     }
 
