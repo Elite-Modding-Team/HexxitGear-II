@@ -22,8 +22,7 @@ public class HexTinkersPlugin {
     public static final AbstractTrait HEXICAL_SPARK = new TraitHexicalSpark();
 
     public static void registerToolMaterials() {
-        TinkerMaterials.materials.add(HEXICAL_DIAMOND);
-        TinkerRegistry.integrate(HEXICAL_DIAMOND).preInit();
+        TinkerRegistry.integrate(HEXICAL_DIAMOND, null, "Hexical").preInit();
         HEXICAL_DIAMOND.addCommonItems("Hexical");
         HEXICAL_DIAMOND.addItem(new ItemStack(HexRegistry.HEXICAL_DIAMOND), 1, Material.VALUE_Ingot);
         HEXICAL_DIAMOND.setRepresentativeItem(HexRegistry.HEXICAL_DIAMOND);
